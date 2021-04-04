@@ -11,7 +11,7 @@ import {
     ICellPosition,
 } from './types/board';
 
-export function getPossibleDestinations(board: ICell[][], fromCell: ICellPosition) {
+export default function getPossibleDestinations(board: ICell[][], fromCell: ICellPosition) {
     const pieceType = board[fromCell.columnIndex][fromCell.rowIndex].piece?.type;
     const pieceColor = board[fromCell.columnIndex][fromCell.rowIndex].piece?.color;
 

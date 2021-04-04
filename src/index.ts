@@ -1,3 +1,3 @@
-import showPossiblePlays from './showPossiblePlays';
+import getPossiblePlays from './getPossiblePlays';
 
-console.log(showPossiblePlays());
+console.log(getPossiblePlays('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'));
