@@ -1,8 +1,8 @@
 {
-  "name": "chess-lib",
+  "name": "chess-position",
   "version": "1.0.0",
-  "description": "Return possible plays from a given board game and player",
-  "main": "index.js",
+  "description": "Return possible moves from a given board game in FEN notation",
+  "main": "src/index.js",
   "author": "colin.faivre@gmail.com",
   "license": "MIT",
   "scripts": {
