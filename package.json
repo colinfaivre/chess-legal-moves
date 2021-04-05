@@ -1,5 +1,5 @@
 {
-  "name": "chess-position",
+  "name": "legal-chess-moves",
   "version": "1.0.0",
   "description": "Return possible moves from a given board game in FEN notation",
   "main": "src/index.js",
