@@ -3,17 +3,10 @@ import getPossibleDestinations from './getPossibleDestinations';
 
 import {
     ICell,
-    IMove,
     IPiece,
-} from './types/board';
+} from '../types/board';
 
-interface IPossiblePlays {
-    possibleMoves: string[];
-    possibleKills: string[];
-    playerIsChecked: boolean;
-}
-
-class Game {
+export default class Game {
     board: ICell[][];
     hasToPlay: string;
     availableCastlings: string;
@@ -80,22 +73,5 @@ class Game {
             columnIndex: piece.columnIndex,
             rowIndex: piece.rowIndex,
         })
-    }
-}
-
-
-export default function getPossiblePlays(gameFenString: string): IPossiblePlays {
-    const game = new Game(gameFenString);
-    console.log(game.board);
-    console.log('allPieces : ', game.allPieces);
-    console.log('playerPieces : ', game.playerPieces);
-    console.log('opponentPieces : ', game.opponentPieces);
-    console.log('computeValidMoves for first white knight', game.computeValidMoves(game.playerPieces[3]));
-    console.log('playerValidMoves', game.playerValidMoves);
-
-    return {
-        possibleMoves: ['a2a3', 'a2a4'],
-        possibleKills: ['a2b3'],
-        playerIsChecked: false,
     }
 }

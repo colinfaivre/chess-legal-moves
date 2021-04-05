@@ -9,7 +9,7 @@ import {
 import {
     ICell,
     ICellPosition,
-} from './types/board';
+} from '../types/board';
 
 export default function getPossibleDestinations(board: ICell[][], fromCell: ICellPosition) {
     const pieceType = board[fromCell.columnIndex][fromCell.rowIndex].piece?.type;
