@@ -9,6 +9,8 @@ export interface ICell {
 export interface IPiece {
     color: string,
     type: string,
+    columnIndex?: number,
+    rowIndex?: number,
 }
 
 export interface IPath {
