@@ -25,3 +25,5 @@ example uciMoves :
 ```js
 ['a2a3', 'a2a4', 'b1a2', 'b1a4', ...]
 ```
+
+create an npm account for the lib
