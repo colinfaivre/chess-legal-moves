@@ -24,6 +24,7 @@ export interface IMove {
 }
 
 export interface ICellPosition {
+    kill?: boolean,
     columnIndex: number,
     rowIndex: number,
 }

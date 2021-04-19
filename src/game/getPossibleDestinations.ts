@@ -136,17 +136,17 @@ export default function getPossibleDestinations(board: ICell[][], fromCell: ICel
             }
         }
 
-        function destinationColumnIsOnBoard(position: number) {
-            return position >= 0 && position < 7;
-        }
+    }
+
+    function destinationColumnIsOnBoard(position: number) {
+        return position >= 0 && position < 7;
     }
 
     possibleDestinations = removeUnreachableDestinations(possibleDestinations);
-    possibleDestinations = splitIntoNormalAndKills(possibleDestinations);
+    
+    return splitIntoNormalAndKills(possibleDestinations);;
 
-    return possibleDestinations;
-
-    function validateMove(columnMove: number, rowMove: number): object | null {
+    function validateMove(columnMove?: number, rowMove?: number) {
         if (destinationIsOnBoard(fromCell, columnMove, rowMove)) {
             if (destinationIsFree()) {
                 return {

@@ -25,7 +25,7 @@ function getPieceChar(piece: IPiece): string {
 function stringify(board: ICell[][]): string[] {
     const boardSnapshot: string[] = [];
 
-    for (const [columnIndex, columnValue] of board.entries()) {
+    for (const [columnIndex, columnValue] of Object.entries(board)) {
         let line = '';
 
         for (const cell of columnValue) {
