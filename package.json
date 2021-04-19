@@ -1,12 +1,20 @@
 {
-  "name": "legal-chess-moves",
-  "version": "1.0.0",
+  "name": "chess-legal-moves",
+  "version": "0.0.1",
   "description": "Return possible moves from a given board game in FEN notation",
-  "main": "src/index.js",
-  "author": "colin.faivre@gmail.com",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "author": "Colin Faivre",
   "license": "MIT",
+  "files": ["dist/**/*"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colinfaivre/chess-legal-moves"
+  },
+  "homepage": "https://github.com/colinfaivre/chess-legal-moves",
   "scripts": {
     "build": "tsc",
+    "prepack": "tsc",
     "test": "jest"
   },
   "devDependencies": {
@@ -14,5 +22,6 @@
     "jest": "^26.6.3",
     "ts-jest": "^26.5.4",
     "typescript": "^4.2.3"
-  }
+  },
+  "keywords": ["Chess"]
 }
