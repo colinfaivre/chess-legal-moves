@@ -1,17 +1,25 @@
 {
   "name": "chess-legal-moves",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Return possible moves from a given board game in FEN notation",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "author": "Colin Faivre",
+  "author": {
+    "name": "Colin Faivre",
+    "email": "colin.faivre@gmail.com",
+    "url": "https://lelaboratoiredespossibles.com"
+  },
   "license": "GPL-3.0",
   "files": [
     "dist/**/*"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/colinfaivre/chess-legal-moves"
+    "url": "https://github.com/colinfaivre/chess-legal-moves.git"
+  },
+  "bugs": {
+    "url": "https://github.com/colinfaivre/chess-legal-moves/issues",
+    "email": "colin.faivre@gmail.com"
   },
   "homepage": "https://github.com/colinfaivre/chess-legal-moves",
   "scripts": {
@@ -26,6 +34,6 @@
     "typescript": "^4.2.3"
   },
   "keywords": [
-    "Chess"
+    "Chess", "Game", "FEN"
   ]
 }
