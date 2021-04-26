@@ -1,13 +1,7 @@
-import createBoard from './createBoard';
-import getPossibleDestinations from './getPossibleDestinations';
-
-import {
-    ICell,
-    IPiece,
-} from '../types/board';
+import Board from '../board';
 
 export default class Game {
-    board: ICell[][];
+    board: Board
     hasToPlay: string;
     availableCastlings: string;
     enPassantTarget: string;
@@ -16,62 +10,53 @@ export default class Game {
 
     constructor(fenString: string) {
         // @TODO Check if fenString is valid with regex
+        const [
+            piecesPositions,
+            hasToPlay,
+            availableCastlings,
+            enPassantTarget,
+            halfMoveClock,
+            fullMoveClock,
+        ] = fenString.split(' ');
 
-        const fenArray = fenString.split(' ');
-        this.board = createBoard(fenArray[0]);
-        this.hasToPlay = fenArray[1];
-        this.availableCastlings = fenArray[2];
-        this.enPassantTarget = fenArray[3];
-        this.halfMoveClock = parseInt(fenArray[4]);
-        this.fullMoveClock = parseInt(fenArray[5]);
+        this.board = new Board(piecesPositions);
+        this.hasToPlay = hasToPlay;
+        this.availableCastlings = availableCastlings;
+        this.enPassantTarget = enPassantTarget;
+        this.halfMoveClock = parseInt(halfMoveClock);
+        this.fullMoveClock = parseInt(fullMoveClock);
     }
 
     get playerColor() {
         return this.hasToPlay === 'w' ? 'white' : 'black';
     }
 
+    get playerPieces() {
+        return this.playerColor === 'white' ? this.board.whites.print() : this.board.blacks.print();
+    }
+
+    get opponentPieces() {
+        return this.playerColor === 'white' ? this.board.blacks.print() : this.board.whites.print();
+    }
+
     get allPieces() {
-        let pieces = [];
+        return this.board.allPieces.print();
+    }
 
-        for (const column in this.board) {
-            for (const row in this.board[column]) {
-                if (this.board[column][row].piece !== null) {
-                    const piece = {
-                        ...this.board[column][row].piece!,
-                        rowIndex: parseInt(row),
-                        columnIndex: parseInt(column),
-                    }
+    get pawns() {
+        return this.board.pawns.print();
+    }
 
-                    pieces.push(piece);
-                }
-            }
+    get rooks() {
+        return this.board.rooks.print();
+    }
+
+    generateLegalMoves() {
+        return {
+            quietMoves: ['a2a3', 'a2a4'],
+            captureMoves: ['a2b3'],
+            playerIsChecked: false,
+            isDraw: false,
         }
-
-        return pieces;
-    }
-
-    get playerPieces(): IPiece[] {
-        return this.allPieces.filter(piece => piece.color === this.playerColor);
-    }
-
-    get opponentPieces(): IPiece[] {
-        return this.allPieces.filter(piece => piece.color !== this.playerColor);
-    }
-
-    get playerValidMoves() {
-        let validMoves = []
-
-        for (let piece of this.playerPieces) {
-            validMoves.push(this.computeValidMoves(piece));
-        }
-
-        return validMoves;
-    }
-
-    computeValidMoves(piece: IPiece) {
-        return getPossibleDestinations(this.board, {
-            columnIndex: piece.columnIndex,
-            rowIndex: piece.rowIndex,
-        })
     }
 }
