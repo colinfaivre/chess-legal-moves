@@ -9,7 +9,7 @@
     "email": "colin.faivre@gmail.com",
     "url": "https://lelaboratoiredespossibles.com"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/colinfaivre/chess-legal-moves.git"
