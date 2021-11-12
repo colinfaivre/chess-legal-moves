@@ -37,3 +37,15 @@ example uciMoves :
 ```js
 ['a2a3', 'a2a4', 'b1a2', 'b1a4', ...]
 ```
+
+Generate documentation commands :
+```bash
+yarn api-extractor run
+```
+
+```bash
+yarn build
+yarn api-documenter markdown -i temp -o docs
+```
+
+[Auto Generated Documentation (github pages)](https://colinfaivre.github.io/data-structures-and-algorithms/)
