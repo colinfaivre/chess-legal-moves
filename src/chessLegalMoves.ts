@@ -7,7 +7,7 @@ interface ILegalMoves {
     isDraw: boolean;
 }
 
-export default function getLegalMoves(gameFenString: string): ILegalMoves {
+export default function chessLegalMoves(gameFenString: string): ILegalMoves {
     const game = new Game(gameFenString);
     console.log(game.allPieces);
     console.log(game.pawns);
