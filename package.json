@@ -1,8 +1,11 @@
 {
   "name": "chess-legal-moves",
-  "version": "0.0.19",
+  "version": "0.0.20",
   "description": "Return possible moves from a given board game in FEN notation",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "types": "dist/index.d.ts",
   "author": {
     "name": "Colin Faivre",
