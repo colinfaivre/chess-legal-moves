@@ -1,5 +1,5 @@
 import boardSnapshotParser from './boardSnapshotParser';
-import { ICell } from '../types/board';
+import { ICell } from '../types';
 
 export default function createBoard(boardString: string): ICell[][] {
     return boardSnapshotParser(createBoardSnapshot(boardString));

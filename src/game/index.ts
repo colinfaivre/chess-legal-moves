@@ -1,3 +1,4 @@
+import { ILegalMoves } from '../types';
 import Board from '../board';
 
 export default class Game {
@@ -51,12 +52,25 @@ export default class Game {
         return this.board.rooks.print();
     }
 
-    generateLegalMoves() {
+    generateLegalMoves(): ILegalMoves {
         return {
-            quietMoves: ['a2a3', 'a2a4'],
-            captureMoves: ['a2b3'],
-            playerIsChecked: false,
-            isDraw: false,
+            legalMoves: [
+                {
+                    from: 'a2',
+                    quietMoves: ['a3', 'a4'],
+                    killMoves: ['b3'],
+                },
+                {
+                    from: 'b2',
+                    quietMoves: ['b3', 'b4'],
+                    killMoves: ['a3'],
+                }
+            ],
+            gameState: {
+                isChecked: false,
+                isCheckMated: false,
+                isDraw: false,
+            }
         }
     }
 }

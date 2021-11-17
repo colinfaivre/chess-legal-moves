@@ -1,7 +1,7 @@
 import {
     ICell,
     IPiece,
-} from '../types/board';
+} from '../types';
 
 export default function boardSnapshotParser(boardSnapshot: string[]): ICell[][] {
     return boardFeeder(adaptToAnCoords(boardSnapshot));

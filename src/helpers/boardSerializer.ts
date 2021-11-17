@@ -1,7 +1,7 @@
 import {
     ICell,
     IPiece,
-} from '../types/board';
+} from '../types';
 
 function getPieceChar(piece: IPiece): string {
     switch (piece.type) {
