@@ -100,4 +100,11 @@ export default class BitBoard {
         console.log('#            #');
         console.log('##############');
     }
+
+    printBinary() {
+        console.log({
+            high: this.high.toString(2),
+            low: this.low.toString(2)
+        })
+    }
 }

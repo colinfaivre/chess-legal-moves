@@ -45,10 +45,10 @@ export default class Board {
     get whiteKnights() {
         return this.whites.and(this.knights);
     }
-    get whiteBishop() {
+    get whiteBishops() {
         return this.whites.and(this.bishops);
     }
-    get whiteQueen() {
+    get whiteQueens() {
         return this.whites.and(this.queens);
     }
     get whiteKing() {

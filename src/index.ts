@@ -1,4 +1,4 @@
-import Game from './game';
+import Game from './game/Game';
 import { ILegalMoves } from './types';
 
 export default function chessLegalMoves(gameFenString: string): ILegalMoves {
