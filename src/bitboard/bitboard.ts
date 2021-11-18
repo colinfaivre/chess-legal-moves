@@ -1,3 +1,5 @@
+import Int32Utils from './int32Utils'
+
 export default class BitBoard {
     low: number;
     high: number;
@@ -38,7 +40,7 @@ export default class BitBoard {
     not() {
         return new BitBoard(~this.low, ~this.high);
     }
-    
+
     equals(other: BitBoard) {
         return (this.low === other.low && this.high === other.high);
     }
@@ -53,6 +55,25 @@ export default class BitBoard {
     
     isZero() {
         return (this.high === 0 && this.low === 0);
+    }
+
+    extractBits() {
+        let lowCopy = this.low
+        let highCopy = this.high
+
+        let extracted = [];
+
+        while (lowCopy) {
+            extracted.push(Int32Utils.bitScanForward32(lowCopy));
+            lowCopy = Int32Utils.clearLeastSigBit32(lowCopy);
+        }
+
+        while (highCopy) {
+            extracted.push(Int32Utils.bitScanForward32(highCopy) + 32);
+            highCopy = Int32Utils.clearLeastSigBit32(highCopy);
+        }
+
+        return extracted;
     }
 
     static fromPos(pos: number) {

@@ -1,13 +1,11 @@
 import { IGameState, ILegalMoves, IMovesFromPosition } from '../types';
 import Board from '../board';
-import {
-    generateKnightsMoves,
-    generatePawnsMoves,
-    generateRooksMoves,
-    generateBishopsMoves,
-    generateQueensMoves,
-    generateKingMoves,
-} from './moves';
+import { generateKnightsMoves } from './knight'
+import { generatePawnsMoves } from './pawn'
+import { generateRooksMoves } from './rook'
+import { generateBishopsMoves } from './bishop'
+import { generateQueensMoves } from './queen'
+import { generateKingMoves } from './king'
 
 export default class Game {
     board: Board
@@ -37,15 +35,21 @@ export default class Game {
     }
 
     get playerColor() {
-        return this.hasToPlay === 'w' ? 'white' : 'black';
+        return this.hasToPlay === 'w' ?
+            'white' :
+            'black';
     }
 
     get playerPieces() {
-        return this.playerColor === 'white' ? this.board.whites.print() : this.board.blacks.print();
+        return this.playerColor === 'white' ?
+            this.board.whites.print() :
+            this.board.blacks.print();
     }
 
     get opponentPieces() {
-        return this.playerColor === 'white' ? this.board.blacks.print() : this.board.whites.print();
+        return this.playerColor === 'white'?
+            this.board.blacks.print() :
+            this.board.whites.print();
     }
 
     get allPieces() {
@@ -68,14 +72,12 @@ export default class Game {
             isDraw: false,
         }
 
-        this.board.knights.printBinary()
-        
-        if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves());
-        if (this.board.whitePawns) legalMoves.push(...generatePawnsMoves());
-        if (this.board.whiteRooks) legalMoves.push(...generateRooksMoves());
-        if (this.board.whiteBishops) legalMoves.push(...generateBishopsMoves());
-        if (this.board.whiteQueens) legalMoves.push(...generateQueensMoves());
-        if (this.board.whiteKing) legalMoves.push(...generateKingMoves());
+        if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves(this.board.whiteKnights));
+        if (this.board.whitePawns) legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
+        if (this.board.whiteRooks) legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
+        if (this.board.whiteBishops) legalMoves.push(...generateBishopsMoves(this.board.whiteBishops));
+        if (this.board.whiteQueens) legalMoves.push(...generateQueensMoves(this.board.whiteQueens));
+        if (this.board.whiteKing) legalMoves.push(...generateKingMoves(this.board.whiteKing));
 
         return {
             legalMoves,

@@ -1,6 +1,6 @@
 {
   "name": "chess-legal-moves",
-  "version": "0.0.29",
+  "version": "0.0.30",
   "description": "Return possible moves from a given board game in FEN notation",
   "main": "dist/index.js",
   "files": [
