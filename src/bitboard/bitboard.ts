@@ -103,8 +103,8 @@ export default class BitBoard {
 
     printBinary() {
         console.log({
-            high: this.high.toString(2),
-            low: this.low.toString(2)
+            high: this.high,
+            low: this.low
         })
     }
 }

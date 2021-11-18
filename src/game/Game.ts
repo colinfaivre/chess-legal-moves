@@ -61,12 +61,14 @@ export default class Game {
     }
 
     generateLegalMoves(): ILegalMoves {
-        let legalMoves: IMovesFromPosition[] = []
+        const legalMoves: IMovesFromPosition[] = []
         const gameState: IGameState = {
             isChecked: false,
             isCheckMated: false,
             isDraw: false,
         }
+
+        this.board.knights.printBinary()
         
         if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves());
         if (this.board.whitePawns) legalMoves.push(...generatePawnsMoves());
