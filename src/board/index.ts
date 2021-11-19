@@ -54,6 +54,9 @@ export default class Board {
     get whiteKing() {
         return this.whites.and(this.kings);
     }
+    get quietDestinations() {
+        return this.whites.not().and(this.blacks.not());
+    }
 
     // BLACK PIECES
     get blackPawns() {

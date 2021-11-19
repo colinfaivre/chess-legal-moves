@@ -72,7 +72,7 @@ export default class Game {
             isDraw: false,
         }
 
-        if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves(this.board.whiteKnights));
+        if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves(this.board));
         if (this.board.whitePawns) legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
         if (this.board.whiteRooks) legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
         if (this.board.whiteBishops) legalMoves.push(...generateBishopsMoves(this.board.whiteBishops));

@@ -5,7 +5,7 @@ import { positionsTable } from "../bitboard/positionsHashTable"
 export function generateQueensMoves(queensBB: BitBoard): IMovesFromPosition[] {
     return [
         {
-            from: 'a4',
+            from: 'd1',
             quietMoves: [],
             killMoves: [],
         },

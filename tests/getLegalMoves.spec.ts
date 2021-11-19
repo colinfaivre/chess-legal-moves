@@ -1,13 +1,27 @@
 import getLegalMoves from "../src/index";
-import { legalMovesFromstartingPosition } from "./startingPosition";
+import {
+    legalMovesFromstartingPosition,
+    legalMovesKnight,
+} from "./startingPosition";
 import {
     generatePosition,
     createPositionTable,
 } from "../src/bitboard/positionsHashTable"
 
-test("Testing 'getLegalMoves' function", () => {
+test("getLegalMoves() | starting position", () => {
     expect(getLegalMoves('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')).toStrictEqual({
         legalMoves: legalMovesFromstartingPosition,
+        gameState: {
+            isChecked: false,
+            isCheckMated: false,
+            isDraw: false,
+        }
+    });
+});
+
+test("getLegalMoves() | knight", () => {
+    expect(getLegalMoves('8/8/8/8/8/4n3/PPPPPPPP/RNBQKBNR w KQkq - 0 1')).toStrictEqual({
+        legalMoves: legalMovesKnight,
         gameState: {
             isChecked: false,
             isCheckMated: false,

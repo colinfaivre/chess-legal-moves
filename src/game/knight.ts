@@ -1,16 +1,16 @@
 import { IMovesFromPosition, IPosition } from "../types"
+import Board from '../board'
 import BitBoard from "../bitboard/bitboard"
 import { positionsTable } from "../bitboard/positionsHashTable"
 
-export function generateKnightsMoves(knightsBB: BitBoard): IMovesFromPosition[] {
-    const killMoves: IPosition[] = []
+export function generateKnightsMoves(board: Board): IMovesFromPosition[] {
     const allKnightMovesTable = generateAllKnightMovesBBTable();
 
-    const knightsList = knightsBB.extractBits().map((knightPositionCode) => {
+    const knightsList = board.whiteKnights.extractBits().map((knightPositionCode) => {
         return {
             from: positionsTable[knightPositionCode],
-            quietMoves: allKnightMovesTable[knightPositionCode].extractBits().map(knightDestination => positionsTable[knightDestination]),
-            killMoves,
+            quietMoves: allKnightMovesTable[knightPositionCode].and(board.quietDestinations).extractBits().map(knightDestination => positionsTable[knightDestination]),
+            killMoves: allKnightMovesTable[knightPositionCode].and(board.blacks).extractBits().map(knightDestination => positionsTable[knightDestination]),
         }
     })
 

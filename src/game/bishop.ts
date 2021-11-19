@@ -5,12 +5,12 @@ import { positionsTable } from "../bitboard/positionsHashTable"
 export function generateBishopsMoves(bishopsBB: BitBoard): IMovesFromPosition[] {
     return [
         {
-            from: 'a3',
+            from: 'c1',
             quietMoves: [],
             killMoves: [],
         },
         {
-            from: 'a6',
+            from: 'f1',
             quietMoves: [],
             killMoves: [],
         },
