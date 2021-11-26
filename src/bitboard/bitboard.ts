@@ -61,7 +61,7 @@ export default class BitBoard {
         let lowCopy = this.low
         let highCopy = this.high
 
-        let extracted = [];
+        const extracted = [];
 
         while (lowCopy) {
             extracted.push(Int32Utils.bitScanForward32(lowCopy));

@@ -1,3 +1,8 @@
+import {
+    IPieceLetter,
+    IPieceName,
+    ILetterToPieceMap,
+} from '../types'
 import BitBoard from '../bitboard/bitboard';
 
 export default class Board {
@@ -19,12 +24,12 @@ export default class Board {
 
         let pos = 0;
         rows.forEach((row) => {
-            row.split('').forEach((char) => {
+            row.split('').forEach((char: IPieceLetter) => {
                 if (/[0-9]/.test(char)) {
                     pos += parseInt(char);
                 } else {
-                    (this as any)[letterToType(char)].setBit(pos);
-                    (this as any)[letterToColor(char)].setBit(pos);
+                    this[letterToType(char)].setBit(pos);
+                    this[letterToColor(char)].setBit(pos);
                     pos++;
                 }
             });
@@ -82,16 +87,22 @@ export default class Board {
 function letterToColor(letter: string) {
     return letter.toUpperCase() === letter ? 'blacks' : 'whites';
 }
-  
-function letterToType(letter: string): string {
-    const types: any = {
+
+function letterToType(letter: IPieceLetter): IPieceName {
+    const types: ILetterToPieceMap = {
         p: 'pawns',
         r: 'rooks',
         n: 'knights',
         b: 'bishops',
         k: 'kings',
         q: 'queens',
+        P: 'pawns',
+        R: 'rooks',
+        N: 'knights',
+        B: 'bishops',
+        K: 'kings',
+        Q: 'queens',
     }
 
-    return types[letter.toLowerCase()]
+    return types[letter]
 }

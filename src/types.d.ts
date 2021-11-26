@@ -55,3 +55,20 @@ export interface ICellPosition {
     columnIndex: number,
     rowIndex: number,
 }
+
+export type IPieceLetter = 'p' | 'r' | 'n' | 'b' | 'k' | 'q' | 'P' | 'R' | 'N' | 'B' | 'K' | 'Q';
+export type IPieceName = 'pawns' | 'rooks' | 'knights' | 'bishops' | 'kings' | 'queens';
+export type ILetterToPieceMap = {
+    p: 'pawns',
+    r: 'rooks',
+    n: 'knights',
+    b: 'bishops',
+    k: 'kings',
+    q: 'queens',
+    P: 'pawns',
+    R: 'rooks',
+    N: 'knights',
+    B: 'bishops',
+    K: 'kings',
+    Q: 'queens',
+}

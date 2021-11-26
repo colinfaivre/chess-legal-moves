@@ -1,5 +1,5 @@
 function generateMSBTable(max: number): number[] {
-  let res = [];
+  const res = [];
   let int;
   for (int = 1; int <= max; int++) {
     res[int] = Math.floor(Math.log2(int));
