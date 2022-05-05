@@ -97,4 +97,9 @@ export default class Game {
             gameState,
         }
     }
+
+    addMove(move: string): void {
+        const isValidMove = move.match(regex.move);
+        if (!isValidMove) throw new Error('The provided move is not valid');
+    }
 }
