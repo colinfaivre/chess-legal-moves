@@ -6,6 +6,8 @@ import {
 import BitBoard from '../bitboard/bitboard';
 
 export default class Board {
+    boardString: string;
+    boardArray: string[];
     whites = new BitBoard();
     blacks = new BitBoard();
     pawns = new BitBoard();
@@ -15,12 +17,13 @@ export default class Board {
     kings = new BitBoard();
     queens = new BitBoard();
 
-    constructor(piecesPositions: string) {
-        this.feedBitBoards(piecesPositions);
+    constructor(boardString: string) {
+        this.feedBoard(boardString);
     }
 
-    feedBitBoards(piecesPositions: string) {
-        const rows: string[] = piecesPositions.split('/');
+    feedBoard(boardString: string) {
+        this.boardString = boardString;
+        const rows: string[] = boardString.split('/');
 
         let pos = 0;
         rows.forEach((row) => {
