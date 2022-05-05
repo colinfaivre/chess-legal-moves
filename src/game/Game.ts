@@ -16,7 +16,10 @@ export default class Game {
     fullMoveClock: number;
 
     constructor(fenString: string) {
-        // @TODO Check if fenString is valid with regex
+        const fenStringRegex = /^\s*([prnbqkPRNBQK12345678]{1,8}(?:\/[prnbqkPRNBQK12345678]{1,8}){7})\s+(w|b)\s+([KQkqA-Ha-h]{1,4}|\-)\s+(?:(?:([a-h][36]|\-)\s+(\d{1,3})\s+(\d{1,4}))|(?:0\s+0))\s*$/;
+        const isValidFen = fenString.match(fenStringRegex)
+        if (!isValidFen) throw new Error('The provided fen string is not valid')
+
         const [
             piecesPositions,
             hasToPlay,
