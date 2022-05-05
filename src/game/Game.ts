@@ -1,3 +1,4 @@
+import regex from '../helpers/regex'
 import { IGameState, ILegalMoves, IMovesFromPosition } from '../types';
 import Board from '../board';
 import { generateKnightsMoves } from './knight'
@@ -8,7 +9,8 @@ import { generateQueensMoves } from './queen'
 import { generateKingMoves } from './king'
 
 export default class Game {
-    board: Board
+    fen: string;
+    board: Board;
     hasToPlay: string;
     availableCastlings: string;
     enPassantTarget: string;
@@ -16,9 +18,17 @@ export default class Game {
     fullMoveClock: number;
 
     constructor(fenString: string) {
-        const fenStringRegex = /^\s*([prnbqkPRNBQK12345678]{1,8}(?:\/[prnbqkPRNBQK12345678]{1,8}){7})\s+(w|b)\s+([KQkqA-Ha-h]{1,4}|\-)\s+(?:(?:([a-h][36]|\-)\s+(\d{1,3})\s+(\d{1,4}))|(?:0\s+0))\s*$/;
-        const isValidFen = fenString.match(fenStringRegex)
-        if (!isValidFen) throw new Error('The provided fen string is not valid')
+        this.validateFenString(fenString)
+        this.feedGame(fenString);
+    }
+
+    validateFenString(fenString: string): void {
+        const isValidFen = fenString.match(regex.fenString);
+        if (!isValidFen) throw new Error('The provided fen string is not valid');
+    }
+
+    feedGame(fenString: string): void {
+        this.fen = fenString;
 
         const [
             piecesPositions,
