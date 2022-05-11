@@ -72,3 +72,25 @@ export type ILetterToPieceMap = {
     K: 'kings',
     Q: 'queens',
 }
+
+export interface IUpdateFenBoardResult {
+    fenBoard: string;
+    castlingLetter?: string;
+    enPassantTarget?: string;
+}
+
+export interface ICastlingMap {
+    [key: string]: {
+        moveIndexes: [number, number], castlingLetter: string
+    }
+}
+
+export interface IParsedMove {
+    move: [number, number];
+    promotionPiece?: string;
+    castling?: {
+        rookMove: [number, number];
+        letter: string;
+    }
+    enPassantTarget?: string;
+}
