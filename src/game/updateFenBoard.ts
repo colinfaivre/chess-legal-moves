@@ -1,26 +1,9 @@
 import regex from '../helpers/regex'
-
-interface IUpdateFenBoardResult {
-    fenBoard: string;
-    castlingLetter?: string;
-    enPassantTarget?: string;
-}
-
-interface ICastlingMap {
-    [key: string]: {
-        moveIndexes: [number, number], castlingLetter: string
-    }
-}
-
-interface IParsedMove {
-    move: [number, number];
-    promotionPiece?: string;
-    castling?: {
-        rookMove: [number, number];
-        letter: string;
-    }
-    enPassantTarget?: string;
-}
+import {
+    IUpdateFenBoardResult,
+    IParsedMove,
+    ICastlingMap,
+} from '../types';
 
 export default function updateFenBoard(
     move: string,
@@ -65,27 +48,32 @@ export function parseBoard(boardString: string): string[] {
 	return boardCells
 }
 
-function getRanks(boardString: string): string[] {
+export function getRanks(boardString: string): string[] {
 	return boardString.split("/");
 }
 
-function getRankCells(rank: string): string[] {
+export function getRankCells(rank: string): string[] {
 	rank = convertNumbersToPoints(rank);
 	return rank.split("");
 }
 
-function convertNumbersToPoints(rank: string): string {
+export function convertNumbersToPoints(rank: string): string {
 	for (let i = 1; i <= 8; i++) {
-		rank = rank.replace(i.toString(), ".".repeat(i));
+		rank = rank.replaceAll(i.toString(), ".".repeat(i));
 	}
 
 	return rank;
 }
 
-function parseMove(moveString: string): IParsedMove {
+export function parseMove(moveString: string): IParsedMove {
     const from = moveString.substring(0, 2);
-    const to = moveString.substring(2);
-    const parsedMove: IParsedMove = { move: [mapPositionToBoardIndex(from), mapPositionToBoardIndex(to)] };
+    const to = moveString.substring(2, 4);
+    const parsedMove: IParsedMove = {
+        move: [
+            mapPositionToBoardIndex(from), 
+            mapPositionToBoardIndex(to)
+        ],
+    };
 
     const isPromotionMove = moveString.match(regex.promotionMove);
     if (isPromotionMove) parsedMove.promotionPiece = moveString.substring(4);
@@ -105,15 +93,16 @@ function parseMove(moveString: string): IParsedMove {
     const isPawnDoubleMove = moveString.match(regex.pawnDoubleMove);
     if (isPawnDoubleMove) {
         const from = moveString.substring(0, 2);
-
-        parsedMove.enPassantTarget = from.replace('2', '3');
-        parsedMove.enPassantTarget = from.replace('7', '6');
+        
+        parsedMove.enPassantTarget = from
+        parsedMove.enPassantTarget = parsedMove.enPassantTarget.replace('2', '3');
+        parsedMove.enPassantTarget = parsedMove.enPassantTarget.replace('7', '6');
     }
 
     return parsedMove;
 }
 
-function mapPositionToBoardIndex(position: string): number {
+export function mapPositionToBoardIndex(position: string): number {
 	const filesLetter = ["a", "b", "c", "d", "e", " f", "g", "h"];
 	const indexMap: {[key: string]: number} = {};
 	let counter = 0;
