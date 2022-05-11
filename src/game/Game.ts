@@ -101,5 +101,25 @@ export default class Game {
     addMove(move: string): void {
         const isValidMove = move.match(regex.move);
         if (!isValidMove) throw new Error('The provided move is not valid');
+
+        const addMoveData = this.board.addMove(move);
+        if (addMoveData.castlingLetter) this.applyCastling(addMoveData.castlingLetter)
+
+        this.toggleHasToPlay();
+
+        // this.feedGame(`${this.board.boardString} ${this.hasToPlay} `);
+    }
+
+    applyCastling(castlingLetter: string): void {
+        const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
+
+        if (isWhiteCastling) this.availableCastlings = this.availableCastlings.replace('KQ', '');
+        else this.availableCastlings = this.availableCastlings.replace('kq', '');
+
+        if (this.availableCastlings.length === 0) this.availableCastlings = '-';
+    }
+
+    toggleHasToPlay() {
+        this.hasToPlay === "w" ? "b" : "w";
     }
 }
