@@ -4,7 +4,13 @@
         "module": "commonjs",
         "noImplicitAny": true,
         "outDir": "./dist",
-        "lib": ["es2017", "es7", "es6", "DOM"],
+        "lib": [
+            "es2021",
+            "es2017",
+            "es7",
+            "es6",
+            "DOM"
+        ],
         "target": "ES5"
     },
     "include": [
