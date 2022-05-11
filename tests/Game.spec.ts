@@ -10,7 +10,17 @@ test("constructor() | valid fen string", () => {
 
 test("addMove() | valid move", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    expect(() => { game.addMove('a3a4') }).not.toThrow();
+    expect(() => { game.addMove('a2a4') }).not.toThrow();
+});
+
+test("addMove() | valid move with promotion", () => {
+    const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+    expect(() => { game.addMove('a7a8q') }).not.toThrow();
+});
+
+test("addMove() | valid move with castling", () => {
+    const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+    expect(() => { game.addMove('e1g1') }).not.toThrow();
 });
 
 test("addMove() | invalid move", () => {
