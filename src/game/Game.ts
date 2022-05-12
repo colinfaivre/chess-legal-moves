@@ -10,6 +10,7 @@ import { generateQueensMoves } from './queen'
 import { generateKingMoves } from './king'
 
 export default class Game {
+    // input
     fen: string;
     fenBoard: string;
 
@@ -20,7 +21,13 @@ export default class Game {
     halfMoveClock: number;
     fullMoveClock: number;
 
-    legalMoves: [];
+    // output
+    legalMoves: ILegalMoves = [];
+    gameState: IGameState = {
+        isChecked: false,
+        isCheckMated: false,
+        isDraw: false,
+    };
 
     constructor(fenString: string) {
         validate.fenString(fenString);
@@ -50,73 +57,37 @@ export default class Game {
         this.fullMoveClock = parseInt(fullMoveClock);
     }
 
-    get playerColor() {
-        return this.hasToPlay === 'w' ?
-            'white' :
-            'black';
-    }
-
-    get playerPieces() {
-        return this.playerColor === 'white' ?
-            this.board.whites.print() :
-            this.board.blacks.print();
-    }
-
-    get opponentPieces() {
-        return this.playerColor === 'white'?
-            this.board.blacks.print() :
-            this.board.whites.print();
-    }
-
-    get allPieces() {
-        return this.board.allPieces.print();
-    }
-
-    get pawns() {
-        return this.board.pawns.print();
-    }
-
-    get rooks() {
-        return this.board.rooks.print();
-    }
-
     scan(): IGameScan {
-        const legalMoves: ILegalMoves = []
-        const gameState: IGameState = {
-            isChecked: false,
-            isCheckMated: false,
-            isDraw: false,
-        }
-
-        if (this.board.whiteKnights) legalMoves.push(...generateKnightsMoves(this.board));
-        if (this.board.whitePawns) legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
-        if (this.board.whiteRooks) legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
-        if (this.board.whiteBishops) legalMoves.push(...generateBishopsMoves(this.board.whiteBishops));
-        if (this.board.whiteQueens) legalMoves.push(...generateQueensMoves(this.board.whiteQueens));
-        if (this.board.whiteKing) legalMoves.push(...generateKingMoves(this.board.whiteKing));
+        if (this.board.whiteKnights) this.legalMoves.push(...generateKnightsMoves(this.board));
+        if (this.board.whitePawns) this.legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
+        if (this.board.whiteRooks) this.legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
+        if (this.board.whiteBishops) this.legalMoves.push(...generateBishopsMoves(this.board.whiteBishops));
+        if (this.board.whiteQueens) this.legalMoves.push(...generateQueensMoves(this.board.whiteQueens));
+        if (this.board.whiteKing) this.legalMoves.push(...generateKingMoves(this.board.whiteKing));
 
         return {
-            legalMoves,
-            gameState,
+            legalMoves: this.legalMoves,
+            gameState: this.gameState,
         }
     }
 
     addMove(move: string): string {
         validate.move(move);
+        this.checkIfLegalMove(move);
 
         const addMoveData = updateFenBoard(move, this.fenBoard);
         if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
         if (addMoveData.enPassantTarget) this.updateEnPassantTarget(addMoveData.enPassantTarget);
         if (addMoveData.incrementHalfMoveClock) this.incrementHalfMoveClock();
 
-        if (this.hasToPlay === "b") this.incrementFullMoveClock;
+        if (this.hasToPlay === "b") this.incrementFullMoveClock();
         this.toggleHasToPlay();
 
         return `${addMoveData.fenBoard} ${this.hasToPlay} ${this.availableCastlings} ${this.enPassantTarget} ${this.halfMoveClock} ${this.fullMoveClock}`
     }
 
-    isLegalMove(move: string): boolean {
-        return 
+    checkIfLegalMove(move: string): void {
+        // @TODO if the move is not legal : throw new Error('The provided move is not legal')
     }
 
     updateAvailableCastlings(castlingLetter: string): void {
@@ -140,7 +111,7 @@ export default class Game {
         this.fullMoveClock++;
     }
 
-    toggleHasToPlay() {
+    toggleHasToPlay(): void {
         this.hasToPlay = this.hasToPlay === "w" ? "b" : "w";
     }
 }
