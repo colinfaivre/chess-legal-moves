@@ -1,6 +1,6 @@
 export interface IGameScan {
     legalMoves: ILegalMoves
-    gameState: IGameState
+    kingState: IKingState
 }
 
 export type ILegalMoves = IMovesFromPosition[];
@@ -21,7 +21,7 @@ export type IPosition =
     'g1' | 'g2' | 'g3' | 'g4' | 'g5' | 'g6' | 'g7' | 'g8' |
     'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7' | 'h8'
 
-export interface IGameState {
+export interface IKingState {
     isChecked: boolean
     isCheckMated: boolean
     isDraw: boolean

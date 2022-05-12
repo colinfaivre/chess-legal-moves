@@ -1,11 +1,11 @@
 # ♔ Chess legal moves
 
 This lib exposes a Game class, its constructor takes a string representing a snapshot of a chess game in [FEN notation](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation).
-You can then use legalMoves, gameState properties and addMove() method.
+You can then use legalMoves, kingState properties and addMove() method.
 
 legalMoves property is an array containing all legal moves in [UCI notation](https://en.wikipedia.org/wiki/Universal_Chess_Interface) 
 
-gameState property gives you the state of the game (isCheck, isCheckmated, isDraw).
+kingState property gives you the state of the game (isCheck, isCheckmated, isDraw).
 
 ## Installation
 - with npm
@@ -24,5 +24,5 @@ As an example the following FEN string represents a game starting position. [Lea
 import Game from 'chess-legal-moves';
 const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
 const possibleMoves = game.legalMoves;
-const gameState = game.gameState;
+const kingState = game.kingState;
 ```

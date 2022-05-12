@@ -1,6 +1,6 @@
 import updateFenBoard from './game/updateFenBoard/updateFenBoard';
 import validate from './helpers/validate';
-import { IGameState, IGameScan, ILegalMoves } from './types';
+import { IKingState, IGameScan, ILegalMoves } from './types';
 import Board from './board';
 import { generateKnightsMoves } from './game/knight'
 import { generatePawnsMoves } from './game/pawn'
@@ -12,9 +12,10 @@ import { generateKingMoves } from './game/king'
 export default class Game {
     // input
     fen: string;
-    fenBoard: string;
-
+    
     board: Board;
+    
+    fenBoard: string;
     hasToPlay: string;
     availableCastlings: string;
     enPassantTarget: string;
@@ -23,7 +24,7 @@ export default class Game {
 
     // output
     legalMoves: ILegalMoves = [];
-    gameState: IGameState = {
+    kingState: IKingState = {
         isChecked: false,
         isCheckMated: false,
         isDraw: false,
@@ -67,7 +68,7 @@ export default class Game {
 
         return {
             legalMoves: this.legalMoves,
-            gameState: this.gameState,
+            kingState: this.kingState,
         }
     }
 
@@ -80,7 +81,6 @@ export default class Game {
         if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
         if (addMoveData.enPassantTarget) this.updateEnPassantTarget(addMoveData.enPassantTarget);
         if (addMoveData.incrementHalfMoveClock) this.incrementHalfMoveClock();
-
         if (this.hasToPlay === "b") this.incrementFullMoveClock();
         this.toggleHasToPlay();
 
