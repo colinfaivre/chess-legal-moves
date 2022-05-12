@@ -77,6 +77,7 @@ export interface IUpdateFenBoardResult {
     fenBoard: string;
     castlingLetter?: string;
     enPassantTarget?: string;
+    incrementHalfMoveClock?: boolean;
 }
 
 export interface ICastlingMap {

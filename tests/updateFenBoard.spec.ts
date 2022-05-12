@@ -11,14 +11,16 @@ import { mapPositionToBoardIndex } from "../src/game/updateFenBoard/parseMove";
 test("updateFenBoard() | a2a4", () => {
     const updatedFenBoard = updateFenBoard('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
-        fenBoard: 'rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR' 
+        fenBoard: 'rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR',
+        enPassantTarget: "a3",
     })
 });
 
 test("updateFenBoard() | h2h4", () => {
     const updatedFenBoard = updateFenBoard('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
-        fenBoard: 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP./RNBQKBNR'
+        fenBoard: 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP./RNBQKBNR',
+        enPassantTarget: "h3",
     })
 });
 

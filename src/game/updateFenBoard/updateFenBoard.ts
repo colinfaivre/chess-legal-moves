@@ -11,12 +11,17 @@ export default function updateFenBoard(
 ): IUpdateFenBoardResult {
     const boardArray = parseBoard(fenBoard);
 
+    let isHalfMoveClockMove: boolean;
     let castlingLetter: string;
-    let enPassantTarget: string;
 
     const parsedMove = parseMove(move);
     const [fromIndex, toIndex] = parsedMove.move;
     const pieceToMove = parsedMove.promotionPiece ? parsedMove.promotionPiece : boardArray[fromIndex];
+
+    if (!isPawn(pieceToMove) && !isCapture(pieceToMove, boardArray[toIndex])) {
+        isHalfMoveClockMove = true;
+    }
+
     boardArray[fromIndex] = ".";
     boardArray[toIndex] = pieceToMove;
 
@@ -28,11 +33,23 @@ export default function updateFenBoard(
     }
 
     const result: IUpdateFenBoardResult = {
-        fenBoard : composeBoardArrayToString(boardArray),
+        fenBoard: composeBoardArrayToString(boardArray),
     }
 
+    if (isHalfMoveClockMove) result.incrementHalfMoveClock = true;
     if (castlingLetter) result.castlingLetter = castlingLetter; 
-    if (enPassantTarget) result.enPassantTarget = enPassantTarget;
+    if (parsedMove.enPassantTarget) result.enPassantTarget = parsedMove.enPassantTarget;
 
     return result;
+}
+
+function isPawn(piece: string): boolean {
+    return ['p', 'P'].includes(piece);
+}
+
+function isCapture(piece: string, destination: string): boolean {
+    const isMoveColorWhite = piece === piece.toUpperCase();
+    const isDestinationColorWhite = destination === destination.toUpperCase();
+
+    return isMoveColorWhite !== isDestinationColorWhite;
 }

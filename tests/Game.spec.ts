@@ -8,22 +8,27 @@ test("constructor() | valid fen string", () => {
     expect(() => { new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') }).not.toThrow();
 });
 
-test("addMove() | valid move", () => {
+test("validateMove() | common move", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    expect(() => { game.addMove('a2a4') }).not.toThrow();
+    expect(() => { game.validateMove('a2a4') }).not.toThrow();
 });
 
-test("addMove() | valid move with promotion", () => {
+test("validateMove() | promotion move", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    expect(() => { game.addMove('a7a8q') }).not.toThrow();
+    expect(() => { game.validateMove('a7a8q') }).not.toThrow();
 });
 
-test("addMove() | valid move with castling", () => {
+test("validateMove() | castling move", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    expect(() => { game.addMove('e1g1') }).not.toThrow();
+    expect(() => { game.validateMove('e1g1') }).not.toThrow();
 });
 
-test("addMove() | invalid move", () => {
+test("validateMove() | invalid move", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
-    expect(() => { game.addMove('&3a4') }).toThrow();
+    expect(() => { game.validateMove('&3a4') }).toThrow();
+});
+
+test("addMove() | addMove", () => {
+    const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
+    expect(game.addMove('a2a4')).toStrictEqual('rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR b KQkq a3 0 1');
 });

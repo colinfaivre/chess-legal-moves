@@ -102,19 +102,26 @@ export default class Game {
         }
     }
 
-    addMove(move: string): void {
-        const isValidMove = move.match(regex.move);
-        if (!isValidMove) throw new Error('The provided move is not valid');
+    addMove(move: string): string {
+        this.validateMove(move);
 
         const addMoveData = updateFenBoard(move, this.fenBoard);
-        if (addMoveData.castlingLetter) this.applyCastling(addMoveData.castlingLetter)
+        if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
+        if (addMoveData.enPassantTarget) this.updateEnPassantTarget(addMoveData.enPassantTarget);
+        if (addMoveData.incrementHalfMoveClock) this.incrementHalfMoveClock();
 
+        if (this.hasToPlay === "b") this.incrementFullMoveClock;
         this.toggleHasToPlay();
 
-        // this.feedGame(`${this.board.boardString} ${this.hasToPlay} `);
+        return `${addMoveData.fenBoard} ${this.hasToPlay} ${this.availableCastlings} ${this.enPassantTarget} ${this.halfMoveClock} ${this.fullMoveClock}`
     }
 
-    applyCastling(castlingLetter: string): void {
+    validateMove(move: string): void {
+        const isValidMove = move.match(regex.move);
+        if (!isValidMove) throw new Error('The provided move is not valid');
+    }
+
+    updateAvailableCastlings(castlingLetter: string): void {
         const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
 
         if (isWhiteCastling) this.availableCastlings = this.availableCastlings.replace('KQ', '');
@@ -123,7 +130,19 @@ export default class Game {
         if (this.availableCastlings.length === 0) this.availableCastlings = '-';
     }
 
+    updateEnPassantTarget(enPassantTarget: string): void {
+        this.enPassantTarget = enPassantTarget;
+    }
+
+    incrementHalfMoveClock(): void {
+        this.halfMoveClock++;
+    }
+
+    incrementFullMoveClock(): void {
+        this.fullMoveClock++;
+    }
+
     toggleHasToPlay() {
-        this.hasToPlay === "w" ? "b" : "w";
+        this.hasToPlay = this.hasToPlay === "w" ? "b" : "w";
     }
 }
