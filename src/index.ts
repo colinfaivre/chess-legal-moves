@@ -19,10 +19,8 @@ interface IGameState {
 }
 
 export default class Game {
-    // input
-    fen: string;
     // game state
-    state: IGameState = {
+    private state: IGameState = {
         fenBoard: "",
         hasToPlay: "",
         availableCastlings: "",
@@ -31,10 +29,12 @@ export default class Game {
         fullMoveClock: 0,
     }
     // legalMoves and kingState generation
-    board: Board;
+    private board: Board;
+    
     // output
-    legalMoves: ILegalMoves = [];
-    kingState: IKingState = {
+    public fen: string;
+    public legalMoves: ILegalMoves = [];
+    public kingState: IKingState = {
         isChecked: false,
         isCheckMated: false,
         isDraw: false,
@@ -46,7 +46,7 @@ export default class Game {
         this.scan();
     }
 
-    feedGame(fenString: string): void {
+    private feedGame(fenString: string): void {
         this.fen = fenString;
         
         const [
@@ -68,7 +68,7 @@ export default class Game {
         this.state.fullMoveClock = parseInt(fullMoveClock);
     }
 
-    scan(): IGameScan {
+    private scan(): IGameScan {
         if (this.board.whiteKnights) this.legalMoves.push(...generateKnightsMoves(this.board));
         if (this.board.whitePawns) this.legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
         if (this.board.whiteRooks) this.legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
@@ -82,7 +82,7 @@ export default class Game {
         }
     }
 
-    addMove(move: string): string {
+    public addMove(move: string): string {
         // @TODO add lots of edge cases tests for this method
         validate.move(move);
         this.checkIfLegalMove(move);
@@ -97,14 +97,14 @@ export default class Game {
         return `${addMoveData.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
 
-    checkIfLegalMove(move: string): void {
+    private checkIfLegalMove(move: string): void {
         // @TODO if the move is not legal : throw new Error('The provided move is not legal')
         // @TODO ILegalMoves may not have the easier to consume data structure
         //       it could be easier with a map instead of array
         //       investigate how it is used on the frontend and in this method.
     }
 
-    updateAvailableCastlings(castlingLetter: string): void {
+    private updateAvailableCastlings(castlingLetter: string): void {
         const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
 
         if (isWhiteCastling) this.state.availableCastlings = this.state.availableCastlings.replace('KQ', '');
@@ -113,19 +113,19 @@ export default class Game {
         if (this.state.availableCastlings.length === 0) this.state.availableCastlings = '-';
     }
 
-    updateEnPassantTarget(enPassantTarget: string): void {
+    private updateEnPassantTarget(enPassantTarget: string): void {
         this.state.enPassantTarget = enPassantTarget;
     }
 
-    incrementHalfMoveClock(): void {
+    private incrementHalfMoveClock(): void {
         this.state.halfMoveClock++;
     }
 
-    incrementFullMoveClock(): void {
+    private incrementFullMoveClock(): void {
         this.state.fullMoveClock++;
     }
 
-    toggleHasToPlay(): void {
+    private toggleHasToPlay(): void {
         this.state.hasToPlay = this.state.hasToPlay === "w" ? "b" : "w";
     }
 }
