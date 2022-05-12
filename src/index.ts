@@ -78,14 +78,16 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
 
-        const addMoveData = updateGameState(move, this.state.fenBoard);
-        if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
-        if (addMoveData.enPassantTarget) this.updateEnPassantTarget(addMoveData.enPassantTarget);
-        if (addMoveData.incrementHalfMoveClock) this.incrementHalfMoveClock();
+        // @TODO maybe pass updateGameState() the whole fen ?? and then feed gameState
+        const newGameState = updateGameState(move, this.state.fenBoard);
+        this.updateFenBoard(newGameState.fenBoard);
+        if (newGameState.castlingLetter) this.updateAvailableCastlings(newGameState.castlingLetter);
+        if (newGameState.enPassantTarget) this.updateEnPassantTarget(newGameState.enPassantTarget);
+        if (newGameState.incrementHalfMoveClock) this.incrementHalfMoveClock();
         if (this.state.hasToPlay === "b") this.incrementFullMoveClock();
         this.toggleHasToPlay();
 
-        return `${addMoveData.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
+        return `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
 
     private checkIfLegalMove(move: string): void {
@@ -93,6 +95,10 @@ export default class Game {
         // @TODO ILegalMoves may not have the easier to consume data structure
         //       it could be easier with a map instead of array
         //       investigate how it is used on the frontend and in this method.
+    }
+
+    private updateFenBoard(fenBoard: string): void {
+        this.state.fenBoard = fenBoard;
     }
 
     private updateAvailableCastlings(castlingLetter: string): void {
