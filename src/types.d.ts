@@ -1,3 +1,12 @@
+interface IGameState {
+    fenBoard: string;
+    hasToPlay: string;
+    availableCastlings: string;
+    enPassantTarget: string;
+    halfMoveClock: number;
+    fullMoveClock: number;
+}
+
 export interface IGameScan {
     legalMoves: ILegalMoves
     kingState: IKingState

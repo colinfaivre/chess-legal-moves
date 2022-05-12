@@ -1,6 +1,6 @@
 import updateGameState from './game/updateGameState/updateGameState';
 import validate from './helpers/validate';
-import { IKingState, IGameScan, ILegalMoves } from './types';
+import { IGameState, IKingState, IGameScan, ILegalMoves } from './types';
 import Board from './board';
 import { generateKnightsMoves } from './game/knight'
 import { generatePawnsMoves } from './game/pawn'
@@ -8,15 +8,6 @@ import { generateRooksMoves } from './game/rook'
 import { generateBishopsMoves } from './game/bishop'
 import { generateQueensMoves } from './game/queen'
 import { generateKingMoves } from './game/king'
-
-interface IGameState {
-    fenBoard: string;
-    hasToPlay: string;
-    availableCastlings: string;
-    enPassantTarget: string;
-    halfMoveClock: number;
-    fullMoveClock: number;
-}
 
 export default class Game {
     // game state
@@ -30,7 +21,7 @@ export default class Game {
     }
     // legalMoves and kingState generation
     private board: Board;
-    
+
     // output
     public fen: string;
     public legalMoves: ILegalMoves = [];
