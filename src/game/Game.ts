@@ -1,5 +1,5 @@
 import updateFenBoard from './updateFenBoard/updateFenBoard';
-import regex from '../helpers/regex'
+import validate from '../helpers/validate';
 import { IGameState, ILegalMoves, IMovesFromPosition } from '../types';
 import Board from '../board';
 import { generateKnightsMoves } from './knight'
@@ -20,13 +20,8 @@ export default class Game {
     fullMoveClock: number;
 
     constructor(fenString: string) {
-        this.validateFenString(fenString)
+        validate.fenString(fenString);
         this.feedGame(fenString);
-    }
-
-    validateFenString(fenString: string): void {
-        const isValidFen = fenString.match(regex.fenString);
-        if (!isValidFen) throw new Error('The provided fen string is not valid');
     }
 
     feedGame(fenString: string): void {
@@ -103,7 +98,7 @@ export default class Game {
     }
 
     addMove(move: string): string {
-        this.validateMove(move);
+        validate.move(move);
 
         const addMoveData = updateFenBoard(move, this.fenBoard);
         if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
@@ -114,11 +109,6 @@ export default class Game {
         this.toggleHasToPlay();
 
         return `${addMoveData.fenBoard} ${this.hasToPlay} ${this.availableCastlings} ${this.enPassantTarget} ${this.halfMoveClock} ${this.fullMoveClock}`
-    }
-
-    validateMove(move: string): void {
-        const isValidMove = move.match(regex.move);
-        if (!isValidMove) throw new Error('The provided move is not valid');
     }
 
     updateAvailableCastlings(castlingLetter: string): void {
