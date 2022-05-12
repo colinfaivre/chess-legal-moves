@@ -72,6 +72,7 @@ export default class Game {
     }
 
     addMove(move: string): string {
+        // @TODO add lots of edge cases tests for this method
         validate.move(move);
         this.checkIfLegalMove(move);
 
@@ -88,6 +89,9 @@ export default class Game {
 
     checkIfLegalMove(move: string): void {
         // @TODO if the move is not legal : throw new Error('The provided move is not legal')
+        // @TODO ILegalMoves may not have the easier to consume data structure
+        //       it could be easier with a map instead of array
+        //       investigate how it is used on the frontend and in this method.
     }
 
     updateAvailableCastlings(castlingLetter: string): void {

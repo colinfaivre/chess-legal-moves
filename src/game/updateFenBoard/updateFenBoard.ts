@@ -9,6 +9,7 @@ export default function updateFenBoard(
     move: string,
     fenBoard: string
 ): IUpdateFenBoardResult {
+    // @TODO extract functions to improve readability
     const boardArray = parseBoard(fenBoard);
 
     let isHalfMoveClockMove: boolean;
@@ -44,10 +45,12 @@ export default function updateFenBoard(
 }
 
 function isPawn(piece: string): boolean {
+    // @TODO add test
     return ['p', 'P'].includes(piece);
 }
 
 function isCapture(piece: string, destination: string): boolean {
+    // @TODO add test
     const isMoveColorWhite = piece === piece.toUpperCase();
     const isDestinationColorWhite = destination === destination.toUpperCase();
 

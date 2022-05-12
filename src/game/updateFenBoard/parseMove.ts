@@ -5,6 +5,7 @@ import {
 } from '../../types';
 
 export function parseMove(moveString: string): IParsedMove {
+    // @TODO extract functions to improve readability
     const from = moveString.substring(0, 2);
     const to = moveString.substring(2, 4);
     const parsedMove: IParsedMove = {
