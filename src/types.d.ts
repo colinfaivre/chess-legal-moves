@@ -75,7 +75,7 @@ export type ILetterToPieceMap = {
     Q: 'queens',
 }
 
-export interface IUpdateFenBoardResult {
+export interface IUpdateGameStateResult {
     fenBoard: string;
     castlingLetter?: string;
     enPassantTarget?: string;

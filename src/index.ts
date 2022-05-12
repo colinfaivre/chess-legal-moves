@@ -1,4 +1,4 @@
-import updateFenBoard from './game/updateFenBoard/updateFenBoard';
+import updateGameState from './game/updateGameState/updateGameState';
 import validate from './helpers/validate';
 import { IKingState, IGameScan, ILegalMoves } from './types';
 import Board from './board';
@@ -9,19 +9,29 @@ import { generateBishopsMoves } from './game/bishop'
 import { generateQueensMoves } from './game/queen'
 import { generateKingMoves } from './game/king'
 
-export default class Game {
-    // input
-    fen: string;
-    
-    board: Board;
-    
+interface IGameState {
     fenBoard: string;
     hasToPlay: string;
     availableCastlings: string;
     enPassantTarget: string;
     halfMoveClock: number;
     fullMoveClock: number;
+}
 
+export default class Game {
+    // input
+    fen: string;
+    // game state
+    state: IGameState = {
+        fenBoard: "",
+        hasToPlay: "",
+        availableCastlings: "",
+        enPassantTarget: "",
+        halfMoveClock: 0,
+        fullMoveClock: 0,
+    }
+    // legalMoves and kingState generation
+    board: Board;
     // output
     legalMoves: ILegalMoves = [];
     kingState: IKingState = {
@@ -40,7 +50,7 @@ export default class Game {
         this.fen = fenString;
         
         const [
-            piecesPositions,
+            fenBoard,
             hasToPlay,
             availableCastlings,
             enPassantTarget,
@@ -48,14 +58,14 @@ export default class Game {
             fullMoveClock,
         ] = fenString.split(' ');
 
-        this.fenBoard = piecesPositions;
+        this.board = new Board(fenBoard);
         
-        this.board = new Board(piecesPositions);
-        this.hasToPlay = hasToPlay;
-        this.availableCastlings = availableCastlings;
-        this.enPassantTarget = enPassantTarget;
-        this.halfMoveClock = parseInt(halfMoveClock);
-        this.fullMoveClock = parseInt(fullMoveClock);
+        this.state.fenBoard = fenBoard;
+        this.state.hasToPlay = hasToPlay;
+        this.state.availableCastlings = availableCastlings;
+        this.state.enPassantTarget = enPassantTarget;
+        this.state.halfMoveClock = parseInt(halfMoveClock);
+        this.state.fullMoveClock = parseInt(fullMoveClock);
     }
 
     scan(): IGameScan {
@@ -77,14 +87,14 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
 
-        const addMoveData = updateFenBoard(move, this.fenBoard);
+        const addMoveData = updateGameState(move, this.state.fenBoard);
         if (addMoveData.castlingLetter) this.updateAvailableCastlings(addMoveData.castlingLetter);
         if (addMoveData.enPassantTarget) this.updateEnPassantTarget(addMoveData.enPassantTarget);
         if (addMoveData.incrementHalfMoveClock) this.incrementHalfMoveClock();
-        if (this.hasToPlay === "b") this.incrementFullMoveClock();
+        if (this.state.hasToPlay === "b") this.incrementFullMoveClock();
         this.toggleHasToPlay();
 
-        return `${addMoveData.fenBoard} ${this.hasToPlay} ${this.availableCastlings} ${this.enPassantTarget} ${this.halfMoveClock} ${this.fullMoveClock}`
+        return `${addMoveData.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
 
     checkIfLegalMove(move: string): void {
@@ -97,25 +107,25 @@ export default class Game {
     updateAvailableCastlings(castlingLetter: string): void {
         const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
 
-        if (isWhiteCastling) this.availableCastlings = this.availableCastlings.replace('KQ', '');
-        else this.availableCastlings = this.availableCastlings.replace('kq', '');
+        if (isWhiteCastling) this.state.availableCastlings = this.state.availableCastlings.replace('KQ', '');
+        else this.state.availableCastlings = this.state.availableCastlings.replace('kq', '');
 
-        if (this.availableCastlings.length === 0) this.availableCastlings = '-';
+        if (this.state.availableCastlings.length === 0) this.state.availableCastlings = '-';
     }
 
     updateEnPassantTarget(enPassantTarget: string): void {
-        this.enPassantTarget = enPassantTarget;
+        this.state.enPassantTarget = enPassantTarget;
     }
 
     incrementHalfMoveClock(): void {
-        this.halfMoveClock++;
+        this.state.halfMoveClock++;
     }
 
     incrementFullMoveClock(): void {
-        this.fullMoveClock++;
+        this.state.fullMoveClock++;
     }
 
     toggleHasToPlay(): void {
-        this.hasToPlay = this.hasToPlay === "w" ? "b" : "w";
+        this.state.hasToPlay = this.state.hasToPlay === "w" ? "b" : "w";
     }
 }

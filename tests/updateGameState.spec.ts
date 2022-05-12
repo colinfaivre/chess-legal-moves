@@ -1,24 +1,24 @@
-import updateFenBoard from "../src/game/updateFenBoard/updateFenBoard";
-import { isPawn, isCapture } from "../src/game/updateFenBoard/updateFenBoard";
-import { parseBoard } from "../src/game/updateFenBoard/parseBoard";
-import { getRanks } from "../src/game/updateFenBoard/parseBoard";
-import { getRankCells } from "../src/game/updateFenBoard/parseBoard";
-import { convertNumbersToPoints } from "../src/game/updateFenBoard/parseBoard";
-import { composeBoardArrayToString } from "../src/game/updateFenBoard/composeBoardArrayToString";
-import { convertPointsToNumbers } from "../src/game/updateFenBoard/composeBoardArrayToString";
-import { parseMove } from "../src/game/updateFenBoard/parseMove";
-import { mapPositionToBoardIndex } from "../src/game/updateFenBoard/parseMove";
+import updateGameState from "../src/game/updateGameState/updateGameState";
+import { isPawn, isCapture } from "../src/game/updateGameState/updateGameState";
+import { parseBoard } from "../src/game/updateGameState/parseBoard";
+import { getRanks } from "../src/game/updateGameState/parseBoard";
+import { getRankCells } from "../src/game/updateGameState/parseBoard";
+import { convertNumbersToPoints } from "../src/game/updateGameState/parseBoard";
+import { composeBoardArrayToString } from "../src/game/updateGameState/composeBoardArrayToString";
+import { convertPointsToNumbers } from "../src/game/updateGameState/composeBoardArrayToString";
+import { parseMove } from "../src/game/updateGameState/parseMove";
+import { mapPositionToBoardIndex } from "../src/game/updateGameState/parseMove";
 
-test("updateFenBoard() | a2a4", () => {
-    const updatedFenBoard = updateFenBoard('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+test("updateGameState() | a2a4", () => {
+    const updatedFenBoard = updateGameState('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
         fenBoard: 'rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR',
         enPassantTarget: "a3",
     })
 });
 
-test("updateFenBoard() | h2h4", () => {
-    const updatedFenBoard = updateFenBoard('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+test("updateGameState() | h2h4", () => {
+    const updatedFenBoard = updateGameState('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
         fenBoard: 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP./RNBQKBNR',
         enPassantTarget: "h3",
