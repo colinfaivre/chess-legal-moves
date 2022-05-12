@@ -1,14 +1,12 @@
-import updateFenBoard from "../src/game/updateFenBoard";
-import {
-    parseBoard,
-    composeBoardArrayToString,
-    convertPointsToNumbers,
-    getRanks,
-    getRankCells,
-    convertNumbersToPoints,
-    parseMove,
-    mapPositionToBoardIndex,
-} from "../src/game/updateFenBoard";
+import updateFenBoard from "../src/game/updateFenBoard/updateFenBoard";
+import { parseBoard } from "../src/game/updateFenBoard/parseBoard";
+import { getRanks } from "../src/game/updateFenBoard/parseBoard";
+import { getRankCells } from "../src/game/updateFenBoard/parseBoard";
+import { convertNumbersToPoints } from "../src/game/updateFenBoard/parseBoard";
+import { composeBoardArrayToString } from "../src/game/updateFenBoard/composeBoardArrayToString";
+import { convertPointsToNumbers } from "../src/game/updateFenBoard/composeBoardArrayToString";
+import { parseMove } from "../src/game/updateFenBoard/parseMove";
+import { mapPositionToBoardIndex } from "../src/game/updateFenBoard/parseMove";
 
 test("updateFenBoard() | a2a4", () => {
     const updatedFenBoard = updateFenBoard('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
