@@ -1,3 +1,4 @@
+import updateFenBoard from './updateFenBoard/updateFenBoard';
 import regex from '../helpers/regex'
 import { IGameState, ILegalMoves, IMovesFromPosition } from '../types';
 import Board from '../board';
@@ -10,6 +11,7 @@ import { generateKingMoves } from './king'
 
 export default class Game {
     fen: string;
+    fenBoard: string;
     board: Board;
     hasToPlay: string;
     availableCastlings: string;
@@ -29,7 +31,7 @@ export default class Game {
 
     feedGame(fenString: string): void {
         this.fen = fenString;
-
+        
         const [
             piecesPositions,
             hasToPlay,
@@ -39,6 +41,8 @@ export default class Game {
             fullMoveClock,
         ] = fenString.split(' ');
 
+        this.fenBoard = piecesPositions;
+        
         this.board = new Board(piecesPositions);
         this.hasToPlay = hasToPlay;
         this.availableCastlings = availableCastlings;
@@ -102,7 +106,7 @@ export default class Game {
         const isValidMove = move.match(regex.move);
         if (!isValidMove) throw new Error('The provided move is not valid');
 
-        const addMoveData = this.board.addMove(move);
+        const addMoveData = updateFenBoard(move, this.fenBoard);
         if (addMoveData.castlingLetter) this.applyCastling(addMoveData.castlingLetter)
 
         this.toggleHasToPlay();
