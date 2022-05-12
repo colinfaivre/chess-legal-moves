@@ -1,8 +1,7 @@
-import { IMovesFromPosition } from "../types"
+import { ILegalMoves } from "../types"
 import BitBoard from "../bitboard/bitboard"
-import { positionsTable } from "../bitboard/positionsHashTable"
 
-export function generateBishopsMoves(bishopsBB: BitBoard): IMovesFromPosition[] {
+export function generateBishopsMoves(bishopsBB: BitBoard): ILegalMoves {
     return [
         {
             from: 'c1',

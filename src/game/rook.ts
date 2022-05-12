@@ -1,8 +1,7 @@
-import { IMovesFromPosition } from "../types"
+import { ILegalMoves } from "../types"
 import BitBoard from "../bitboard/bitboard"
-import { positionsTable } from "../bitboard/positionsHashTable"
 
-export function generateRooksMoves(rooksBB: BitBoard): IMovesFromPosition[] {
+export function generateRooksMoves(rooksBB: BitBoard): ILegalMoves {
     return [
         {
             from: 'a1',

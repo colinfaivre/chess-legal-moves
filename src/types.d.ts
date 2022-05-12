@@ -1,7 +1,9 @@
-export interface ILegalMoves {
-    legalMoves: IMovesFromPosition[]
+export interface IGameScan {
+    legalMoves: ILegalMoves
     gameState: IGameState
 }
+
+export type ILegalMoves = IMovesFromPosition[];
 
 export interface IMovesFromPosition {
     from: IPosition

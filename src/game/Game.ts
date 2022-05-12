@@ -1,6 +1,6 @@
 import updateFenBoard from './updateFenBoard/updateFenBoard';
 import validate from '../helpers/validate';
-import { IGameState, ILegalMoves, IMovesFromPosition } from '../types';
+import { IGameState, IGameScan, ILegalMoves } from '../types';
 import Board from '../board';
 import { generateKnightsMoves } from './knight'
 import { generatePawnsMoves } from './pawn'
@@ -12,6 +12,7 @@ import { generateKingMoves } from './king'
 export default class Game {
     fen: string;
     fenBoard: string;
+
     board: Board;
     hasToPlay: string;
     availableCastlings: string;
@@ -19,9 +20,12 @@ export default class Game {
     halfMoveClock: number;
     fullMoveClock: number;
 
+    legalMoves: [];
+
     constructor(fenString: string) {
         validate.fenString(fenString);
         this.feedGame(fenString);
+        this.scan();
     }
 
     feedGame(fenString: string): void {
@@ -76,8 +80,8 @@ export default class Game {
         return this.board.rooks.print();
     }
 
-    generateLegalMoves(): ILegalMoves {
-        const legalMoves: IMovesFromPosition[] = []
+    scan(): IGameScan {
+        const legalMoves: ILegalMoves = []
         const gameState: IGameState = {
             isChecked: false,
             isCheckMated: false,
@@ -109,6 +113,10 @@ export default class Game {
         this.toggleHasToPlay();
 
         return `${addMoveData.fenBoard} ${this.hasToPlay} ${this.availableCastlings} ${this.enPassantTarget} ${this.halfMoveClock} ${this.fullMoveClock}`
+    }
+
+    isLegalMove(move: string): boolean {
+        return 
     }
 
     updateAvailableCastlings(castlingLetter: string): void {
