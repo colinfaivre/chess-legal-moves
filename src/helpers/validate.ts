@@ -7,6 +7,6 @@ export default {
     },
     move(move: string): void {
         const isValidMove = move.match(regex.move);
-        if (!isValidMove) throw new Error('The provided move is not valid');
+        if (!isValidMove) throw new Error('The provided move syntax is not valid');
     }
 }
