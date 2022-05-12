@@ -44,13 +44,12 @@ export default function updateFenBoard(
     return result;
 }
 
-function isPawn(piece: string): boolean {
-    // @TODO add test
+export function isPawn(piece: string): boolean {
     return ['p', 'P'].includes(piece);
 }
 
-function isCapture(piece: string, destination: string): boolean {
-    // @TODO add test
+export function isCapture(piece: string, destination: string): boolean {
+    if (destination === '.') return false;
     const isMoveColorWhite = piece === piece.toUpperCase();
     const isDestinationColorWhite = destination === destination.toUpperCase();
 

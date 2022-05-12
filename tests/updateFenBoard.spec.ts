@@ -1,4 +1,5 @@
 import updateFenBoard from "../src/game/updateFenBoard/updateFenBoard";
+import { isPawn, isCapture } from "../src/game/updateFenBoard/updateFenBoard";
 import { parseBoard } from "../src/game/updateFenBoard/parseBoard";
 import { getRanks } from "../src/game/updateFenBoard/parseBoard";
 import { getRankCells } from "../src/game/updateFenBoard/parseBoard";
@@ -139,3 +140,35 @@ test("mapPositionToBoardIndex() | h8", () => {
 
     expect(received).toBe(expected);
 });
+
+test("isPawn() | pawn", () => {
+    const received1 = isPawn('p');
+    const received2 = isPawn('P');
+
+    expect(received1).toBe(true);
+    expect(received2).toBe(true);
+});
+
+test("isPawn() | not pawn", () => {
+    const received1 = isPawn('x');
+    const received2 = isPawn('');
+
+    expect(received1).toBe(false);
+    expect(received2).toBe(false);
+});
+
+test("isCapture() | capture", () => {
+    const received1 = isCapture('p', 'P');
+    const received2 = isCapture('Q', 'n');
+
+    expect(received1).toBe(true);
+    expect(received2).toBe(true);
+});
+
+test("isCapture() | not capture", () => {
+    const received1 = isCapture('K', '.');
+    const received2 = isCapture('p', '.');
+
+    expect(received1).toBe(false);
+    expect(received2).toBe(false);
+})
