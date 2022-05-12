@@ -33,11 +33,11 @@ export default class Game {
 
     constructor(fenString: string) {
         validate.fenString(fenString);
-        this.feedGame(fenString);
+        this.feedState(fenString);
         this.scan();
     }
 
-    private feedGame(fenString: string): void {
+    private feedState(fenString: string): void {
         this.fen = fenString;
         
         const [
@@ -49,8 +49,6 @@ export default class Game {
             fullMoveClock,
         ] = fenString.split(' ');
 
-        this.board = new Board(fenBoard);
-        
         this.state.fenBoard = fenBoard;
         this.state.hasToPlay = hasToPlay;
         this.state.availableCastlings = availableCastlings;
@@ -58,8 +56,9 @@ export default class Game {
         this.state.halfMoveClock = parseInt(halfMoveClock);
         this.state.fullMoveClock = parseInt(fullMoveClock);
     }
-
+    
     private scan(): IGameScan {
+        this.board = new Board(this.state.fenBoard);
         if (this.board.whiteKnights) this.legalMoves.push(...generateKnightsMoves(this.board));
         if (this.board.whitePawns) this.legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
         if (this.board.whiteRooks) this.legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
@@ -78,7 +77,7 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
 
-        // @TODO maybe pass updateGameState() the whole fen ?? and then feed gameState
+        // @TODO maybe pass updateGameState() the whole gameState ?? and then feed gameState
         const newGameState = updateGameState(move, this.state.fenBoard);
         this.updateFenBoard(newGameState.fenBoard);
         if (newGameState.castlingLetter) this.updateAvailableCastlings(newGameState.castlingLetter);
