@@ -1,4 +1,4 @@
-import Board from '../board';
+import Board from './board';
 import { IScan } from '../types';
 import { knightsMoves } from './knightsMoves';
 import { pawnsMoves } from './pawnsMoves';

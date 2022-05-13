@@ -6,7 +6,7 @@ import {
 import {
     generatePosition,
     createPositionTable,
-} from "../src/bitboard/positionsHashTable"
+} from "../src/createNewGameScan/bitboard/positionsHashTable"
 
 test("getLegalMoves() | starting position", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')

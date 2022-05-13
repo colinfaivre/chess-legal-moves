@@ -1,5 +1,5 @@
 import { ILegalMoves } from "../types"
-import BitBoard from "../bitboard/bitboard"
+import BitBoard from "./bitboard/bitboard"
 
 export function rooksMoves(rooksBB: BitBoard): ILegalMoves {
     return [

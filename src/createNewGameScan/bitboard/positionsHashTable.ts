@@ -1,4 +1,4 @@
-import { IPosition } from '../types'
+import { IPosition } from '../../types'
 
 export function createPositionTable(): IPosition[] {
     const positionsTable: IPosition[] = []

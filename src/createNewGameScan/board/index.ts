@@ -2,7 +2,7 @@ import {
     IPieceLetter,
     IPieceName,
     ILetterToPieceMap,
-} from '../types'
+} from '../../types'
 import BitBoard from '../bitboard/bitboard';
 
 export default class Board {
