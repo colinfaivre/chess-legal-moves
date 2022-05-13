@@ -1,6 +1,5 @@
 import createNewGameState from './game/createNewGameState/createNewGameState';
-import Board from './board';
-import { generate } from './game/moveGeneration';
+import { createNewGameScan } from './game/createNewGameScan';
 import validate from './helpers/validate';
 import { IGameState, IScan } from './types';
 
@@ -13,7 +12,6 @@ export default class Game {
         halfMoveClock: 0,
         fullMoveClock: 0,
     }
-    private board: Board;
 
     public fen: string;
     public scan: IScan = {
@@ -27,11 +25,11 @@ export default class Game {
 
     constructor(fenString: string) {
         validate.fenStringSyntax(fenString);
-        this.feedState(fenString);
-        this.generateScan();
+        this.updateState(fenString);
+        this.updateScan(this.state.fenBoard);
     }
 
-    private feedState(fenString: string): void {
+    private updateState(fenString: string): void {
         this.fen = fenString;
         
         const [
@@ -51,20 +49,8 @@ export default class Game {
         this.state.fullMoveClock = parseInt(fullMoveClock);
     }
     
-    private generateScan(): IScan {
-        this.board = new Board(this.state.fenBoard);
-
-        if (this.board.whiteKnights) this.scan.legalMoves.push(...generate.knightsMoves(this.board));
-        if (this.board.whitePawns) this.scan.legalMoves.push(...generate.pawnsMoves(this.board.whitePawns));
-        if (this.board.whiteRooks) this.scan.legalMoves.push(...generate.rooksMoves(this.board.whiteRooks));
-        if (this.board.whiteBishops) this.scan.legalMoves.push(...generate.bishopsMoves(this.board.whiteBishops));
-        if (this.board.whiteQueens) this.scan.legalMoves.push(...generate.queenMoves(this.board.whiteQueens));
-        if (this.board.whiteKing) this.scan.legalMoves.push(...generate.kingMoves(this.board.whiteKing));
-
-        return this.scan = {
-            legalMoves: this.scan.legalMoves,
-            kingState: this.scan.kingState,
-        }
+    private updateScan(fenBoard: string): IScan {
+        return this.scan = createNewGameScan(fenBoard);
     }
 
     public addMove(move: string): string {
@@ -73,7 +59,7 @@ export default class Game {
         this.checkIfLegalMove(move);
         this.state = createNewGameState(move, this.state);
 
-        return this.updateFenFromState();
+        return this.updateFen();
     }
 
     private checkIfLegalMove(move: string): void {
@@ -83,7 +69,7 @@ export default class Game {
         //       investigate how it is used on the frontend and in this method.
     }
 
-    private updateFenFromState(): string {
+    private updateFen(): string {
         return this.fen = `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
 }
