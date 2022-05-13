@@ -78,15 +78,7 @@ export default class Game {
         // @TODO add lots of edge cases tests for this method
         validate.move(move);
         this.checkIfLegalMove(move);
-
-        // @TODO maybe pass createNewGameState() the whole gameState ?? and then feed gameState
-        const newGameState = createNewGameState(move, this.state.fenBoard);
-        this.updateFenBoard(newGameState.fenBoard);
-        if (newGameState.castlingLetter) this.updateAvailableCastlings(newGameState.castlingLetter);
-        if (newGameState.enPassantTarget) this.updateEnPassantTarget(newGameState.enPassantTarget);
-        if (newGameState.incrementHalfMoveClock) this.incrementHalfMoveClock();
-        if (this.state.hasToPlay === "b") this.incrementFullMoveClock();
-        this.toggleHasToPlay();
+        this.state = createNewGameState(move, this.state);
 
         return `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
@@ -96,34 +88,5 @@ export default class Game {
         // @TODO ILegalMoves may not have the easier to consume data structure
         //       it could be easier with a map instead of array
         //       investigate how it is used on the frontend and in this method.
-    }
-
-    private updateFenBoard(fenBoard: string): void {
-        this.state.fenBoard = fenBoard;
-    }
-
-    private updateAvailableCastlings(castlingLetter: string): void {
-        const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
-
-        if (isWhiteCastling) this.state.availableCastlings = this.state.availableCastlings.replace('KQ', '');
-        else this.state.availableCastlings = this.state.availableCastlings.replace('kq', '');
-
-        if (this.state.availableCastlings.length === 0) this.state.availableCastlings = '-';
-    }
-
-    private updateEnPassantTarget(enPassantTarget: string): void {
-        this.state.enPassantTarget = enPassantTarget;
-    }
-
-    private incrementHalfMoveClock(): void {
-        this.state.halfMoveClock++;
-    }
-
-    private incrementFullMoveClock(): void {
-        this.state.fullMoveClock++;
-    }
-
-    private toggleHasToPlay(): void {
-        this.state.hasToPlay = this.state.hasToPlay === "w" ? "b" : "w";
     }
 }

@@ -2,15 +2,15 @@ import { parseBoard } from "./parseBoard";
 import { parseMove } from "./parseMove";
 import { composeBoardArrayToString } from "./composeBoardArrayToString";
 import {
-    ICreateNewGameStateResult,
+    IGameState,
 } from '../../types';
 
 export default function createNewGameState(
     move: string,
-    fenBoard: string
-): ICreateNewGameStateResult {
+    state: IGameState,
+): IGameState {
     // @TODO extract functions to improve readability
-    const boardArray = parseBoard(fenBoard);
+    const boardArray = parseBoard(state.fenBoard);
 
     let isHalfMoveClockMove: boolean;
     let castlingLetter: string;
@@ -33,15 +33,14 @@ export default function createNewGameState(
         castlingLetter = parsedMove.castling.letter;
     }
 
-    const result: ICreateNewGameStateResult = {
-        fenBoard: composeBoardArrayToString(boardArray),
-    }
+    state.fenBoard = updateFenBoard(composeBoardArrayToString(boardArray))
+    if (state.hasToPlay === "b") state.fullMoveClock = incrementFullMoveClock(state.fullMoveClock);
+    if (isHalfMoveClockMove) state.halfMoveClock = incrementHalfMoveClock(state.halfMoveClock);
+    if (castlingLetter) state.availableCastlings = updateAvailableCastlings(state.availableCastlings, castlingLetter); 
+    if (parsedMove.enPassantTarget) state.enPassantTarget = parsedMove.enPassantTarget;
+    state.hasToPlay = toggleHasToPlay(state.hasToPlay)
 
-    if (isHalfMoveClockMove) result.incrementHalfMoveClock = true;
-    if (castlingLetter) result.castlingLetter = castlingLetter; 
-    if (parsedMove.enPassantTarget) result.enPassantTarget = parsedMove.enPassantTarget;
-
-    return result;
+    return state;
 }
 
 export function isPawn(piece: string): boolean {
@@ -54,4 +53,29 @@ export function isCapture(piece: string, destination: string): boolean {
     const isDestinationColorWhite = destination === destination.toUpperCase();
 
     return isMoveColorWhite !== isDestinationColorWhite;
+}
+
+export function updateFenBoard(fenBoard: string): string {
+    return fenBoard;
+}
+
+export function incrementFullMoveClock(fullMoveClock: number): number {
+    return fullMoveClock++;
+}
+
+export function incrementHalfMoveClock(halfMoveClock: number): number {
+    return halfMoveClock++;
+}
+
+export function toggleHasToPlay(hasToPlay: string): string {
+    return hasToPlay === "w" ? "b" : "w";
+}
+
+export function updateAvailableCastlings(availableCastlings: string, castlingLetter: string): string {
+    const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
+    if (isWhiteCastling) availableCastlings = availableCastlings.replace('KQ', '');
+    else availableCastlings = availableCastlings.replace('kq', '');
+    if (availableCastlings.length === 0) availableCastlings = '-';
+
+    return availableCastlings;
 }

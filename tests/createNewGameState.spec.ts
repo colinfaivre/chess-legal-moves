@@ -10,19 +10,46 @@ import { parseMove } from "../src/game/createNewGameState/parseMove";
 import { mapPositionToBoardIndex } from "../src/game/createNewGameState/parseMove";
 
 test("createNewGameState() | a2a4", () => {
-    const updatedFenBoard = createNewGameState('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
-    expect(updatedFenBoard).toStrictEqual({
+    const gameState = {
+        fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+        hasToPlay: 'w',
+        availableCastlings: 'KQkq',
+        enPassantTarget: '-',
+        halfMoveClock: 0,
+        fullMoveClock: 1,
+    };
+    const received = createNewGameState('a2a4', gameState);
+    const expected = {
         fenBoard: 'rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR',
-        enPassantTarget: "a3",
-    })
+        hasToPlay: 'b',
+        availableCastlings: 'KQkq',
+        enPassantTarget: 'a3',
+        halfMoveClock: 0,
+        fullMoveClock: 1,
+    };
+
+    expect(received).toStrictEqual(expected);
 });
 
 test("createNewGameState() | h2h4", () => {
-    const updatedFenBoard = createNewGameState('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
-    expect(updatedFenBoard).toStrictEqual({
+    const gameState = {
+        fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+        hasToPlay: 'w',
+        availableCastlings: 'KQkq',
+        enPassantTarget: '-',
+        halfMoveClock: 0,
+        fullMoveClock: 1,
+    };
+    const received = createNewGameState('h2h4', gameState);
+    const expected = {
         fenBoard: 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP./RNBQKBNR',
-        enPassantTarget: "h3",
-    })
+        hasToPlay: 'b',
+        availableCastlings: 'KQkq',
+        enPassantTarget: 'h3',
+        halfMoveClock: 0,
+        fullMoveClock: 1,
+    };
+    expect(received).toStrictEqual(expected);
 });
 
 test("parseBoard()", () => {
