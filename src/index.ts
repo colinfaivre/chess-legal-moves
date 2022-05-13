@@ -1,17 +1,10 @@
 import createNewGameState from './game/createNewGameState/createNewGameState';
+import Board from './board';
+import { generate } from './game/moveGeneration';
 import validate from './helpers/validate';
 import { IGameState, IKingState, IGameScan, ILegalMoves } from './types';
-import Board from './board';
-// @TODO import every move generation from one index file
-import { generateKnightsMoves } from './game/knight'
-import { generatePawnsMoves } from './game/pawn'
-import { generateRooksMoves } from './game/rook'
-import { generateBishopsMoves } from './game/bishop'
-import { generateQueensMoves } from './game/queen'
-import { generateKingMoves } from './game/king'
 
 export default class Game {
-    // game state
     private state: IGameState = {
         fenBoard: "",
         hasToPlay: "",
@@ -20,10 +13,8 @@ export default class Game {
         halfMoveClock: 0,
         fullMoveClock: 0,
     }
-    // legalMoves and kingState generation
     private board: Board;
 
-    // output
     public fen: string;
     public legalMoves: ILegalMoves = [];
     public kingState: IKingState = {
@@ -61,12 +52,12 @@ export default class Game {
     private scan(): IGameScan {
         this.board = new Board(this.state.fenBoard);
 
-        if (this.board.whiteKnights) this.legalMoves.push(...generateKnightsMoves(this.board));
-        if (this.board.whitePawns) this.legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
-        if (this.board.whiteRooks) this.legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
-        if (this.board.whiteBishops) this.legalMoves.push(...generateBishopsMoves(this.board.whiteBishops));
-        if (this.board.whiteQueens) this.legalMoves.push(...generateQueensMoves(this.board.whiteQueens));
-        if (this.board.whiteKing) this.legalMoves.push(...generateKingMoves(this.board.whiteKing));
+        if (this.board.whiteKnights) this.legalMoves.push(...generate.knightsMoves(this.board));
+        if (this.board.whitePawns) this.legalMoves.push(...generate.pawnsMoves(this.board.whitePawns));
+        if (this.board.whiteRooks) this.legalMoves.push(...generate.rooksMoves(this.board.whiteRooks));
+        if (this.board.whiteBishops) this.legalMoves.push(...generate.bishopsMoves(this.board.whiteBishops));
+        if (this.board.whiteQueens) this.legalMoves.push(...generate.queenMoves(this.board.whiteQueens));
+        if (this.board.whiteKing) this.legalMoves.push(...generate.kingMoves(this.board.whiteKing));
 
         return {
             legalMoves: this.legalMoves,
@@ -79,7 +70,7 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
         this.state = createNewGameState(move, this.state);
-        
+
         return this.updateFenFromState();
     }
 

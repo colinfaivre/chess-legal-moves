@@ -1,7 +1,7 @@
-import { ILegalMoves } from "../types"
-import BitBoard from "../bitboard/bitboard"
+import { ILegalMoves } from "../../types"
+import BitBoard from "../../bitboard/bitboard"
 
-export function generateBishopsMoves(bishopsBB: BitBoard): ILegalMoves {
+export function bishopsMoves(bishopsBB: BitBoard): ILegalMoves {
     return [
         {
             from: 'c1',

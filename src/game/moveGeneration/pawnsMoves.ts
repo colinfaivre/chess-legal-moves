@@ -1,7 +1,7 @@
-import { ILegalMoves } from "../types"
-import BitBoard from "../bitboard/bitboard"
+import { ILegalMoves } from "../../types"
+import BitBoard from "../../bitboard/bitboard"
 
-export function generatePawnsMoves(pawnsBB: BitBoard): ILegalMoves {
+export function pawnsMoves(pawnsBB: BitBoard): ILegalMoves {
     return [
         {
             from: 'a2',

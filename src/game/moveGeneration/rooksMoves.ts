@@ -1,7 +1,7 @@
-import { ILegalMoves } from "../types"
-import BitBoard from "../bitboard/bitboard"
+import { ILegalMoves } from "../../types"
+import BitBoard from "../../bitboard/bitboard"
 
-export function generateRooksMoves(rooksBB: BitBoard): ILegalMoves {
+export function rooksMoves(rooksBB: BitBoard): ILegalMoves {
     return [
         {
             from: 'a1',
