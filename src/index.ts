@@ -67,7 +67,7 @@ export default class Game {
 
     public addMove(move: string): string {
         // @TODO add lots of edge cases tests for this method
-        validate.move(move);
+        validate.moveSyntax(move);
         this.checkIfLegalMove(move);
         this.state = createNewGameState(move, this.state);
 

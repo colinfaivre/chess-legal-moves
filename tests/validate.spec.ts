@@ -8,18 +8,18 @@ test("validate.fenString() | valid fen string", () => {
     expect(() => { validate.fenString('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') }).not.toThrow();
 });
 
-test("validate.move() | common move", () => {
-    expect(() => { validate.move('a2a4') }).not.toThrow();
+test("validate.moveSyntax() | common move", () => {
+    expect(() => { validate.moveSyntax('a2a4') }).not.toThrow();
 });
 
-test("validate.move() | promotion move", () => {
-    expect(() => { validate.move('a7a8q') }).not.toThrow();
+test("validate.moveSyntax() | promotion move", () => {
+    expect(() => { validate.moveSyntax('a7a8q') }).not.toThrow();
 });
 
-test("validate.move() | castling move", () => {
-    expect(() => { validate.move('e1g1') }).not.toThrow();
+test("validate.moveSyntax() | castling move", () => {
+    expect(() => { validate.moveSyntax('e1g1') }).not.toThrow();
 });
 
-test("validate.move() | invalid move", () => {
-    expect(() => { validate.move('&3a4') }).toThrow();
+test("validate.moveSyntax() | invalid move", () => {
+    expect(() => { validate.moveSyntax('&3a4') }).toThrow();
 });
