@@ -10,8 +10,8 @@ import {
 
 test("getLegalMoves() | starting position", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
-    expect(game.legalMoves).toStrictEqual(legalMovesFromstartingPosition);
-    expect(game.kingState).toStrictEqual({
+    expect(game.scan.legalMoves).toStrictEqual(legalMovesFromstartingPosition);
+    expect(game.scan.kingState).toStrictEqual({
         isChecked: false,
         isCheckMated: false,
         isDraw: false,
@@ -20,8 +20,8 @@ test("getLegalMoves() | starting position", () => {
 
 test("getLegalMoves() | knight", () => {
     const game = new Game('8/8/8/8/8/4n3/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
-    expect(game.legalMoves).toStrictEqual(legalMovesKnight);
-    expect(game.kingState).toStrictEqual({
+    expect(game.scan.legalMoves).toStrictEqual(legalMovesKnight);
+    expect(game.scan.kingState).toStrictEqual({
         isChecked: false,
         isCheckMated: false,
         isDraw: false,

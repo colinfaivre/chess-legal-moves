@@ -7,7 +7,7 @@ interface IGameState {
     fullMoveClock: number;
 }
 
-export interface IGameScan {
+export interface IScan {
     legalMoves: ILegalMoves
     kingState: IKingState
 }

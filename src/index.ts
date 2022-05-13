@@ -2,7 +2,7 @@ import createNewGameState from './game/createNewGameState/createNewGameState';
 import Board from './board';
 import { generate } from './game/moveGeneration';
 import validate from './helpers/validate';
-import { IGameState, IKingState, IGameScan, ILegalMoves } from './types';
+import { IGameState, IScan } from './types';
 
 export default class Game {
     private state: IGameState = {
@@ -16,17 +16,19 @@ export default class Game {
     private board: Board;
 
     public fen: string;
-    public legalMoves: ILegalMoves = [];
-    public kingState: IKingState = {
-        isChecked: false,
-        isCheckMated: false,
-        isDraw: false,
-    };
+    public scan: IScan = {
+        legalMoves: [],
+        kingState: {
+            isChecked: false,
+            isCheckMated: false,
+            isDraw: false,
+        },
+    }
 
     constructor(fenString: string) {
         validate.fenStringSyntax(fenString);
         this.feedState(fenString);
-        this.scan();
+        this.generateScan();
     }
 
     private feedState(fenString: string): void {
@@ -49,19 +51,19 @@ export default class Game {
         this.state.fullMoveClock = parseInt(fullMoveClock);
     }
     
-    private scan(): IGameScan {
+    private generateScan(): IScan {
         this.board = new Board(this.state.fenBoard);
 
-        if (this.board.whiteKnights) this.legalMoves.push(...generate.knightsMoves(this.board));
-        if (this.board.whitePawns) this.legalMoves.push(...generate.pawnsMoves(this.board.whitePawns));
-        if (this.board.whiteRooks) this.legalMoves.push(...generate.rooksMoves(this.board.whiteRooks));
-        if (this.board.whiteBishops) this.legalMoves.push(...generate.bishopsMoves(this.board.whiteBishops));
-        if (this.board.whiteQueens) this.legalMoves.push(...generate.queenMoves(this.board.whiteQueens));
-        if (this.board.whiteKing) this.legalMoves.push(...generate.kingMoves(this.board.whiteKing));
+        if (this.board.whiteKnights) this.scan.legalMoves.push(...generate.knightsMoves(this.board));
+        if (this.board.whitePawns) this.scan.legalMoves.push(...generate.pawnsMoves(this.board.whitePawns));
+        if (this.board.whiteRooks) this.scan.legalMoves.push(...generate.rooksMoves(this.board.whiteRooks));
+        if (this.board.whiteBishops) this.scan.legalMoves.push(...generate.bishopsMoves(this.board.whiteBishops));
+        if (this.board.whiteQueens) this.scan.legalMoves.push(...generate.queenMoves(this.board.whiteQueens));
+        if (this.board.whiteKing) this.scan.legalMoves.push(...generate.kingMoves(this.board.whiteKing));
 
-        return {
-            legalMoves: this.legalMoves,
-            kingState: this.kingState,
+        return this.scan = {
+            legalMoves: this.scan.legalMoves,
+            kingState: this.scan.kingState,
         }
     }
 
