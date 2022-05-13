@@ -1,5 +1,5 @@
-import createNewGameState from './game/createNewGameState/createNewGameState';
-import { createNewGameScan } from './game/createNewGameScan';
+import createNewGameState from './createNewGameState/createNewGameState';
+import { createNewGameScan } from './createNewGameScan';
 import validate from './helpers/validate';
 import { fenToState, stateToFen } from './helpers/fen';
 import { IGameState, IScan } from './types';

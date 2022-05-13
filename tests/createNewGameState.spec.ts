@@ -1,13 +1,13 @@
-import createNewGameState from "../src/game/createNewGameState/createNewGameState";
-import { isPawn, isCapture } from "../src/game/createNewGameState/createNewGameState";
-import { parseBoard } from "../src/game/createNewGameState/parseBoard";
-import { getRanks } from "../src/game/createNewGameState/parseBoard";
-import { getRankCells } from "../src/game/createNewGameState/parseBoard";
-import { convertNumbersToPoints } from "../src/game/createNewGameState/parseBoard";
-import { composeBoardArrayToString } from "../src/game/createNewGameState/composeBoardArrayToString";
-import { convertPointsToNumbers } from "../src/game/createNewGameState/composeBoardArrayToString";
-import { parseMove } from "../src/game/createNewGameState/parseMove";
-import { mapPositionToBoardIndex } from "../src/game/createNewGameState/parseMove";
+import createNewGameState from "../src/createNewGameState/createNewGameState";
+import { isPawn, isCapture } from "../src/createNewGameState/createNewGameState";
+import { parseBoard } from "../src/createNewGameState/parseBoard";
+import { getRanks } from "../src/createNewGameState/parseBoard";
+import { getRankCells } from "../src/createNewGameState/parseBoard";
+import { convertNumbersToPoints } from "../src/createNewGameState/parseBoard";
+import { composeBoardArrayToString } from "../src/createNewGameState/composeBoardArrayToString";
+import { convertPointsToNumbers } from "../src/createNewGameState/composeBoardArrayToString";
+import { parseMove } from "../src/createNewGameState/parseMove";
+import { mapPositionToBoardIndex } from "../src/createNewGameState/parseMove";
 
 test("createNewGameState() | a2a4", () => {
     const gameState = {

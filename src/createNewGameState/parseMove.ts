@@ -1,8 +1,8 @@
-import regex from '../../helpers/regex'
+import regex from '../helpers/regex'
 import {
     IParsedMove,
     ICastlingMap,
-} from '../../types';
+} from '../types';
 
 // Document parseMove function
 export function parseMove(moveString: string): IParsedMove {

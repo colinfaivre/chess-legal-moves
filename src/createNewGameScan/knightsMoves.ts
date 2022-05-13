@@ -1,7 +1,7 @@
-import { ILegalMoves } from "../../types"
-import Board from '../../board'
-import BitBoard from "../../bitboard/bitboard"
-import { positionsTable } from "../../bitboard/positionsHashTable"
+import { ILegalMoves } from "../types"
+import Board from "../board"
+import BitBoard from "../bitboard/bitboard"
+import { positionsTable } from "../bitboard/positionsHashTable"
 
 export function knightsMoves(board: Board): ILegalMoves {
     const allKnightMovesTable = generateAllKnightMovesBBTable();
