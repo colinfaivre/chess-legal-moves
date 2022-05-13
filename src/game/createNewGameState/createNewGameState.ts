@@ -2,13 +2,13 @@ import { parseBoard } from "./parseBoard";
 import { parseMove } from "./parseMove";
 import { composeBoardArrayToString } from "./composeBoardArrayToString";
 import {
-    IUpdateGameStateResult,
+    ICreateNewGameStateResult,
 } from '../../types';
 
-export default function updateFenBoard(
+export default function createNewGameState(
     move: string,
     fenBoard: string
-): IUpdateGameStateResult {
+): ICreateNewGameStateResult {
     // @TODO extract functions to improve readability
     const boardArray = parseBoard(fenBoard);
 
@@ -33,7 +33,7 @@ export default function updateFenBoard(
         castlingLetter = parsedMove.castling.letter;
     }
 
-    const result: IUpdateGameStateResult = {
+    const result: ICreateNewGameStateResult = {
         fenBoard: composeBoardArrayToString(boardArray),
     }
 

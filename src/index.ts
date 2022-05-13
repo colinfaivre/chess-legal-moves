@@ -1,7 +1,8 @@
-import updateGameState from './game/updateGameState/updateGameState';
+import createNewGameState from './game/createNewGameState/createNewGameState';
 import validate from './helpers/validate';
 import { IGameState, IKingState, IGameScan, ILegalMoves } from './types';
 import Board from './board';
+// @TODO import every move generation from one index file
 import { generateKnightsMoves } from './game/knight'
 import { generatePawnsMoves } from './game/pawn'
 import { generateRooksMoves } from './game/rook'
@@ -59,6 +60,7 @@ export default class Game {
     
     private scan(): IGameScan {
         this.board = new Board(this.state.fenBoard);
+
         if (this.board.whiteKnights) this.legalMoves.push(...generateKnightsMoves(this.board));
         if (this.board.whitePawns) this.legalMoves.push(...generatePawnsMoves(this.board.whitePawns));
         if (this.board.whiteRooks) this.legalMoves.push(...generateRooksMoves(this.board.whiteRooks));
@@ -77,8 +79,8 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
 
-        // @TODO maybe pass updateGameState() the whole gameState ?? and then feed gameState
-        const newGameState = updateGameState(move, this.state.fenBoard);
+        // @TODO maybe pass createNewGameState() the whole gameState ?? and then feed gameState
+        const newGameState = createNewGameState(move, this.state.fenBoard);
         this.updateFenBoard(newGameState.fenBoard);
         if (newGameState.castlingLetter) this.updateAvailableCastlings(newGameState.castlingLetter);
         if (newGameState.enPassantTarget) this.updateEnPassantTarget(newGameState.enPassantTarget);

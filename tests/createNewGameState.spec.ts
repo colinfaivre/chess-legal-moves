@@ -1,24 +1,24 @@
-import updateGameState from "../src/game/updateGameState/updateGameState";
-import { isPawn, isCapture } from "../src/game/updateGameState/updateGameState";
-import { parseBoard } from "../src/game/updateGameState/parseBoard";
-import { getRanks } from "../src/game/updateGameState/parseBoard";
-import { getRankCells } from "../src/game/updateGameState/parseBoard";
-import { convertNumbersToPoints } from "../src/game/updateGameState/parseBoard";
-import { composeBoardArrayToString } from "../src/game/updateGameState/composeBoardArrayToString";
-import { convertPointsToNumbers } from "../src/game/updateGameState/composeBoardArrayToString";
-import { parseMove } from "../src/game/updateGameState/parseMove";
-import { mapPositionToBoardIndex } from "../src/game/updateGameState/parseMove";
+import createNewGameState from "../src/game/createNewGameState/createNewGameState";
+import { isPawn, isCapture } from "../src/game/createNewGameState/createNewGameState";
+import { parseBoard } from "../src/game/createNewGameState/parseBoard";
+import { getRanks } from "../src/game/createNewGameState/parseBoard";
+import { getRankCells } from "../src/game/createNewGameState/parseBoard";
+import { convertNumbersToPoints } from "../src/game/createNewGameState/parseBoard";
+import { composeBoardArrayToString } from "../src/game/createNewGameState/composeBoardArrayToString";
+import { convertPointsToNumbers } from "../src/game/createNewGameState/composeBoardArrayToString";
+import { parseMove } from "../src/game/createNewGameState/parseMove";
+import { mapPositionToBoardIndex } from "../src/game/createNewGameState/parseMove";
 
-test("updateGameState() | a2a4", () => {
-    const updatedFenBoard = updateGameState('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+test("createNewGameState() | a2a4", () => {
+    const updatedFenBoard = createNewGameState('a2a4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
         fenBoard: 'rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR',
         enPassantTarget: "a3",
     })
 });
 
-test("updateGameState() | h2h4", () => {
-    const updatedFenBoard = updateGameState('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
+test("createNewGameState() | h2h4", () => {
+    const updatedFenBoard = createNewGameState('h2h4', 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
     expect(updatedFenBoard).toStrictEqual({
         fenBoard: 'rnbqkbnr/pppppppp/8/8/7P/8/PPPPPPP./RNBQKBNR',
         enPassantTarget: "h3",
