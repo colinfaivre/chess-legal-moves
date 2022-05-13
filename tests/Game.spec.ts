@@ -8,6 +8,9 @@ import {
     createPositionTable,
 } from "../src/createNewGameScan/bitboard/positionsHashTable"
 
+// TODO use factory for Game, starting position, etc
+// TODO organize tests suites
+
 test("getLegalMoves() | starting position", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
     expect(game.scan.legalMoves).toStrictEqual(legalMovesFromstartingPosition);
