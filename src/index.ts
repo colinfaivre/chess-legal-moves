@@ -25,41 +25,23 @@ export default class Game {
 
     constructor(fenString: string) {
         validate.fenStringSyntax(fenString);
-        this.updateState(fenString);
+        this.updateFen(fenString);
+        this.updateState(this.fenToState(fenString));
         this.updateScan(this.state.fenBoard);
     }
 
-    private updateState(fenString: string): void {
-        this.fen = fenString;
-        
-        const [
-            fenBoard,
-            hasToPlay,
-            availableCastlings,
-            enPassantTarget,
-            halfMoveClock,
-            fullMoveClock,
-        ] = fenString.split(' ');
-
-        this.state.fenBoard = fenBoard;
-        this.state.hasToPlay = hasToPlay;
-        this.state.availableCastlings = availableCastlings;
-        this.state.enPassantTarget = enPassantTarget;
-        this.state.halfMoveClock = parseInt(halfMoveClock);
-        this.state.fullMoveClock = parseInt(fullMoveClock);
+    private updateState(newState: IGameState): void {
+        this.state = newState;
     }
     
     private updateScan(fenBoard: string): IScan {
+        // @TODO make it return void
         return this.scan = createNewGameScan(fenBoard);
     }
 
-    public addMove(move: string): string {
-        // @TODO add lots of edge cases tests for this method
-        validate.moveSyntax(move);
-        this.checkIfLegalMove(move);
-        this.state = createNewGameState(move, this.state);
-
-        return this.updateFen();
+    private updateFen(newFen: string): string {
+        // @TODO make it return void
+        return this.fen = newFen;
     }
 
     private checkIfLegalMove(move: string): void {
@@ -69,7 +51,31 @@ export default class Game {
         //       investigate how it is used on the frontend and in this method.
     }
 
-    private updateFen(): string {
-        return this.fen = `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
+    private stateToFen(state: IGameState): string {
+        // @TODO extract this method from Game
+        return `${state.fenBoard} ${state.hasToPlay} ${state.availableCastlings} ${state.enPassantTarget} ${state.halfMoveClock} ${state.fullMoveClock}`
+    }
+
+    private fenToState(fen: string): IGameState {
+        // @TODO extract this method from Game
+        const fenArray = fen.split(' ');
+
+        return {
+            fenBoard: fenArray[0],
+            hasToPlay: fenArray[1],
+            availableCastlings: fenArray[2],
+            enPassantTarget: fenArray[3],
+            halfMoveClock: parseInt(fenArray[4]),
+            fullMoveClock: parseInt(fenArray[5]),
+        }
+    }
+
+    public addMove(move: string): string {
+        // @TODO add lots of edge cases tests for this method
+        validate.moveSyntax(move);
+        this.checkIfLegalMove(move);
+        this.updateState(createNewGameState(move, this.state));
+
+        return this.updateFen(this.stateToFen(this.state));
     }
 }
