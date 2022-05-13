@@ -1,6 +1,7 @@
 import createNewGameState from './game/createNewGameState/createNewGameState';
 import { createNewGameScan } from './game/createNewGameScan';
 import validate from './helpers/validate';
+import { fenToState, stateToFen } from './helpers/fen';
 import { IGameState, IScan } from './types';
 
 export default class Game {
@@ -26,22 +27,30 @@ export default class Game {
     constructor(fenString: string) {
         validate.fenStringSyntax(fenString);
         this.updateFen(fenString);
-        this.updateState(this.fenToState(fenString));
+        this.updateState(fenToState(fenString));
         this.updateScan(this.state.fenBoard);
+    }
+
+    private updateFen(newFen: string): void {
+        this.fen = newFen;
     }
 
     private updateState(newState: IGameState): void {
         this.state = newState;
     }
     
-    private updateScan(fenBoard: string): IScan {
-        // @TODO make it return void
-        return this.scan = createNewGameScan(fenBoard);
+    private updateScan(fenBoard: string): void {
+        this.scan = createNewGameScan(fenBoard);
     }
-
-    private updateFen(newFen: string): string {
-        // @TODO make it return void
-        return this.fen = newFen;
+    
+    public addMove(move: string): string {
+        // @TODO add lots of edge cases tests for this method
+        validate.moveSyntax(move);
+        this.checkIfLegalMove(move);
+        this.updateState(createNewGameState(move, this.state));
+        this.updateFen(stateToFen(this.state))
+        
+        return this.fen;
     }
 
     private checkIfLegalMove(move: string): void {
@@ -49,33 +58,5 @@ export default class Game {
         // @TODO ILegalMoves may not have the easier to consume data structure
         //       it could be easier with a map instead of array
         //       investigate how it is used on the frontend and in this method.
-    }
-
-    private stateToFen(state: IGameState): string {
-        // @TODO extract this method from Game
-        return `${state.fenBoard} ${state.hasToPlay} ${state.availableCastlings} ${state.enPassantTarget} ${state.halfMoveClock} ${state.fullMoveClock}`
-    }
-
-    private fenToState(fen: string): IGameState {
-        // @TODO extract this method from Game
-        const fenArray = fen.split(' ');
-
-        return {
-            fenBoard: fenArray[0],
-            hasToPlay: fenArray[1],
-            availableCastlings: fenArray[2],
-            enPassantTarget: fenArray[3],
-            halfMoveClock: parseInt(fenArray[4]),
-            fullMoveClock: parseInt(fenArray[5]),
-        }
-    }
-
-    public addMove(move: string): string {
-        // @TODO add lots of edge cases tests for this method
-        validate.moveSyntax(move);
-        this.checkIfLegalMove(move);
-        this.updateState(createNewGameState(move, this.state));
-
-        return this.updateFen(this.stateToFen(this.state));
     }
 }
