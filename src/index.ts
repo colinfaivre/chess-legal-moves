@@ -79,8 +79,8 @@ export default class Game {
         validate.move(move);
         this.checkIfLegalMove(move);
         this.state = createNewGameState(move, this.state);
-
-        return `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
+        
+        return this.updateFenFromState();
     }
 
     private checkIfLegalMove(move: string): void {
@@ -88,5 +88,9 @@ export default class Game {
         // @TODO ILegalMoves may not have the easier to consume data structure
         //       it could be easier with a map instead of array
         //       investigate how it is used on the frontend and in this method.
+    }
+
+    private updateFenFromState(): string {
+        return this.fen = `${this.state.fenBoard} ${this.state.hasToPlay} ${this.state.availableCastlings} ${this.state.enPassantTarget} ${this.state.halfMoveClock} ${this.state.fullMoveClock}`
     }
 }
