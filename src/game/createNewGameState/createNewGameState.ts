@@ -5,11 +5,13 @@ import {
     IGameState,
 } from '../../types';
 
+// @TODO document createNewGameState function
 export default function createNewGameState(
     move: string,
     state: IGameState,
 ): IGameState {
     // @TODO extract functions to improve readability
+    // @TODO test everything
     const boardArray = parseBoard(state.fenBoard);
 
     let isHalfMoveClockMove: boolean;

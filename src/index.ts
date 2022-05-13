@@ -4,7 +4,10 @@ import validate from './helpers/validate';
 import { fenToState, stateToFen } from './helpers/fen';
 import { IGameState, IScan } from './types';
 
+// @TODO document Game class
+// @TODO use getters and setters ?
 export default class Game {
+    // @TODO test everything in Game class
     private state: IGameState = {
         fenBoard: "",
         hasToPlay: "",
