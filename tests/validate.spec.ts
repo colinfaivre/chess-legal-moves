@@ -1,11 +1,11 @@
 import validate from "../src/helpers/validate";
 
-test("validate.fenString() | invalid fen string", () => {
-    expect(() => { validate.fenString('& w KQkq - 0 1') }).toThrow();
+test("validate.fenStringSyntax() | invalid fen string", () => {
+    expect(() => { validate.fenStringSyntax('& w KQkq - 0 1') }).toThrow();
 });
 
-test("validate.fenString() | valid fen string", () => {
-    expect(() => { validate.fenString('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') }).not.toThrow();
+test("validate.fenStringSyntax() | valid fen string", () => {
+    expect(() => { validate.fenStringSyntax('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1') }).not.toThrow();
 });
 
 test("validate.moveSyntax() | common move", () => {

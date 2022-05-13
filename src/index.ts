@@ -24,7 +24,7 @@ export default class Game {
     };
 
     constructor(fenString: string) {
-        validate.fenString(fenString);
+        validate.fenStringSyntax(fenString);
         this.feedState(fenString);
         this.scan();
     }
