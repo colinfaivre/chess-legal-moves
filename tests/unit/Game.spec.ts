@@ -1,12 +1,12 @@
-import Game from "../src/index";
+import Game from "../../src/index";
 import {
     legalMovesFromstartingPosition,
     legalMovesKnight,
-} from "./startingPosition";
+} from "../factories/startingPosition";
 import {
     generatePosition,
     createPositionTable,
-} from "../src/createNewGameScan/bitboard/positionsHashTable"
+} from "../../src/createNewGameScan/bitboard/positionsHashTable"
 
 // TODO use factory for Game, starting position, etc
 // TODO organize tests suites

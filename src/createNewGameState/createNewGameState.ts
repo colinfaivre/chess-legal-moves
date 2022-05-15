@@ -3,7 +3,7 @@ import { parseMove } from "./parseMove";
 import { composeBoardArrayToString } from "./composeBoardArrayToString";
 import {
     IGameState,
-} from '../../types';
+} from '../types';
 
 // @TODO document createNewGameState function
 export default function createNewGameState(
