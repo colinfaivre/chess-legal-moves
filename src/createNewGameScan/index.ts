@@ -1,11 +1,11 @@
-import Board from './board';
+import Board from './Board/Board';
 import { IScan } from '../types';
-import { knightsMoves } from './knightsMoves';
-import { pawnsMoves } from './pawnsMoves';
-import { rooksMoves } from './rooksMoves';
-import { bishopsMoves } from './bishopsMoves';
-import { queenMoves } from './queenMoves';
-import { kingMoves } from './kingMoves';
+import { knightsMoves } from './moves/knightsMoves';
+import { pawnsMoves } from './moves/pawnsMoves';
+import { rooksMoves } from './moves/rooksMoves';
+import { bishopsMoves } from './moves/bishopsMoves';
+import { queenMoves } from './moves/queenMoves';
+import { kingMoves } from './moves/kingMoves';
 
 export const generate = {
     knightsMoves,

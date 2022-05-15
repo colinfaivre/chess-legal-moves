@@ -3,7 +3,7 @@ import {
     IPieceName,
     ILetterToPieceMap,
 } from '../../types'
-import BitBoard from '../bitboard/bitboard';
+import BitBoard from '../BitBoard/BitBoard';
 
 export default class Board {
     boardString: string;
