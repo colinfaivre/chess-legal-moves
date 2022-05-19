@@ -1,7 +1,7 @@
 {
   "name": "chess-legal-moves",
   "version": "2.0.2",
-  "description": "Return possible moves from a given board game in FEN notation",
+  "description": "Analyses a given chess game position in Fen notation to return legal moves and provides the next game position after a given move",
   "main": "dist/index.js",
   "files": [
     "dist/*"
