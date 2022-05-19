@@ -10,7 +10,6 @@ export default function createNewGameState(
     move: string,
     state: IGameState,
 ): IGameState {
-    // @TODO extract functions to improve readability
     // @TODO test everything
     const boardArray = parseBoard(state.fenBoard);
 
@@ -62,11 +61,11 @@ export function updateFenBoard(fenBoard: string): string {
 }
 
 export function incrementFullMoveClock(fullMoveClock: number): number {
-    return fullMoveClock++;
+    return fullMoveClock + 1;
 }
 
 export function incrementHalfMoveClock(halfMoveClock: number): number {
-    return halfMoveClock++;
+    return halfMoveClock + 1;
 }
 
 export function toggleHasToPlay(hasToPlay: string): string {
