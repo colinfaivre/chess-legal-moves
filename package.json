@@ -26,7 +26,8 @@
     "build": "tsc",
     "dev": "yarn build --watch --preserveWatchOutput",
     "test:unit": "jest",
-    "lint": "eslint src --ext js,ts"
+    "lint": "eslint src --ext js,ts",
+    "extract:local": "yarn build && yarn api-extractor run --local"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
