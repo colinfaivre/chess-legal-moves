@@ -1,6 +1,6 @@
 {
   "name": "chess-legal-moves",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "Analyses a given chess game position in Fen notation to return legal moves and provides the next game position after a given move",
   "main": "dist/index.js",
   "files": [
@@ -24,11 +24,11 @@
   "homepage": "https://github.com/colinfaivre/chess-legal-moves",
   "scripts": {
     "build": "tsc",
-    "dev": "yarn build --watch --preserveWatchOutput",
+    "dev": "npm run build --watch --preserveWatchOutput",
     "test:unit": "jest",
     "lint": "eslint src --ext js,ts",
-    "extract:local": "yarn build && yarn api-extractor run --local",
-    "document": "yarn build && yarn api-documenter markdown -i temp -o docs"
+    "extract:local": "npm run build && api-extractor run --local",
+    "document": "npm run build && api-documenter markdown -i temp -o docs"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
