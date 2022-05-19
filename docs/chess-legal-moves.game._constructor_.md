@@ -4,7 +4,7 @@
 
 ## Game.(constructor)
 
-Constructs a new instance of the `Game` class
+The class constructor to build a Game instance
 
 <b>Signature:</b>
 
@@ -16,5 +16,5 @@ constructor(fenString: string);
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  fenString | string |  |
+|  fenString | string | a string in FEN notation representing a particular game position |
 

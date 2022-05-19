@@ -4,9 +4,15 @@ import validate from './helpers/validate';
 import { fenToState, stateToFen } from './helpers/fen';
 import { IGameState, IScan } from './types';
 
-// @TODO document Game class
 // @TODO use getters and setters ?
+
+/**
+ * The Game class
+ * 
+ * @public
+ */
 export default class Game {
+
     // @TODO test everything in Game class
     private state: IGameState = {
         fenBoard: "",
@@ -27,6 +33,12 @@ export default class Game {
         },
     }
 
+    /**
+     * The class constructor to build a Game instance
+     * @param fenString - a string in FEN notation representing a particular game position
+     * 
+     * @public
+     */
     constructor(fenString: string) {
         validate.fenStringSyntax(fenString);
         this.updateFen(fenString);
@@ -34,18 +46,43 @@ export default class Game {
         this.updateScan(this.state.fenBoard);
     }
 
+    /**
+     * Updates fen property with a new string in FEN notation
+     * @param newFen - a new string in FEN notation to update fen property
+     * 
+     * @internal
+     */
     private updateFen(newFen: string): void {
         this.fen = newFen;
     }
 
+     /**
+     * Updates state property with a new state
+     * @param newState - a new state to update state property
+     * 
+     * @internal
+     */
     private updateState(newState: IGameState): void {
         this.state = newState;
     }
     
+     /**
+     * Updates scan property with a new scan
+     * @param fenBoard - a board represented as a string in FEN notation
+     * 
+     * @internal
+     */
     private updateScan(fenBoard: string): void {
         this.scan = createNewGameScan(fenBoard);
     }
     
+    /**
+     * Adds a move to the game
+     * @param move - a move in long UCI notation to be added to the game
+     * @returns a new string in FEN notation to represent the game after the added move
+     * 
+     * @public
+     */
     public addMove(move: string): string {
         // @TODO add lots of edge cases tests for this method
         validate.moveSyntax(move);

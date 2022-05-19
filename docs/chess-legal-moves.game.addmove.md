@@ -4,6 +4,8 @@
 
 ## Game.addMove() method
 
+Adds a move to the game
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,9 +16,11 @@ addMove(move: string): string;
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  move | string |  |
+|  move | string | a move in long UCI notation to be added to the game |
 
 <b>Returns:</b>
 
 string
+
+a new string in FEN notation to represent the game after the added move
 

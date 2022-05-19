@@ -8,5 +8,5 @@
 
 |  Class | Description |
 |  --- | --- |
-|  [Game](./chess-legal-moves.game.md) |  |
+|  [Game](./chess-legal-moves.game.md) | The Game class |
 

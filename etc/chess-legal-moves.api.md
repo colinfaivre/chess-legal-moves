@@ -4,10 +4,9 @@
 
 ```ts
 
-// @public (undocumented)
+// @public
 class Game {
     constructor(fenString: string);
-    // (undocumented)
     addMove(move: string): string;
     // (undocumented)
     fen: string;

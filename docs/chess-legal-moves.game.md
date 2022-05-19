@@ -4,6 +4,8 @@
 
 ## Game class
 
+The Game class
+
 <b>Signature:</b>
 
 ```typescript
@@ -14,7 +16,7 @@ export default class Game
 
 |  Constructor | Modifiers | Description |
 |  --- | --- | --- |
-|  [(constructor)(fenString)](./chess-legal-moves.game._constructor_.md) |  | Constructs a new instance of the <code>Game</code> class |
+|  [(constructor)(fenString)](./chess-legal-moves.game._constructor_.md) |  | The class constructor to build a Game instance |
 
 ## Properties
 
@@ -27,5 +29,5 @@ export default class Game
 
 |  Method | Modifiers | Description |
 |  --- | --- | --- |
-|  [addMove(move)](./chess-legal-moves.game.addmove.md) |  |  |
+|  [addMove(move)](./chess-legal-moves.game.addmove.md) |  | Adds a move to the game |
 
