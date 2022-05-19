@@ -12,7 +12,14 @@ import {
 } from "./helpers";
 import { IGameState } from '../types';
 
-// @TODO document createNewGameState function
+/**
+ * Creates new game state from the current state and the added move
+ * @param move - a string representing a move in long UCI notation
+ * @param state - an IGameState object representing the current state of the game
+ * @returns the new game state after the move is added
+ * 
+ * @private
+ */
 export default function createNewGameState(
     move: string,
     state: IGameState,
