@@ -2,8 +2,15 @@ import { parseBoard } from "./parseBoard";
 import { parseMove } from "./parseMove";
 import { composeBoardArrayToString } from "./composeBoardArrayToString";
 import {
-    IGameState,
-} from '../types';
+    isPawn,
+    isCapture,
+    updateFenBoard,
+    incrementFullMoveClock,
+    incrementHalfMoveClock,
+    toggleHasToPlay,
+    updateAvailableCastlings,
+} from "./helpers";
+import { IGameState } from '../types';
 
 // @TODO document createNewGameState function
 export default function createNewGameState(
@@ -42,41 +49,4 @@ export default function createNewGameState(
     state.hasToPlay = toggleHasToPlay(state.hasToPlay);
 
     return state;
-}
-
-export function isPawn(piece: string): boolean {
-    return ['p', 'P'].includes(piece);
-}
-
-export function isCapture(piece: string, destination: string): boolean {
-    if (destination === '.') return false;
-    const isMoveColorWhite = piece === piece.toUpperCase();
-    const isDestinationColorWhite = destination === destination.toUpperCase();
-
-    return isMoveColorWhite !== isDestinationColorWhite;
-}
-
-export function updateFenBoard(fenBoard: string): string {
-    return fenBoard;
-}
-
-export function incrementFullMoveClock(fullMoveClock: number): number {
-    return fullMoveClock + 1;
-}
-
-export function incrementHalfMoveClock(halfMoveClock: number): number {
-    return halfMoveClock + 1;
-}
-
-export function toggleHasToPlay(hasToPlay: string): string {
-    return hasToPlay === "w" ? "b" : "w";
-}
-
-export function updateAvailableCastlings(availableCastlings: string, castlingLetter: string): string {
-    const isWhiteCastling = castlingLetter.toUpperCase() === castlingLetter;
-    if (isWhiteCastling) availableCastlings = availableCastlings.replace('KQ', '');
-    else availableCastlings = availableCastlings.replace('kq', '');
-    if (availableCastlings.length === 0) availableCastlings = '-';
-
-    return availableCastlings;
 }
