@@ -27,7 +27,8 @@
     "dev": "yarn build --watch --preserveWatchOutput",
     "test:unit": "jest",
     "lint": "eslint src --ext js,ts",
-    "extract:local": "yarn build && yarn api-extractor run --local"
+    "extract:local": "yarn build && yarn api-extractor run --local",
+    "document": "yarn build && yarn api-documenter markdown -i temp -o docs"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
