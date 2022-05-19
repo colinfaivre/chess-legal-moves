@@ -1,6 +1,8 @@
 # ♔ Chess legal moves
 > Analyses a given chess game position in Fen notation to return legal moves and provides the next game position after a given move
 
+[API reference](https://colinfaivre.github.io/chess-legal-moves/)
+
 This lib exposes a Game class, its constructor takes a string representing a snapshot of a chess game in [FEN notation](https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation).
 You can then use legalMoves, kingState properties and addMove() method.
 
