@@ -18,7 +18,7 @@ import { IGameState } from '../types';
  * @param state - an IGameState object representing the current state of the game
  * @returns the new game state after the move is added
  * 
- * @private
+ * @internal
  */
 export default function createNewGameState(
     move: string,
