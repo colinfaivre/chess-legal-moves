@@ -1,4 +1,6 @@
 # ♔ Chess legal moves
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md)
+
 > Analyses a given chess game position in Fen notation to return legal moves and provides the next game position after a given move
 
 [API reference](https://colinfaivre.github.io/chess-legal-moves/)
