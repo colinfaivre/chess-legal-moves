@@ -26,17 +26,19 @@ export default class Board {
         const rows: string[] = boardString.split('/');
 
         let pos = 0;
-        rows.forEach((row) => {
-            row.split('').forEach((char: IPieceLetter) => {
+        for (let i = rows.length - 1; i >= 0; i--) {
+            rows[i].split('').forEach((char: IPieceLetter | '.') => {
                 if (/[0-9]/.test(char)) {
                     pos += parseInt(char);
+                } else if (char === '.') {
+                    pos = pos + 1;
                 } else {
                     this[letterToType(char)].setBit(pos);
                     this[letterToColor(char)].setBit(pos);
-                    pos++;
+                    pos = pos + 1;
                 }
             });
-        });
+        }
     }
 
     get allPieces() {
@@ -88,7 +90,7 @@ export default class Board {
 }
 
 function letterToColor(letter: string) {
-    return letter.toUpperCase() === letter ? 'blacks' : 'whites';
+    return letter.toUpperCase() === letter ? 'whites' : 'blacks';
 }
 
 function letterToType(letter: IPieceLetter): IPieceName {

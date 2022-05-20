@@ -83,9 +83,14 @@ export const legalMovesFromstartingPosition = [
 
 export const legalMovesKnight = [
     {
-        from: 'e6',
-        quietMoves: ['d4', 'f4', 'c5', 'g5'],
-        killMoves: ['c7', 'g7', 'd8', 'f8'],
+        from: 'b1',
+        quietMoves: ['a3', 'c3'],
+        killMoves: [],
+    },
+    {
+        from: 'g1',
+        quietMoves: ["f3", "h3"],
+        killMoves: [],
     },
     {
         from: 'a2',
