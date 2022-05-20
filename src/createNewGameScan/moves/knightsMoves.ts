@@ -7,10 +7,20 @@ export function knightsMoves(board: Board): ILegalMoves {
     const allKnightMovesTable = generateAllKnightMovesBBTable();
 
     const knightsList = board.whiteKnights.extractBits().map((knightPositionCode) => {
+        const from = positionsTable[knightPositionCode];
+        const quietMoves = allKnightMovesTable[knightPositionCode]
+            .and(board.quietDestinations)
+            .extractBits()
+            .map(knightDestination => positionsTable[knightDestination]);
+        const killMoves = allKnightMovesTable[knightPositionCode]
+            .and(board.blacks)
+            .extractBits()
+            .map(knightDestination => positionsTable[knightDestination]);
+        
         return {
-            from: positionsTable[knightPositionCode],
-            quietMoves: allKnightMovesTable[knightPositionCode].and(board.quietDestinations).extractBits().map(knightDestination => positionsTable[knightDestination]),
-            killMoves: allKnightMovesTable[knightPositionCode].and(board.blacks).extractBits().map(knightDestination => positionsTable[knightDestination]),
+            from,
+            quietMoves,
+            killMoves,
         }
     })
 
@@ -18,6 +28,21 @@ export function knightsMoves(board: Board): ILegalMoves {
 }
 
 function generateAllKnightMovesBBTable(): BitBoard[] {
+
+    // Knight moves from a given position
+    //
+    //         noNoWe    noNoEa
+    //             +15  +17
+    //              |     |
+    // noWeWe  +6 __|     |__+10  noEaEa
+    //               \   /
+    //                >0<
+    //            __ /   \ __
+    // soWeWe -10   |     |   -6  soEaEa
+    //              |     |
+    //             -17  -15
+    //         soSoWe    soSoEa
+
     // A list of 64 bitboards representing the knight possible moves from any board position
     const AFile = [0, 8, 16, 24, 32, 40, 48, 56];
     const BFile = [1, 9, 17, 25, 33, 41, 49, 57];
@@ -27,12 +52,15 @@ function generateAllKnightMovesBBTable(): BitBoard[] {
     const GHFile = [...GFile, ...HFile];
 
     function noNoEa(position: number): number {
+        // if knight is on H file northNorthEast move would land on A file because of +17 -> return null in that particular case
         return !AFile.includes(position + 17) ? position + 17 : null;
     }
     function noEaEa(position: number): number {
+        // if knight is on G or H file northEastEast move would land on A or B file because of +10 -> return null in that particular case
         return !ABFile.includes(position + 10) ? position + 10 : null;
     }
     function soEaEa(position: number): number {
+        // if knight is on G or H file southEastEast move would land on A file because of -6 -> return null in that particular case
         return !ABFile.includes(position - 6) ? position - 6 : null;
     }
     function soSoEa(position: number): number {
@@ -55,6 +83,7 @@ function generateAllKnightMovesBBTable(): BitBoard[] {
     
     for (let position = 0; position < 63; position++) {
         const movesFromThisPosition = [];
+        // if destination is not out of the board, add it to the list
         if (noNoEa(position)) movesFromThisPosition.push(noNoEa(position));
         if (noEaEa(position)) movesFromThisPosition.push(noEaEa(position));
         if (soEaEa(position)) movesFromThisPosition.push(soEaEa(position));
