@@ -76,6 +76,42 @@ export default class BitBoard {
         return extracted;
     }
 
+    shiftRight(numBits: number): BitBoard {
+        let newLowBits, newHighBits;
+    
+        if (numBits <= 0) {
+          return new BitBoard(this.low, this.high);
+        } else if (numBits > 63) {
+          return new BitBoard();
+        } else if (numBits >= 32) {
+          newLowBits = this.high >>> (numBits - 32);
+          newHighBits = 0;
+        } else {
+          newLowBits = (this.low >>> numBits) | (this.high << (32 - numBits));
+          newHighBits = this.high >>> numBits;
+        }
+    
+        return new BitBoard(newLowBits, newHighBits);
+    }
+    
+      shiftLeft(numBits: number): BitBoard {
+        let newLowBits, newHighBits;
+    
+        if (numBits <= 0) {
+          return new BitBoard(this.low, this.high);
+        } else if (numBits > 63) {
+          return new BitBoard();
+        } else if (numBits >= 32) {
+          newLowBits = 0;
+          newHighBits = (this.low << (numBits - 32)) >>> 0;
+        } else {
+          newLowBits = (this.low << numBits) >>> 0;
+          newHighBits =  ((this.low >>> (32 - numBits)) | (this.high << numBits)) >>> 0;
+        }
+    
+        return new BitBoard(newLowBits, newHighBits);
+    }
+
     static fromPos(pos: number) {
         const res = new BitBoard();
         res.setBit(pos);
@@ -90,6 +126,14 @@ export default class BitBoard {
             res.setBit(pos);
         });
 
+        return res;
+    }
+
+    static fromHex(hexNumberAsString: string) {
+        const high = parseInt(`0x${hexNumberAsString.slice(0, 8)}`);
+        const low = parseInt(`0x${hexNumberAsString.slice(8)}`);
+        const res = new BitBoard(low, high);
+        
         return res;
     }
 
