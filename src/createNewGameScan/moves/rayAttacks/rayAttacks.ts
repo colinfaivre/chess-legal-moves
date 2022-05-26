@@ -11,6 +11,9 @@ import {
 } from "./directions";
 
 export function generateRayAttacks(): IRayAttack[] {
+    // @TODO document
+    // @TODO add tests
+    
     let result: IRayAttack[] = [];
     for (let i = 0; i < 64; i++) {
         result.push({

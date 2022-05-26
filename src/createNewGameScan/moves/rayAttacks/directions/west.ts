@@ -2,6 +2,9 @@ import { IRayAttack } from "../../../../types";
 import BitBoard from "../../../BitBoard/BitBoard";
 
 export function generateWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
+    // @TODO document
+    // @TODO add tests
+    
     /**************
      * 8 ........ *
      * 7 ........ *

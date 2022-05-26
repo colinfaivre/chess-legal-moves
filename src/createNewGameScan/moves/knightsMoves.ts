@@ -4,7 +4,10 @@ import BitBoard from "../BitBoard/BitBoard"
 import { positionsTable } from "./../BitBoard/positionsHashTable"
 
 export function knightsMoves(board: Board): ILegalMoves {
+    // @TODO document
+    // @TODO add tests
     // @TODO get info about color to generate black or white knights moves
+    
     const allKnightMovesTable = generateAllKnightMovesBBTable();
 
     const knightsList = board.whiteKnights.extractBits().map((knightPositionCode) => {
