@@ -1,7 +1,8 @@
 import { ILegalMoves } from "../../types"
-import BitBoard from "../BitBoard/BitBoard"
+import Board from "../Board/Board"
+import { RAY_ATTACKS } from "./rayAttacks/rayAttacks"
 
-export function bishopsMoves(bishopsBB: BitBoard): ILegalMoves {
+export function bishopsMoves(board: Board): ILegalMoves {
     return [
         {
             from: 'c1',

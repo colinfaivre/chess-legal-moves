@@ -1,7 +1,7 @@
 import { ILegalMoves } from "../../types";
 import Board from "../Board/Board";
 import { positionsTable } from "./../BitBoard/positionsHashTable"
-import { rankMask, fileMask } from "./slidingAttacks";
+import { RAY_ATTACKS } from "./rayAttacks/rayAttacks";
 
 export function rooksMoves(board: Board): ILegalMoves {
     const rooksList = board.whiteRooks.extractBits().map((rookPositionCode) => {

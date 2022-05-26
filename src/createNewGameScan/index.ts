@@ -30,8 +30,8 @@ export function createNewGameScan(fenBoard: string): IScan {
     if (board.whiteKnights) scan.legalMoves.push(...generate.knightsMoves(board));
     if (board.whitePawns) scan.legalMoves.push(...generate.pawnsMoves(board.whitePawns));
     if (board.whiteRooks) scan.legalMoves.push(...generate.rooksMoves(board));
-    if (board.whiteBishops) scan.legalMoves.push(...generate.bishopsMoves(board.whiteBishops));
-    if (board.whiteQueens) scan.legalMoves.push(...generate.queenMoves(board.whiteQueens));
+    if (board.whiteBishops) scan.legalMoves.push(...generate.bishopsMoves(board));
+    if (board.whiteQueens) scan.legalMoves.push(...generate.queenMoves(board));
     if (board.whiteKing) scan.legalMoves.push(...generate.kingMoves(board.whiteKing));
 
     return scan;

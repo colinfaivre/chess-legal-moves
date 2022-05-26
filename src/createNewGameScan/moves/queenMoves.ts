@@ -1,7 +1,8 @@
 import { ILegalMoves } from "../../types"
-import BitBoard from "../BitBoard/BitBoard"
+import Board from "../Board/Board"
+import { RAY_ATTACKS } from "./rayAttacks/rayAttacks"
 
-export function queenMoves(queensBB: BitBoard): ILegalMoves {
+export function queenMoves(baord: Board): ILegalMoves {
     return [
         {
             from: 'd1',

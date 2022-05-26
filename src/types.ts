@@ -1,3 +1,18 @@
+import BitBoard from "./createNewGameScan/BitBoard/BitBoard";
+
+export interface IRayAttack {
+    // Positive rays
+    no: BitBoard,
+    ea: BitBoard,
+    noEa: BitBoard,
+    noWe: BitBoard,
+    // Negative rays
+    so: BitBoard,
+    we: BitBoard,
+    soWe: BitBoard,
+    soEa: BitBoard
+};
+
 export interface IGameState {
     fenBoard: string;
     hasToPlay: string;
