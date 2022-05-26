@@ -94,22 +94,50 @@ export default class BitBoard {
         return new BitBoard(newLowBits, newHighBits);
     }
     
-      shiftLeft(numBits: number): BitBoard {
-        let newLowBits, newHighBits;
-    
-        if (numBits <= 0) {
-          return new BitBoard(this.low, this.high);
-        } else if (numBits > 63) {
-          return new BitBoard();
-        } else if (numBits >= 32) {
-          newLowBits = 0;
-          newHighBits = (this.low << (numBits - 32)) >>> 0;
-        } else {
-          newLowBits = (this.low << numBits) >>> 0;
-          newHighBits =  ((this.low >>> (32 - numBits)) | (this.high << numBits)) >>> 0;
-        }
-    
-        return new BitBoard(newLowBits, newHighBits);
+    shiftLeft(numBits: number): BitBoard {
+      let newLowBits, newHighBits;
+  
+      if (numBits <= 0) {
+        return new BitBoard(this.low, this.high);
+      } else if (numBits > 63) {
+        return new BitBoard();
+      } else if (numBits >= 32) {
+        newLowBits = 0;
+        newHighBits = (this.low << (numBits - 32)) >>> 0;
+      } else {
+        newLowBits = (this.low << numBits) >>> 0;
+        newHighBits =  ((this.low >>> (32 - numBits)) | (this.high << numBits)) >>> 0;
+      }
+  
+      return new BitBoard(newLowBits, newHighBits);
+    }
+
+    bitScanForward(): number {
+      if (this.low) {
+        return Int32Utils.bitScanForward32(this.low);
+      } else if (this.high) {
+        return Int32Utils.bitScanForward32(this.high) + 32;
+      } else {
+        return null;
+      }
+    }
+  
+    hasSetBit(pos: number): boolean {
+      if (pos < 32) {
+        return Boolean(this.low & (1 << pos));
+      } else {
+        return Boolean(this.high & (1 << (pos - 32)));
+      }
+    }
+  
+    bitScanReverse(): number {
+      if (this.high) {
+        return Int32Utils.bitScanReverse32(this.high) + 32;
+      } else if (this.low) {
+        return Int32Utils.bitScanReverse32(this.low);
+      } else {
+        return null;
+      }
     }
 
     static fromPos(pos: number) {
