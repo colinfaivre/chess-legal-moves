@@ -1,3 +1,4 @@
+import Board from '../Board/Board';
 import Int32Utils from './int32Utils'
 
 export default class BitBoard {
@@ -17,11 +18,11 @@ export default class BitBoard {
         }
     }
 
-    clearBit(pos: number) {
+    clearBit(pos: number): BitBoard {
         if (pos >= 32) {
-          this.high = (this.high & ~(1 << (pos - 32))) >>> 0;
+          return new BitBoard(this.low, (this.high & ~(1 << (pos - 32))) >>> 0)
         } else {
-          this.low = (this.low & ~(1 << pos)) >>> 0;
+          return new BitBoard((this.low & ~(1 << pos)) >>> 0, this.high)
         }
     }
 
@@ -113,6 +114,7 @@ export default class BitBoard {
     }
 
     bitScanForward(): number {
+      // returns the less significant bit index
       if (this.low) {
         return Int32Utils.bitScanForward32(this.low);
       } else if (this.high) {
@@ -131,6 +133,7 @@ export default class BitBoard {
     }
   
     bitScanReverse(): number {
+      // returns the most significant bit index
       if (this.high) {
         return Int32Utils.bitScanReverse32(this.high) + 32;
       } else if (this.low) {
