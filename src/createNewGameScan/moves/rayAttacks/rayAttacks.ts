@@ -10,11 +10,24 @@ import {
     generateSouthEastAttacks,
 } from "./directions";
 
-export function generateRayAttacks(): IRayAttack[] {
+export function generateRayAttacks(rayAttacks: IRayAttack[]): IRayAttack[] {
     // @TODO document
     // @TODO add tests
-    
+    rayAttacks = generateNorthAttacks(rayAttacks);
+    rayAttacks = generateSouthAttacks(rayAttacks);
+    rayAttacks = generateEastAttacks(rayAttacks);
+    rayAttacks = generateNorthEastAttacks(rayAttacks);
+    rayAttacks = generateWestAttacks(rayAttacks);
+    rayAttacks = generateSouthWestAttacks(rayAttacks);
+    rayAttacks = generateNorthWestAttacks(rayAttacks);
+    rayAttacks = generateSouthEastAttacks(rayAttacks);
+
+    return rayAttacks;
+}
+
+export function initRayAttackList() {
     let result: IRayAttack[] = [];
+    
     for (let i = 0; i < 64; i++) {
         result.push({
             no: null,
@@ -28,16 +41,7 @@ export function generateRayAttacks(): IRayAttack[] {
         })
     };
 
-    result = generateNorthAttacks(result);
-    result = generateSouthAttacks(result);
-    result = generateEastAttacks(result);
-    result = generateNorthEastAttacks(result);
-    result = generateWestAttacks(result);
-    result = generateSouthWestAttacks(result);
-    result = generateNorthWestAttacks(result);
-    result = generateSouthEastAttacks(result);
-
     return result;
 }
 
-export const RAY_ATTACKS = generateRayAttacks();
+export const RAY_ATTACKS = generateRayAttacks(initRayAttackList());
