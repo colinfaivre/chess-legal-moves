@@ -8,8 +8,6 @@ import { RAYS } from "../rays";
  * @returns attacksList populated with east attacks
  */
 export function generateEastAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO add tests
-
     /**************
      * 8 ........ *
      * 7 ........ *
