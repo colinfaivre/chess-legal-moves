@@ -1,10 +1,13 @@
 import { IRayAttack } from "../../../../types";
 import BitBoard from "../../../BitBoard/BitBoard";
+import { RAYS } from "../rays";
 
+/**
+ * Populates an array of 64 IRayAttacks objects with west attacks
+ * @param attacksList an IRayAttack array of directional attacks
+ * @returns attacksList populated with west attacks
+ */
 export function generateWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO document
-    // @TODO add tests
-    
     /**************
      * 8 ........ *
      * 7 ........ *
@@ -16,23 +19,35 @@ export function generateWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
      * 1 1111111x * -- G1_A1 
      *   ABCDEFGH
      *************/
-    
-    const G1_A1 = BitBoard.fromHex('000000000000007F');
-    let westAttackMask: BitBoard = G1_A1;
+    // G1_A1 west attack mask is used as a placeholder to be slid on each square
+    let westAttackMask: BitBoard = RAYS.G1_A1;
 
-    for (let file = 7; file >= 0; file--, westAttackMask = getNextWestMask(westAttackMask)) {
+    // Loop through each file of the board: H, G, ... B, A
+    // at the end of each loop, slide the mask to the left for the next iteration
+    for (let file = 7; file >= 0; file--) {
+        // Set temporary west mask to be used by the following for loop
         let west = westAttackMask;
-        for (let r8 = 0; r8 < 8*8; r8 += 8) {
-            attacksList[r8 + file].we = west;
-            west = west.shiftLeft(8);
-        } 
+        // Loop through each square (from bottom to top) on the current file
+        // at the end of each loop, slide the mask to the top for the next iteration
+        for (let square = 0; square < 8 * 8; square += 8) {
+            // populate each attacksList square west property
+            attacksList[square + file].we = west;
+            west = slideTop(west);
+        }
+        westAttackMask = slideLeft(westAttackMask);
     }
 
     return attacksList;
 }
 
-export function getNextWestMask(attacks: BitBoard): BitBoard {
-    attacks.clearBit(attacks.bitScanReverse());
+export function slideLeft(attacks: BitBoard): BitBoard {
+    attacks = attacks.clearBit(attacks.bitScanReverse());
+
+    return attacks;
+}
+
+export function slideTop(attacks: BitBoard): BitBoard {
+    attacks = attacks.shiftLeft(8);
 
     return attacks;
 }
