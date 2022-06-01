@@ -22,13 +22,13 @@ export function generateEastAttacks(attacksList: IRayAttack[]): IRayAttack[] {
     // B1_H1 east attack mask is used as a placeholder to be slid on each square
     let eastAttackMask: BitBoard = RAYS.B1_H1;
 
-    // Loop through each file of the board A, B, ... G, H
-    // at the end of the each loop slide the mask to the right for the next iteration
+    // Loop through each file of the board: A, B, ... G, H
+    // at the end of each loop, slide the mask to the right for the next iteration
     for (let file = 0; file < 8; file++) {
-        // Set temporary east mask to be used by the following for loops
+        // Set temporary east mask to be used by the following for loop
         let east = eastAttackMask;
         // Loop through each square (from bottom to top) on the current file
-        // at the end of each loop slide the mask to the tom for the next iteration
+        // at the end of each loop, slide the mask to the top for the next iteration
         for (let square = 0; square < 8 * 8; square += 8) {
             // populate each attacksList square east property
             attacksList[square + file].ea = east;
