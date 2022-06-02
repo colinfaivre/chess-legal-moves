@@ -45,7 +45,7 @@ export function getNegativeRayAttacks(
     // Intersect the attacks and all the pieces to find the blockers
     const blockers = attacks.and(occupiedBoard);
     // If there are blockers find the closest one and return the moves from the square to this blocker
-    if (!blockers.isZero) {
+    if (!blockers.isZero()) {
         position = blockers.bitScanReverse();
         attacks = attacks.xor(EMPTY_BOARD_RAY_ATTACKS[position][direction]);
     }
