@@ -35,7 +35,7 @@ export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[
             northEast = slideUp(northEast);
         }
         northEastAttackMask = slideDown(northEastAttackMask);
-        northEastAttackMask = removeSmallestBit(northEastAttackMask);
+        northEastAttackMask = removeLowestBit(northEastAttackMask);
     }
 
     return attacksList;
@@ -47,7 +47,7 @@ export function slideDown(attacks: BitBoard): BitBoard {
     return attacks;
 }
 
-export function removeSmallestBit(attacks: BitBoard): BitBoard {
+export function removeLowestBit(attacks: BitBoard): BitBoard {
     attacks = attacks.clearBit(attacks.bitScanForward());
 
     return attacks;
