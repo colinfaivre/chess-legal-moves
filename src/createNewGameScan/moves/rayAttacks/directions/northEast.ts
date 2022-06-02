@@ -1,10 +1,14 @@
 import { IRayAttack } from "../../../../types";
 import BitBoard from "../../../BitBoard/BitBoard";
+import { RAYS } from "../rays";
 
+/**
+ * Populates an array of 64 IRayAttacks objects with north-east attacks
+ * @param attacksList an IRayAttack array of directional attacks
+ * @returns attacksList populated with north-east attacks
+ */
 export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO document
     // @TODO add tests
-    
     /**************
      * 8 .......1 *
      * 7 ......1. *
@@ -13,27 +17,45 @@ export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[
      * 4 ...1.... *
      * 3 ..1..... *
      * 2 .1...... *
-     * 1 x....... * -- B1_H8 
+     * 1 x....... * -- B2_H8 
      *   ABCDEFGH
      *************/
+    // B2_H8 north-east attack mask is used as a placeholder to be slid on each square
+    let northEastAttackMask: BitBoard = RAYS.B2_H8;
 
-    const B2_H8 = BitBoard.fromHex('8040201008040200');
-    let northEastAttackMask: BitBoard = B2_H8;
-
-    for (let file = 0; file < 8; file++, northEastAttackMask = getNextNorthEastMask(northEastAttackMask)) {
+    // Loop through each file of the board: A, B, ... G, H
+    // at the end of each loop, slide the mask down and remove the smallest bit for the next iteration
+    for (let file = 0; file < 8; file++) {
+        // Set temporary north-east mask to be used by the following for loop
         let northEast = northEastAttackMask;
-        for (let r8 = 0; r8 < 8*8; r8 += 8) {
-            attacksList[r8 + file].noEa = northEast;
-            northEast = northEast.shiftLeft(8);
-        } 
+        // Loop through each square (from bottom to top) on the current file
+        // at the end of each loop, slide the mask to the top for the next iteration
+        for (let square = 0; square < 8 * 8; square += 8) {
+            // populate each attacksList square north-east property
+            attacksList[square + file].noEa = northEast;
+            northEast = slideTop(northEast);
+        }
+        northEastAttackMask = slideDown(northEastAttackMask);
+        northEastAttackMask = removeSmallest(northEastAttackMask);
     }
 
-    return attacksList
+    return attacksList;
 }
 
-export function getNextNorthEastMask(attacks: BitBoard): BitBoard {
+export function slideDown(attacks: BitBoard): BitBoard {
     attacks = attacks.shiftRight(8);
-    attacks.clearBit(attacks.bitScanForward());
+
+    return attacks;
+}
+
+export function removeSmallest(attacks: BitBoard): BitBoard {
+    attacks = attacks.clearBit(attacks.bitScanForward());
+
+    return attacks;
+}
+
+export function slideTop(attacks: BitBoard): BitBoard {
+    attacks = attacks.shiftLeft(8);
 
     return attacks;
 }
