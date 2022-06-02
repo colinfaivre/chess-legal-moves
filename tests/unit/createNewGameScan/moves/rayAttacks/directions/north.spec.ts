@@ -4,7 +4,7 @@ import {
 } from "../../../../../../src/createNewGameScan/moves/rayAttacks/directions/north";
 import {
     initRayAttackList,
-} from "../../../../../../src/createNewGameScan/moves/rayAttacks/rayAttacks";
+} from "../../../../../../src/createNewGameScan/moves/rayAttacks/emptyBoardRayAttacks";
 
 test("generateNorthAttacks() | from a1", () => {
     const emptyRayAttackList = initRayAttackList();
