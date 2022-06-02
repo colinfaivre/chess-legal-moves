@@ -8,7 +8,6 @@ import { RAYS } from "../rays";
  * @returns attacksList populated with north-east attacks
  */
 export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO add tests
     /**************
      * 8 .......1 *
      * 7 ......1. *
@@ -36,7 +35,7 @@ export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[
             northEast = slideUp(northEast);
         }
         northEastAttackMask = slideDown(northEastAttackMask);
-        northEastAttackMask = removeSmallest(northEastAttackMask);
+        northEastAttackMask = removeSmallestBit(northEastAttackMask);
     }
 
     return attacksList;
@@ -48,7 +47,7 @@ export function slideDown(attacks: BitBoard): BitBoard {
     return attacks;
 }
 
-export function removeSmallest(attacks: BitBoard): BitBoard {
+export function removeSmallestBit(attacks: BitBoard): BitBoard {
     attacks = attacks.clearBit(attacks.bitScanForward());
 
     return attacks;
