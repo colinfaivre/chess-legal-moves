@@ -33,7 +33,7 @@ export function generateNorthEastAttacks(attacksList: IRayAttack[]): IRayAttack[
         for (let square = 0; square < 8 * 8; square += 8) {
             // populate each attacksList square north-east property
             attacksList[square + file].noEa = northEast;
-            northEast = slideTop(northEast);
+            northEast = slideUp(northEast);
         }
         northEastAttackMask = slideDown(northEastAttackMask);
         northEastAttackMask = removeSmallest(northEastAttackMask);
@@ -54,7 +54,7 @@ export function removeSmallest(attacks: BitBoard): BitBoard {
     return attacks;
 }
 
-export function slideTop(attacks: BitBoard): BitBoard {
+export function slideUp(attacks: BitBoard): BitBoard {
     attacks = attacks.shiftLeft(8);
 
     return attacks;

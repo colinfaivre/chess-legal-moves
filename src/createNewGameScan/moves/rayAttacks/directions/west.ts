@@ -32,7 +32,7 @@ export function generateWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
         for (let square = 0; square < 8 * 8; square += 8) {
             // populate each attacksList square west property
             attacksList[square + file].we = west;
-            west = slideTop(west);
+            west = slideUp(west);
         }
         westAttackMask = slideLeft(westAttackMask);
     }
@@ -46,7 +46,7 @@ export function slideLeft(attacks: BitBoard): BitBoard {
     return attacks;
 }
 
-export function slideTop(attacks: BitBoard): BitBoard {
+export function slideUp(attacks: BitBoard): BitBoard {
     attacks = attacks.shiftLeft(8);
 
     return attacks;
