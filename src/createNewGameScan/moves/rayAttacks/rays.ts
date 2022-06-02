@@ -108,4 +108,37 @@ export const RAYS = {
     D8_A8: BitBoard.fromPositions([0+8*7, 1+8*7, 2+8*7, 3+8*7]),
     C8_A8: BitBoard.fromPositions([0+8*7, 1+8*7, 2+8*7]),
     B8_A8: BitBoard.fromPositions([0+8*7, 1+8*7]),
+
+    // North-East
+    B2_H8: BitBoard.fromPositions([9, 18, 27, 36, 45, 54, 63]),
+    C2_H7: BitBoard.fromPositions([18-1*8, 27-1*8, 36-1*8, 45-1*8, 54-1*8, 63-1*8]),
+    D2_H6: BitBoard.fromPositions([27-2*8, 36-2*8, 45-2*8, 54-2*8, 63-2*8]),
+    E2_H5: BitBoard.fromPositions([36-3*8, 45-3*8, 54-3*8, 63-3*8]),
+    F2_H4: BitBoard.fromPositions([45-4*8, 54-4*8, 63-4*8]),
+    G2_H3: BitBoard.fromPositions([54-5*8, 63-5*8]),
+    H2: BitBoard.fromPositions([63-6*8]),
+
+    B3_G8: BitBoard.fromPositions([9+8*1, 18+8*1, 27+8*1, 36+8*1, 45+8*1, 54+8*1]),
+    B4_F8: BitBoard.fromPositions([9+8*2, 18+8*2, 27+8*2, 36+8*2, 45+8*2]),
+    B5_E8: BitBoard.fromPositions([9+8*3, 18+8*3, 27+8*3, 36+8*3]),
+    B6_D8: BitBoard.fromPositions([9+8*4, 18+8*4, 27+8*4]),
+    B7_C8: BitBoard.fromPositions([9+8*5, 18+8*5]),
+    B8: BitBoard.fromPositions([9+8*6]),
+
+    // North-West
+    G2_A8: BitBoard.fromPositions([14, 21, 28, 35, 42, 49, 56]),
+    F2_A7: BitBoard.fromPositions([14-1, 21-1, 28-1, 35-1, 42-1, 49-1]),
+    E2_A6: BitBoard.fromPositions([14-2, 21-2, 28-2, 35-2, 42-2]),
+    D2_A5: BitBoard.fromPositions([14-3, 21-3, 28-3, 35-3]),
+    C2_A4: BitBoard.fromPositions([14-4, 21-4, 28-4]),
+    B2_A3: BitBoard.fromPositions([14-5, 21-5]),
+    A2: BitBoard.fromPositions([14-6]),
+
+
+    G3_B8: BitBoard.fromPositions([14+8*1, 21+8*1, 28+8*1, 35+8*1, 42+8*1, 49+8*1]),
+    G4_C8: BitBoard.fromPositions([14+8*2, 21+8*2, 28+8*2, 35+8*2, 42+8*2]),
+    G5_D8: BitBoard.fromPositions([14+8*3, 21+8*3, 28+8*3, 35+8*3]),
+    G6_E8: BitBoard.fromPositions([14+8*4, 21+8*4, 28+8*4]),
+    G7_F8: BitBoard.fromPositions([14+8*5, 21+8*5]),
+    G8: BitBoard.fromPositions([14+8*6]),
 };

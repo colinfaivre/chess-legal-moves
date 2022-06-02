@@ -8,7 +8,6 @@ import { RAYS } from "../rays";
  * @returns attacksList populated with north-west attacks
  */
 export function generateNorthWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO add tests
     /**************
      * 8 1....... *
      * 7 .1...... *
@@ -24,19 +23,19 @@ export function generateNorthWestAttacks(attacksList: IRayAttack[]): IRayAttack[
     let northWestAttackMask: BitBoard = RAYS.G2_A8;
 
     // Loop through each file of the board: H, G, ... B, A
-    // at the end of each loop, slide the mask down and remove the highest bit for the next iteration
+    // at the end of each loop, slide the mask down and remove the lowest bit for the next iteration
     for (let file = 7; file >= 0; file--) {
         // Set temporary north-west mask to be used by the following for loop
         let northWest = northWestAttackMask;
         // Loop through each square (from bottom to top) on the current file
         // at the end of each loop, slide up the mask for the next iteration
         for (let square = 0; square < 8 * 8; square += 8) {
-            // populate each attacksList square north-east property
+            // populate each attacksList square north-west property
             attacksList[square + file].noWe = northWest;
             northWest = slideUp(northWest);
         }
         northWestAttackMask = slideDown(northWestAttackMask);
-        northWestAttackMask = removeHighestBit(northWestAttackMask);
+        northWestAttackMask = removeLowestBit(northWestAttackMask);
     }
 
     return attacksList;
@@ -48,8 +47,8 @@ export function slideDown(attacks: BitBoard): BitBoard {
     return attacks;
 }
 
-export function removeHighestBit(attacks: BitBoard): BitBoard {
-    attacks = attacks.clearBit(attacks.bitScanReverse());
+export function removeLowestBit(attacks: BitBoard): BitBoard {
+    attacks = attacks.clearBit(attacks.bitScanForward());
 
     return attacks;
 }
