@@ -1,7 +1,7 @@
 import {
     generateRayAttacks,
     initRayAttackList,
-} from "../../../../../src/createNewGameScan/moves/rayAttacks/rayAttacks";
+} from "../../../../../src/createNewGameScan/moves/rayAttacks/emptyBoardRayAttacks";
 
 test("generateRayAttacks()", () => {
     const received = generateRayAttacks(initRayAttackList())[4];

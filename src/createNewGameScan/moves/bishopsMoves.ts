@@ -1,9 +1,8 @@
 import { ILegalMoves } from "../../types"
 import Board from "../Board/Board"
-import { RAY_ATTACKS } from "./rayAttacks/rayAttacks"
 
 export function bishopsMoves(board: Board): ILegalMoves {
-    // @TODO sue RAY_ATTACKS
+    // @TODO sue EMPTY_BOARD_RAY_ATTACKS
     // @TODO document
     // @TODO add tests
     

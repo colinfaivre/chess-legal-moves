@@ -44,4 +44,4 @@ export function initRayAttackList() {
     return result;
 }
 
-export const RAY_ATTACKS = generateRayAttacks(initRayAttackList());
+export const EMPTY_BOARD_RAY_ATTACKS = generateRayAttacks(initRayAttackList());
