@@ -157,4 +157,20 @@ export const RAYS = {
     B3_D1: BitBoard.fromPositions([49-8*4, 42-8*4, 35-8*4]),
     B2_C1: BitBoard.fromPositions([49-8*5, 42-8*5]),
     B1: BitBoard.fromPositions([49-8*6]),
+
+    // South-West
+    G7_A1: BitBoard.fromPositions([54, 45, 36, 27, 18, 9, 0]),
+    F7_A2: BitBoard.fromPositions([54-1, 45-1, 36-1, 27-1, 18-1, 9-1]),
+    E7_A3: BitBoard.fromPositions([54-2, 45-2, 36-2, 27-2, 18-2]),
+    D7_A4: BitBoard.fromPositions([54-3, 45-3, 36-3, 27-3]),
+    C7_A5: BitBoard.fromPositions([54-4, 45-4, 36-4]),
+    B7_A6: BitBoard.fromPositions([54-5, 45-5]),
+    A7: BitBoard.fromPositions([54-6]),
+
+    G6_B1: BitBoard.fromPositions([54-8*1, 45-8*1, 36-8*1, 27-8*1, 18-8*1, 9-8*1]),
+    G5_C1: BitBoard.fromPositions([54-8*2, 45-8*2, 36-8*2, 27-8*2, 18-8*2]),
+    G4_D1: BitBoard.fromPositions([54-8*3, 45-8*3, 36-8*3, 27-8*3]),
+    G3_E1: BitBoard.fromPositions([54-8*4, 45-8*4, 36-8*4]),
+    G2_F1: BitBoard.fromPositions([54-8*5, 45-8*5]),
+    G1: BitBoard.fromPositions([54-8*6]),
 };
