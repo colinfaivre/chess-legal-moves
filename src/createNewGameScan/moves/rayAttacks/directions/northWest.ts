@@ -1,10 +1,14 @@
 import { IRayAttack } from "../../../../types";
 import BitBoard from "../../../BitBoard/BitBoard";
+import { RAYS } from "../rays";
 
+/**
+ * Populates an array of 64 IRayAttacks objects with north-west attacks
+ * @param attacksList an IRayAttack array of directional attacks
+ * @returns attacksList populated with north-west attacks
+ */
 export function generateNorthWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
-    // @TODO document
     // @TODO add tests
-    
     /**************
      * 8 1....... *
      * 7 .1...... *
@@ -16,25 +20,42 @@ export function generateNorthWestAttacks(attacksList: IRayAttack[]): IRayAttack[
      * 1 .......x * -- G2_A8 
      *   ABCDEFGH
      *************/
-    
-    // @TODO nearly there...
-    const G2_A8 = BitBoard.fromHex('0102040810204000');
-    let northWestAttackMask: BitBoard = G2_A8;
+    // G2_A8 north-west attack mask is used as a placeholder to be slid on each square
+    let northWestAttackMask: BitBoard = RAYS.G2_A8;
 
-    for (let file = 7; file >= 0; file--, northWestAttackMask = getNextNorthWestMask(northWestAttackMask)) {
+    // Loop through each file of the board: H, G, ... B, A
+    // at the end of each loop, slide the mask down and remove the highest bit for the next iteration
+    for (let file = 7; file >= 0; file--) {
+        // Set temporary north-west mask to be used by the following for loop
         let northWest = northWestAttackMask;
-        for (let rank = 0; rank < 8; rank++) {
-            attacksList[file + 8*rank].noWe = northWest;
-            northWest = northWest.shiftLeft(8);
-        } 
+        // Loop through each square (from bottom to top) on the current file
+        // at the end of each loop, slide up the mask for the next iteration
+        for (let square = 0; square < 8 * 8; square += 8) {
+            // populate each attacksList square north-east property
+            attacksList[square + file].noWe = northWest;
+            northWest = slideUp(northWest);
+        }
+        northWestAttackMask = slideDown(northWestAttackMask);
+        northWestAttackMask = removeHighestBit(northWestAttackMask);
     }
 
     return attacksList;
 }
 
-export function getNextNorthWestMask(attacks: BitBoard): BitBoard {
+export function slideDown(attacks: BitBoard): BitBoard {
     attacks = attacks.shiftRight(8);
-    attacks.clearBit(attacks.bitScanReverse());
+
+    return attacks;
+}
+
+export function removeHighestBit(attacks: BitBoard): BitBoard {
+    attacks = attacks.clearBit(attacks.bitScanReverse());
+
+    return attacks;
+}
+
+export function slideUp(attacks: BitBoard): BitBoard {
+    attacks = attacks.shiftLeft(8);
 
     return attacks;
 }
