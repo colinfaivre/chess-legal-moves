@@ -1,3 +1,5 @@
+import { IColor } from "../types";
+
 export function isPawn(piece: string): boolean {
     return ['p', 'P'].includes(piece);
 }
@@ -22,7 +24,7 @@ export function incrementHalfMoveClock(halfMoveClock: number): number {
     return halfMoveClock + 1;
 }
 
-export function toggleHasToPlay(hasToPlay: string): string {
+export function toggleHasToPlay(hasToPlay: IColor): IColor {
     return hasToPlay === "w" ? "b" : "w";
 }
 

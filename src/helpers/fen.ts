@@ -1,4 +1,4 @@
-import { IGameState } from '../types';
+import { IGameState, IColor } from '../types';
 
 export function stateToFen(state: IGameState): string {
     return `${state.fenBoard} ${state.hasToPlay} ${state.availableCastlings} ${state.enPassantTarget} ${state.halfMoveClock} ${state.fullMoveClock}`
@@ -9,7 +9,7 @@ export function fenToState(fen: string): IGameState {
 
     return {
         fenBoard: fenArray[0],
-        hasToPlay: fenArray[1],
+        hasToPlay: fenArray[1] as IColor,
         availableCastlings: fenArray[2],
         enPassantTarget: fenArray[3],
         halfMoveClock: parseInt(fenArray[4]),
