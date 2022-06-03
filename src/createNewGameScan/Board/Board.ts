@@ -78,10 +78,10 @@ export default class Board {
     get blackKnights() {
         return this.blacks.and(this.knights);
     }
-    get blackBishop() {
+    get blackBishops() {
         return this.blacks.and(this.bishops);
     }
-    get blackQueen() {
+    get blackQueens() {
         return this.blacks.and(this.queens);
     }
     get blackKing() {

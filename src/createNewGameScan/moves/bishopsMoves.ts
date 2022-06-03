@@ -1,21 +1,13 @@
-import { ILegalMoves } from "../../types"
-import Board from "../Board/Board"
+import { IColor, ILegalMoves } from "../../types";
+import Board from "../Board/Board";
+import { generateSlidingPieceScope } from "./rayAttacks/generateSlidingPieceScope";
+import { generatePieceMoves } from "./generatePieceMoves";
 
-export function bishopsMoves(board: Board): ILegalMoves {
-    // @TODO sue EMPTY_BOARD_RAY_ATTACKS
+
+export function bishopsMoves(board: Board, hasToPlay: IColor): ILegalMoves {
     // @TODO document
-    // @TODO add tests
-    
-    return [
-        {
-            from: 'c1',
-            quietMoves: [],
-            killMoves: [],
-        },
-        {
-            from: 'f1',
-            quietMoves: [],
-            killMoves: [],
-        },
-    ]
+    const bishopScope = generateSlidingPieceScope(board, 'bishop', hasToPlay);
+    const bishopsMovesList = generatePieceMoves(bishopScope, board, hasToPlay);
+
+    return bishopsMovesList;
 }

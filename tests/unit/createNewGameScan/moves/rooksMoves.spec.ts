@@ -5,7 +5,7 @@ import {
 
 test("rooksMoves() | starting position", () => {
     const board = new Board('rnbqkbnr/ppppppp/8/8/8/8/.PPPPPPP/RNBQKBNR');
-    const received = rooksMoves(board);
+    const received = rooksMoves(board, 'w');
     const expected = [{
         from: "a1",
         killMoves: ['a7'],
@@ -22,7 +22,7 @@ test("rooksMoves() | starting position", () => {
 
 test("rooksMoves() | rook party", () => {
     const board = new Board('rnbqkbnr/ppppppp/8/2R2R2/8/8/PPPPPPPP/.NBQKBN.');
-    const received = rooksMoves(board);
+    const received = rooksMoves(board, 'w');
     const expected = [{
         from: "c5",
         killMoves: ['c7'],

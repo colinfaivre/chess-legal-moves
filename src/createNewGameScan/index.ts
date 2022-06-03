@@ -1,10 +1,10 @@
 import Board from './Board/Board';
-import { IScan } from '../types';
+import { IGameState, IScan } from '../types';
 import { knightsMoves } from './moves/knightsMoves';
 import { pawnsMoves } from './moves/pawnsMoves';
 import { rooksMoves } from './moves/rooksMoves';
 import { bishopsMoves } from './moves/bishopsMoves';
-import { queenMoves } from './moves/queenMoves';
+import { queensMoves } from './moves/queensMoves';
 import { kingMoves } from './moves/kingMoves';
 
 export const generate = {
@@ -12,11 +12,11 @@ export const generate = {
     pawnsMoves,
     rooksMoves,
     bishopsMoves,
-    queenMoves,
+    queensMoves,
     kingMoves,
 }
 
-export function createNewGameScan(fenBoard: string): IScan {
+export function createNewGameScan(gameState: IGameState): IScan {
     const scan: IScan = {
         legalMoves: [],
         kingState: {
@@ -25,13 +25,13 @@ export function createNewGameScan(fenBoard: string): IScan {
             isDraw: false,
         },
     }
-    const board = new Board(fenBoard);
+    const board = new Board(gameState.fenBoard);
 
     if (board.whiteKnights) scan.legalMoves.push(...generate.knightsMoves(board));
     if (board.whitePawns) scan.legalMoves.push(...generate.pawnsMoves(board.whitePawns));
-    if (board.whiteRooks) scan.legalMoves.push(...generate.rooksMoves(board));
-    if (board.whiteBishops) scan.legalMoves.push(...generate.bishopsMoves(board));
-    if (board.whiteQueens) scan.legalMoves.push(...generate.queenMoves(board));
+    if (board.whiteRooks) scan.legalMoves.push(...generate.rooksMoves(board, gameState.hasToPlay));
+    if (board.whiteBishops) scan.legalMoves.push(...generate.bishopsMoves(board, gameState.hasToPlay));
+    if (board.whiteQueens) scan.legalMoves.push(...generate.queensMoves(board, gameState.hasToPlay));
     if (board.whiteKing) scan.legalMoves.push(...generate.kingMoves(board.whiteKing));
 
     return scan;

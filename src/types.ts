@@ -13,9 +13,20 @@ export interface IRayAttack {
     soEa: BitBoard
 };
 
+export type IPieceCategory = 'whiteRooks' | 'blackRooks' | 'whiteBishops' | 'blackBishops' | 'whiteQueens' | 'blackQueens';
+
+export type ISlidingPiece = 'queen' | 'bishop' | 'rook';
+
+export type IColor = 'w' | 'b';
+
+export interface IPieceScope {
+    position: number;
+    attacks: BitBoard;
+};
+
 export interface IGameState {
     fenBoard: string;
-    hasToPlay: string;
+    hasToPlay: IColor;
     availableCastlings: string;
     enPassantTarget: string;
     halfMoveClock: number;

@@ -2,7 +2,7 @@ import createNewGameState from './createNewGameState/createNewGameState';
 import { createNewGameScan } from './createNewGameScan';
 import validate from './helpers/validate';
 import { fenToState, stateToFen } from './helpers/fen';
-import { IGameState, IScan } from './types';
+import { IGameState, IScan, IColor } from './types';
 
 // @TODO use getters and setters ?
 
@@ -16,7 +16,7 @@ export default class Game {
     // @TODO test everything in Game class
     private state: IGameState = {
         fenBoard: "",
-        hasToPlay: "",
+        hasToPlay: 'w',
         availableCastlings: "",
         enPassantTarget: "",
         halfMoveClock: 0,
@@ -43,7 +43,7 @@ export default class Game {
         validate.fenStringSyntax(fenString);
         this.updateFen(fenString);
         this.updateState(fenToState(fenString));
-        this.updateScan(this.state.fenBoard);
+        this.updateScan();
     }
 
     /**
@@ -68,12 +68,11 @@ export default class Game {
     
      /**
      * Updates scan property with a new scan
-     * @param fenBoard - a board represented as a string in FEN notation
      * 
      * @internal
      */
-    private updateScan(fenBoard: string): void {
-        this.scan = createNewGameScan(fenBoard);
+    private updateScan(): void {
+        this.scan = createNewGameScan(this.state);
     }
     
     /**
