@@ -4,8 +4,6 @@ import {
     legalMovesKnight,
 } from "../factories/startingPosition";
 
-// TODO use factory for Game, starting position, etc
-
 test("getLegalMoves() | starting position", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')
     expect(game.scan.legalMoves).toStrictEqual(legalMovesFromstartingPosition);
@@ -29,4 +27,12 @@ test("getLegalMoves() | knight", () => {
 test("addMove() | addMove", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1');
     expect(game.addMove('a2a4')).toStrictEqual('rnbqkbnr/pppppppp/8/8/P7/8/.PPPPPPP/RNBQKBNR b KQkq a3 0 1');
+});
+
+test("Game | starting position", () => {
+    const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/8/RNBQKBNR w KQkq - 0 1')
+    const received = game.scan.legalMoves;
+    const expected = [];
+
+    expect(received).toStrictEqual(expected);
 });
