@@ -5,7 +5,7 @@ import {
 
 test("knightsMoves() | starting position", () => {
     const board = new Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
-    const received = knightsMoves(board);
+    const received = knightsMoves(board, 'w');
     const expected = [{
         from: "b1",
         killMoves: [],
@@ -22,7 +22,7 @@ test("knightsMoves() | starting position", () => {
 
 test("knightsMoves() | knight attack position", () => {
     const board1 = new Board('rnbqkbnr/pppppppp/.N4N./8/8/8/PPPPPPPP/R.BQKB.R');
-    const received = knightsMoves(board1);
+    const received = knightsMoves(board1, 'w');
     const expected = [
         {
             from: "b6",

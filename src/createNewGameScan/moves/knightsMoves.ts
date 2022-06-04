@@ -1,23 +1,21 @@
-import { ILegalMoves } from "../../types"
+import { IColor, ILegalMoves } from "../../types"
 import Board from "../Board/Board"
 import BitBoard from "../BitBoard/BitBoard"
 import { positionsTable } from "./../BitBoard/positionsHashTable"
 
-export function knightsMoves(board: Board): ILegalMoves {
+export function knightsMoves(board: Board, hasToPlay: IColor): ILegalMoves {
     // @TODO document
-    // @TODO add tests
-    // @TODO get info about color to generate black or white knights moves
-    
+    const opponent = hasToPlay === 'w' ? 'blacks' : 'whites';
     const allKnightMovesTable = generateAllKnightMovesBBTable();
 
-    const knightsList = board.whiteKnights.extractBits().map((knightPositionCode) => {
+    const knightsList = board[getKnightAndColor(hasToPlay)].extractBits().map((knightPositionCode) => {
         const from = positionsTable[knightPositionCode];
         const quietMoves = allKnightMovesTable[knightPositionCode]
             .and(board.quietDestinations)
             .extractBits()
             .map(knightDestination => positionsTable[knightDestination]);
         const killMoves = allKnightMovesTable[knightPositionCode]
-            .and(board.blacks)
+            .and(board[opponent])
             .extractBits()
             .map(knightDestination => positionsTable[knightDestination]);
         
@@ -85,7 +83,7 @@ function generateAllKnightMovesBBTable(): BitBoard[] {
     
     const allKnightMoves: BitBoard[] = [];
     
-    for (let position = 0; position < 63; position++) {
+    for (let position = 0; position < 64; position++) {
         const movesFromThisPosition = [];
         // if destination is not out of the board, add it to the list
         if (noNoEa(position)) movesFromThisPosition.push(noNoEa(position));
@@ -101,4 +99,9 @@ function generateAllKnightMovesBBTable(): BitBoard[] {
     }
 
     return allKnightMoves;
+}
+
+export function getKnightAndColor(hasToPlay: IColor): 'whiteKnights' | 'blackKnights' {
+    if (hasToPlay === 'w') return 'whiteKnights';
+    if (hasToPlay === 'b') return 'blackKnights';
 }
