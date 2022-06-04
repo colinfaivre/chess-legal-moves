@@ -14,11 +14,11 @@ export function generatePieceMoves(
         const quietMoves = pieceScope.attacks
             .and(board.quietDestinations)
             .extractBits()
-            .map(rookDestination => positionsTable[rookDestination]);
+            .map(pieceDestination => positionsTable[pieceDestination]);
         const killMoves = pieceScope.attacks
             .and(board[opponent])
             .extractBits()
-            .map(rookDestination => positionsTable[rookDestination]);
+            .map(pieceDestination => positionsTable[pieceDestination]);
             
         return {
             from,
