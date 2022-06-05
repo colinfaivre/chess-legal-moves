@@ -3,6 +3,8 @@
 <!-- First off thank you for considereing to contribute! 👍 -->
 Sorry... At the moment the library is not ready to accept any contribution
 
+https://www.chessprogramming.org/
+
 ## Getting Started
 Run unit tests :
 ```bash

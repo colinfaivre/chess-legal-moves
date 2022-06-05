@@ -2,6 +2,10 @@ import { ILegalMoves } from "../../types"
 import BitBoard from "../BitBoard/BitBoard"
 
 export function pawnsMoves(pawnsBB: BitBoard): ILegalMoves {
+    // @TODO implement pawnsMoves using
+    // https://www.chessprogramming.org/Pawn_Pushes_(Bitboards)
+    // https://www.chessprogramming.org/Pawn_Attacks_(Bitboards)
+
     return [
         {
             from: 'a2',
