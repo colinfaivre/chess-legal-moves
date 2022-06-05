@@ -1,4 +1,5 @@
-export const legalMovesFromstartingPosition = [
+import { IMovesFromPosition } from "../../src/types"
+export const legalMovesFromstartingPosition: IMovesFromPosition[] = [
     {
         from: "b1",
         killMoves: [],
@@ -81,7 +82,7 @@ export const legalMovesFromstartingPosition = [
     },
 ]
 
-export const legalMovesKnight = [
+export const legalMovesKnight: IMovesFromPosition[] = [
     {
         from: 'b1',
         quietMoves: ['a3', 'c3'],

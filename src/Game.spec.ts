@@ -1,8 +1,8 @@
-import Game from "../../src/index";
+import Game from "./index";
 import {
     legalMovesFromstartingPosition,
     legalMovesKnight,
-} from "../factories/startingPosition";
+} from "../tests/factories/startingPosition";
 
 test("getLegalMoves() | starting position", () => {
     const game = new Game('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1')

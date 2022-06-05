@@ -1,4 +1,4 @@
-import BitBoard from "../../../../src/createNewGameScan/BitBoard/BitBoard"
+import BitBoard from "./BitBoard"
 
 test("BitBoard | clearBit()", () => {
     const received = BitBoard.fromPositions([0, 1, 2, 3, 4, 5, 6, 7]).clearBit(0);

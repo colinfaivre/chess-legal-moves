@@ -1,7 +1,7 @@
-import { parseBoard } from "../../../src/createNewGameState/parseBoard";
-import { getRanks } from "../../../src/createNewGameState/parseBoard";
-import { getRankCells } from "../../../src/createNewGameState/parseBoard";
-import { convertNumbersToPoints } from "../../../src/createNewGameState/parseBoard";
+import { parseBoard } from "./parseBoard";
+import { getRanks } from "./parseBoard";
+import { getRankCells } from "./parseBoard";
+import { convertNumbersToPoints } from "./parseBoard";
 
 test("parseBoard()", () => {
     const received = parseBoard('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');

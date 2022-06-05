@@ -1,7 +1,7 @@
-import Board from "../../../../src/createNewGameScan/Board/Board";
+import Board from "../Board/Board";
 import {
     knightsMoves,
-} from "../../../../src/createNewGameScan/moves/knightsMoves";
+} from "./knightsMoves";
 
 test("knightsMoves() | starting position", () => {
     const board = new Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');

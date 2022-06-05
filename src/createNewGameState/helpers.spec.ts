@@ -6,7 +6,7 @@ import {
     incrementHalfMoveClock,
     toggleHasToPlay,
     updateAvailableCastlings
-} from "../../../src/createNewGameState/helpers";
+} from "./helpers";
 
 test("isPawn() | pawn", () => {
     const received1 = isPawn('p');

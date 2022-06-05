@@ -1,10 +1,10 @@
-import BitBoard from "../../../../../src/createNewGameScan/BitBoard/BitBoard";
-import Board from "../../../../../src/createNewGameScan/Board/Board";
+import BitBoard from "../../BitBoard/BitBoard";
+import Board from "../../Board/Board";
 import {
     getPositiveRayAttacks,
     getNegativeRayAttacks,
-} from "../../../../../src/createNewGameScan/moves/rayAttacks/occupiedBoardRayAttacks";
-import { RAYS } from "../../../../../src/createNewGameScan/moves/rayAttacks/rays"
+} from "./occupiedBoardRayAttacks";
+import { RAYS } from "./rays"
 
 test("getPositiveRayAttacks() | starting position - north - a1 rook", () => {
     const startingBitBoard: BitBoard = new Board('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR').allPieces

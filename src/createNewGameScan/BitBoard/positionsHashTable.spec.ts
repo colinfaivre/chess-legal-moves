@@ -1,7 +1,7 @@
 import {
     generatePosition,
     createPositionTable,
-} from "../../../../src/createNewGameScan/BitBoard/positionsHashTable"
+} from "./positionsHashTable"
 
 test("Testing 'generatePosition' function", () => {
     expect(generatePosition(0)).toEqual('a1');

@@ -1,7 +1,7 @@
-import Board from "../../../../src/createNewGameScan/Board/Board";
+import Board from "../Board/Board";
 import {
     rooksMoves,
-} from "../../../../src/createNewGameScan/moves/rooksMoves";
+} from "./rooksMoves";
 
 test("rooksMoves() | starting position", () => {
     const board = new Board('rnbqkbnr/ppppppp/8/8/8/8/.PPPPPPP/RNBQKBNR');

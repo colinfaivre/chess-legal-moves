@@ -1,7 +1,8 @@
-import createNewGameState from "../../../src/createNewGameState/createNewGameState";
+import { IGameState } from "../types";
+import createNewGameState from "./createNewGameState";
 
 test("createNewGameState() | a2a4", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
         hasToPlay: 'w',
         availableCastlings: 'KQkq',
@@ -23,7 +24,7 @@ test("createNewGameState() | a2a4", () => {
 });
 
 test("createNewGameState() | h2h4", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
         hasToPlay: 'w',
         availableCastlings: 'KQkq',
@@ -44,7 +45,7 @@ test("createNewGameState() | h2h4", () => {
 });
 
 test("createNewGameState() | k castling", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'r3k2r/8/8/8/8/8/8/R3K2R',
         hasToPlay: 'b',
         availableCastlings: 'KQkq',
@@ -65,7 +66,7 @@ test("createNewGameState() | k castling", () => {
 });
 
 test("createNewGameState() | q castling", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'r3k2r/8/8/8/8/8/8/R3K2R',
         hasToPlay: 'b',
         availableCastlings: 'kq',
@@ -86,7 +87,7 @@ test("createNewGameState() | q castling", () => {
 });
 
 test("createNewGameState() | K castling", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'r3k2r/8/8/8/8/8/8/R3K2R',
         hasToPlay: 'w',
         availableCastlings: 'KQkq',
@@ -107,7 +108,7 @@ test("createNewGameState() | K castling", () => {
 });
 
 test("createNewGameState() | Q castling", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: 'r3k2r/8/8/8/8/8/8/R3K2R',
         hasToPlay: 'w',
         availableCastlings: 'KQ',
@@ -128,7 +129,7 @@ test("createNewGameState() | Q castling", () => {
 });
 
 test("createNewGameState() | Q promotion move", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: '8/P7/8/8/8/8/8/8',
         hasToPlay: 'w',
         availableCastlings: 'KQkq',
@@ -149,7 +150,7 @@ test("createNewGameState() | Q promotion move", () => {
 });
 
 test("createNewGameState() | N promotion move", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: '8/7P/8/8/8/8/8/8',
         hasToPlay: 'w',
         availableCastlings: 'KQkq',
@@ -170,7 +171,7 @@ test("createNewGameState() | N promotion move", () => {
 });
 
 test("createNewGameState() | b promotion move", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: '8/8/8/8/8/8/p7/8',
         hasToPlay: 'b',
         availableCastlings: 'KQkq',
@@ -191,7 +192,7 @@ test("createNewGameState() | b promotion move", () => {
 });
 
 test("createNewGameState() | r promotion move", () => {
-    const gameState = {
+    const gameState: IGameState = {
         fenBoard: '8/8/8/8/8/8/7p/8',
         hasToPlay: 'b',
         availableCastlings: 'KQkq',

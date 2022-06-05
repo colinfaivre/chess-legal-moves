@@ -1,5 +1,5 @@
-import { composeBoardArrayToString } from "../../../src/createNewGameState/composeBoardArrayToString";
-import { convertPointsToNumbers } from "../../../src/createNewGameState/composeBoardArrayToString";
+import { composeBoardArrayToString } from "./composeBoardArrayToString";
+import { convertPointsToNumbers } from "./composeBoardArrayToString";
 
 test("composeBoardArrayToString()", () => {
     const received = composeBoardArrayToString([

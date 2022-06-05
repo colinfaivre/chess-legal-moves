@@ -1,10 +1,10 @@
-import { RAYS } from "../../../../../../src/createNewGameScan/moves/rayAttacks/rays"
+import { RAYS } from "../rays"
 import {
     generateWestAttacks,
-} from "../../../../../../src/createNewGameScan/moves/rayAttacks/directions/west";
+} from "./west";
 import {
     initRayAttackList,
-} from "../../../../../../src/createNewGameScan/moves/rayAttacks/emptyBoardRayAttacks";
+} from "../emptyBoardRayAttacks";
 
 test("generateSouthAttacks() | from h1", () => {
     const emptyRayAttackList = initRayAttackList();

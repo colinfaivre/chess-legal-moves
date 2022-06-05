@@ -1,7 +1,7 @@
-import Board from "../../../../src/createNewGameScan/Board/Board";
+import Board from "../Board/Board";
 import {
     kingMoves,
-} from "../../../../src/createNewGameScan/moves/kingMoves";
+} from "./kingMoves";
 
 test("kingMoves()", () => {
     const board = new Board('rnbqkbnr/pppppppp/8/8/8/8/8/4K3');

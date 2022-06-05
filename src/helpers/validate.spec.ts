@@ -1,4 +1,4 @@
-import validate from "../../../src/helpers/validate";
+import validate from "./validate";
 
 test("validate.fenStringSyntax() | invalid fen string", () => {
     expect(() => { validate.fenStringSyntax('& w KQkq - 0 1') }).toThrow();

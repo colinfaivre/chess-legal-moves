@@ -1,5 +1,5 @@
-import { parseMove } from "../../../src/createNewGameState/parseMove";
-import { mapPositionToBoardIndex } from "../../../src/createNewGameState/parseMove";
+import { parseMove } from "./parseMove";
+import { mapPositionToBoardIndex } from "./parseMove";
 
 test("parseMove() | common move", () => {
     const received = parseMove("a2a3");
