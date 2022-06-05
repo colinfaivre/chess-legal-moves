@@ -1,5 +1,7 @@
-import { composeBoardArrayToString } from './composeBoardArrayToString';
-import { convertPointsToNumbers } from './composeBoardArrayToString';
+import {
+  composeBoardArrayToString,
+  convertPointsToNumbers,
+} from './composeBoardArrayToString';
 
 test('composeBoardArrayToString()', () => {
   const received = composeBoardArrayToString([

@@ -1,5 +1,4 @@
-import { parseMove } from './parseMove';
-import { mapPositionToBoardIndex } from './parseMove';
+import { parseMove, mapPositionToBoardIndex } from './parseMove';
 
 test('parseMove() | common move', () => {
   const received = parseMove('a2a3');

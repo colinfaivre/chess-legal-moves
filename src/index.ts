@@ -2,7 +2,7 @@ import createNewGameState from './createNewGameState/createNewGameState';
 import { createNewGameScan } from './createNewGameScan';
 import validate from './helpers/validate';
 import { fenToState, stateToFen } from './helpers/fen';
-import { IGameState, IScan, IColor } from './types';
+import { IGameState, IScan } from './types';
 
 // @TODO use getters and setters ?
 

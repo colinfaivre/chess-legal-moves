@@ -1,4 +1,3 @@
-import Board from '../Board/Board';
 import Int32Utils from './int32Utils';
 
 export default class BitBoard {

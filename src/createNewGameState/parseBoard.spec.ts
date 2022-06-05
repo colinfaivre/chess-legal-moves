@@ -1,7 +1,9 @@
-import { parseBoard } from './parseBoard';
-import { getRanks } from './parseBoard';
-import { getRankCells } from './parseBoard';
-import { convertNumbersToPoints } from './parseBoard';
+import {
+  parseBoard,
+  getRanks,
+  getRankCells,
+  convertNumbersToPoints,
+} from './parseBoard';
 
 test('parseBoard()', () => {
   const received = parseBoard('rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR');
