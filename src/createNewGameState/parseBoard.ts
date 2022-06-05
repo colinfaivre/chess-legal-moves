@@ -6,8 +6,8 @@
  * @internal
  */
 export function parseBoard(boardString: string): string[] {
-	var boardCells: string[] = [];
-	var rankList = getRanks(boardString);
+	const boardCells: string[] = [];
+	const rankList = getRanks(boardString);
 
 	for (let i = rankList.length - 1; i >= 0; i--) {
 		boardCells.push(...getRankCells(rankList[i]));

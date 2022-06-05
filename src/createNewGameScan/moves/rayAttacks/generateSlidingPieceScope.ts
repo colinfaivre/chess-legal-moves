@@ -8,7 +8,7 @@ export function generateSlidingPieceScope(
     hasToPlay: IColor,
 ) {
     // @TODO maybe not very performant...
-    let piecePositions = board[getPieceCategory(pieceName, hasToPlay)].extractBits();
+    const piecePositions = board[getPieceCategory(pieceName, hasToPlay)].extractBits();
 
     const pieceScope = piecePositions.map((position) => {
         const northAttacks = getPositiveRayAttacks(board.allPieces, 'no', position);

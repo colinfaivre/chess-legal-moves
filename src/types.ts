@@ -11,7 +11,7 @@ export interface IRayAttack {
     we: BitBoard,
     soWe: BitBoard,
     soEa: BitBoard
-};
+}
 
 export type IPieceCategory = 'whiteRooks' | 'blackRooks' | 'whiteBishops' | 'blackBishops' | 'whiteQueens' | 'blackQueens';
 
@@ -22,7 +22,7 @@ export type IColor = 'w' | 'b';
 export interface IPieceScope {
     position: number;
     attacks: BitBoard;
-};
+}
 
 export interface IGameState {
     fenBoard: string;

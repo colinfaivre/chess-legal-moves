@@ -1,5 +1,5 @@
 export default {
-    fenString: /^\s*([prnbqkPRNBQK12345678]{1,8}(?:\/[prnbqkPRNBQK12345678]{1,8}){7})\s+(w|b)\s+([KQkqA-Ha-h]{1,4}|\-)\s+(?:(?:([a-h][36]|\-)\s+(\d{1,3})\s+(\d{1,4}))|(?:0\s+0))\s*$/,
+    fenString: /^\s*([prnbqkPRNBQK12345678]{1,8}(?:\/[prnbqkPRNBQK12345678]{1,8}){7})\s+(w|b)\s+([KQkqA-Ha-h]{1,4}|-)\s+(?:(?:([a-h][36]|-)\s+(\d{1,3})\s+(\d{1,4}))|(?:0\s+0))\s*$/,
     move: /^([a-h][1-8]){2}[rnbqRNBQ]?$/,
     promotionMove: /^(a7a8|b7b8|c7c8|d7d8|e7e8|f7f8|g7g8|h7h8|a2a1|b2b1|c2c1|d2d1|e2e1|f2f1|g2g1|h2h1)[rnbqRNBQ]?$/,
     castlingMove: /^(e1g1|e1c1|e8g8|e8c8)$/,

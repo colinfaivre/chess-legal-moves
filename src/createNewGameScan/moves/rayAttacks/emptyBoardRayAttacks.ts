@@ -26,7 +26,7 @@ export function generateRayAttacks(rayAttacks: IRayAttack[]): IRayAttack[] {
 }
 
 export function initRayAttackList() {
-    let result: IRayAttack[] = [];
+    const result: IRayAttack[] = [];
     
     for (let i = 0; i < 64; i++) {
         result.push({
@@ -39,7 +39,7 @@ export function initRayAttackList() {
             soWe: null,
             soEa: null
         })
-    };
+    }
 
     return result;
 }
