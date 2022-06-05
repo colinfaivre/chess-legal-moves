@@ -1,26 +1,12 @@
 {
-    "compilerOptions": {
-        "declaration": true,
-        "module": "commonjs",
-        "noImplicitAny": true,
-        "outDir": "./dist",
-        "lib": [
-            "es2021",
-            "es2017",
-            "es7",
-            "es6",
-            "DOM"
-        ],
-        "target": "ES5"
-    },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts"
-    ],
-    "exclude": [
-        "node_modules",
-        "dist",
-        "tests",
-        "src/**/*.spec.ts",
-    ]
+  "compilerOptions": {
+    "declaration": true,
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "lib": ["es2021", "es2017", "es7", "es6", "DOM"],
+    "target": "ES5"
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist", "tests", "src/**/*.spec.ts"]
 }

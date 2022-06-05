@@ -1,15 +1,15 @@
 // Sync object
 /** @type {import('@jest/types').Config.InitialOptions} */
 const config = {
-    verbose: true,
+  verbose: true,
 };
 
 module.exports = config;
 
 // Or async function
 module.exports = async () => {
-    return {
-        verbose: true,
-        roots: ["<rootDir>/src"],
-    };
+  return {
+    verbose: true,
+    roots: ['<rootDir>/src'],
+  };
 };
