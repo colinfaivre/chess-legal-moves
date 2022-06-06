@@ -40,6 +40,9 @@ export default class Board {
   get allPieces() {
     return this.whites.or(this.blacks);
   }
+  get empty() {
+    return this.allPieces.not();
+  }
 
   // WHITE PIECES
   get whitePawns() {
