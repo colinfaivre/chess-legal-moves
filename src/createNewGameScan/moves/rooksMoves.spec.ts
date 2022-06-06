@@ -2,7 +2,7 @@ import Board from '../Board/Board';
 import { rooksMoves } from './rooksMoves';
 
 test('rooksMoves() | starting position', () => {
-  const board = new Board('rnbqkbnr/ppppppp/8/8/8/8/.PPPPPPP/RNBQKBNR');
+  const board = new Board('rnbqkbnr/pppppppp/8/8/8/8/.PPPPPPP/RNBQKBNR');
   const received = rooksMoves(board, 'w');
   const expected = [
     {
@@ -21,7 +21,7 @@ test('rooksMoves() | starting position', () => {
 });
 
 test('rooksMoves() | rook party', () => {
-  const board = new Board('rnbqkbnr/ppppppp/8/2R2R2/8/8/PPPPPPPP/.NBQKBN.');
+  const board = new Board('rnbqkbnr/pppppppp/8/2R2R2/8/8/PPPPPPPP/.NBQKBN.');
   const received = rooksMoves(board, 'w');
   const expected = [
     {
