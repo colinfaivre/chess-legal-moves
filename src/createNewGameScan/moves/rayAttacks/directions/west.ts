@@ -1,3 +1,4 @@
+import { removeHighestBit, slideUp } from '../../moveHelpers';
 import { IRayAttack } from '../../../../types';
 import BitBoard from '../../../BitBoard/BitBoard';
 import { RAYS } from '../rays';
@@ -34,20 +35,8 @@ export function generateWestAttacks(attacksList: IRayAttack[]): IRayAttack[] {
       attacksList[square + file].we = west;
       west = slideUp(west);
     }
-    westAttackMask = slideLeft(westAttackMask);
+    westAttackMask = removeHighestBit(westAttackMask);
   }
 
   return attacksList;
-}
-
-export function slideLeft(attacks: BitBoard): BitBoard {
-  attacks = attacks.clearBit(attacks.bitScanReverse());
-
-  return attacks;
-}
-
-export function slideUp(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftLeft(8);
-
-  return attacks;
 }

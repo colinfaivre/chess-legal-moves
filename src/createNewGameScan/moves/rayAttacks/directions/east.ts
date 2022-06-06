@@ -1,3 +1,4 @@
+import { removeLowestBit, slideUp } from '../../moveHelpers';
 import { IRayAttack } from '../../../../types';
 import BitBoard from '../../../BitBoard/BitBoard';
 import { RAYS } from '../rays';
@@ -34,20 +35,8 @@ export function generateEastAttacks(attacksList: IRayAttack[]): IRayAttack[] {
       attacksList[square + file].ea = east;
       east = slideUp(east);
     }
-    eastAttackMask = slideRight(eastAttackMask);
+    eastAttackMask = removeLowestBit(eastAttackMask);
   }
 
   return attacksList;
-}
-
-export function slideRight(attacks: BitBoard): BitBoard {
-  attacks = attacks.clearBit(attacks.bitScanForward());
-
-  return attacks;
-}
-
-export function slideUp(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftLeft(8);
-
-  return attacks;
 }

@@ -1,3 +1,4 @@
+import { slideDown, slideUp, removeHighestBit } from '../../moveHelpers';
 import { IRayAttack } from '../../../../types';
 import BitBoard from '../../../BitBoard/BitBoard';
 import { RAYS } from '../rays';
@@ -41,22 +42,4 @@ export function generateSouthEastAttacks(
   }
 
   return attacksList;
-}
-
-export function slideDown(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftRight(8);
-
-  return attacks;
-}
-
-export function removeHighestBit(attacks: BitBoard): BitBoard {
-  attacks = attacks.clearBit(attacks.bitScanReverse());
-
-  return attacks;
-}
-
-export function slideUp(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftLeft(8);
-
-  return attacks;
 }

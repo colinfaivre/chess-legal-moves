@@ -1,3 +1,4 @@
+import { slideUp, slideDown, removeLowestBit } from '../../moveHelpers';
 import { IRayAttack } from '../../../../types';
 import BitBoard from '../../../BitBoard/BitBoard';
 import { RAYS } from '../rays';
@@ -41,22 +42,4 @@ export function generateNorthEastAttacks(
   }
 
   return attacksList;
-}
-
-export function slideDown(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftRight(8);
-
-  return attacks;
-}
-
-export function removeLowestBit(attacks: BitBoard): BitBoard {
-  attacks = attacks.clearBit(attacks.bitScanForward());
-
-  return attacks;
-}
-
-export function slideUp(attacks: BitBoard): BitBoard {
-  attacks = attacks.shiftLeft(8);
-
-  return attacks;
 }
