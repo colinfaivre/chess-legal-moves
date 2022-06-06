@@ -14,8 +14,47 @@ import BitBoard from '../../BitBoard/BitBoard';
  *                               *
  ********************************/
 
+function generateFilePositions(fileIndex: number): number[] {
+  const file: number[] = [];
+
+  for (let rankIndex = 0; rankIndex < 8; rankIndex++) {
+    file.push(rankIndex * 8 + fileIndex);
+  }
+
+  return file;
+}
+
+function generateRankPositions(rankIndex: number): number[] {
+  const rank: number[] = [];
+
+  for (let fileIndex = 0; fileIndex < 8; fileIndex++) {
+    rank.push(rankIndex + fileIndex);
+  }
+
+  return rank;
+}
+
 export const RAYS = {
   NULL: new BitBoard(0, 0),
+
+  // @TODO use those FILES to generate other rays
+  A_FILE: BitBoard.fromPositions(generateFilePositions(0)),
+  B_FILE: BitBoard.fromPositions(generateFilePositions(1)),
+  C_FILE: BitBoard.fromPositions(generateFilePositions(2)),
+  D_FILE: BitBoard.fromPositions(generateFilePositions(3)),
+  E_FILE: BitBoard.fromPositions(generateFilePositions(4)),
+  F_FILE: BitBoard.fromPositions(generateFilePositions(5)),
+  G_FILE: BitBoard.fromPositions(generateFilePositions(6)),
+  H_FILE: BitBoard.fromPositions(generateFilePositions(7)),
+  // @TODO use those RANKS to generate other rays
+  ONE_RANK: BitBoard.fromPositions(generateRankPositions(0)),
+  TWO_RANK: BitBoard.fromPositions(generateRankPositions(1)),
+  THREE_RANK: BitBoard.fromPositions(generateRankPositions(2)),
+  FOUR_RANK: BitBoard.fromPositions(generateRankPositions(3)),
+  FIVE_RANK: BitBoard.fromPositions(generateRankPositions(4)),
+  SIX_RANK: BitBoard.fromPositions(generateRankPositions(5)),
+  SEVEN_RANK: BitBoard.fromPositions(generateRankPositions(6)),
+  EIGHT_RANK: BitBoard.fromPositions(generateRankPositions(7)),
 
   // North
   A2_A8: BitBoard.fromPositions([8, 16, 24, 32, 40, 48, 56]),
