@@ -6,7 +6,6 @@ import { positionsTable } from './../BitBoard/positionsHashTable';
 
 export function pawnsMoves(board: Board, hasToPlay: IColor): ILegalMoves {
   // @TODO document
-  // @TODO implement pawnsMoves using
   // https://www.chessprogramming.org/Pawn_Pushes_(Bitboards)
   // https://www.chessprogramming.org/Pawn_Attacks_(Bitboards)
   const opponent = hasToPlay === 'w' ? 'blacks' : 'whites';
@@ -19,11 +18,15 @@ export function pawnsMoves(board: Board, hasToPlay: IColor): ILegalMoves {
         [pawnPositionCode].and(board.quietDestinations)
         .extractBits()
         .map(pawnDestination => positionsTable[pawnDestination]);
+      const killMoves = generateAllPawnsAttacksBBTable(hasToPlay)
+        [pawnPositionCode].and(board[opponent])
+        .extractBits()
+        .map(pawnDestination => positionsTable[pawnDestination]);
 
       return {
         from,
         quietMoves,
-        killMoves: [],
+        killMoves,
       };
     });
 
@@ -106,4 +109,56 @@ export function getPawnAndColor(
 ): 'whitePawns' | 'blackPawns' {
   if (hasToPlay === 'w') return 'whitePawns';
   if (hasToPlay === 'b') return 'blackPawns';
+}
+
+export function generateAllPawnsAttacksBBTable(hasToPlay: IColor): BitBoard[] {
+  const result: BitBoard[] = [];
+
+  if (hasToPlay === 'w') {
+    for (let position = 0; position < 64; position++) {
+      const positionsAttacked: number[] = [];
+      if (getWhitePawnEastAttack(position))
+        positionsAttacked.push(getWhitePawnEastAttack(position));
+      if (getWhitePawnWestAttack(position))
+        positionsAttacked.push(getWhitePawnWestAttack(position));
+      result.push(BitBoard.fromPositions(positionsAttacked));
+    }
+  }
+
+  if (hasToPlay === 'b') {
+    for (let position = 0; position < 64; position++) {
+      const positionsAttacked: number[] = [];
+      if (getBlackPawnEastAttack(position))
+        positionsAttacked.push(getBlackPawnEastAttack(position));
+      if (getBlackPawnWestAttack(position))
+        positionsAttacked.push(getBlackPawnWestAttack(position));
+      result.push(BitBoard.fromPositions(positionsAttacked));
+    }
+  }
+
+  return result;
+}
+
+export function getWhitePawnWestAttack(position: number): number {
+  const HFile = [7, 15, 23, 31, 39, 47, 55, 63];
+
+  return !HFile.includes(position + 7) ? position + 7 : null;
+}
+
+export function getWhitePawnEastAttack(position: number): number {
+  const AFile = [0, 8, 16, 24, 32, 40, 48, 56];
+
+  return !AFile.includes(position + 9) ? position + 9 : null;
+}
+
+export function getBlackPawnWestAttack(position: number): number {
+  const HFile = [7, 15, 23, 31, 39, 47, 55, 63];
+
+  return !HFile.includes(position - 9) ? position - 9 : null;
+}
+
+export function getBlackPawnEastAttack(position: number): number {
+  const AFile = [0, 8, 16, 24, 32, 40, 48, 56];
+
+  return !AFile.includes(position - 7) ? position - 7 : null;
 }

@@ -1,3 +1,4 @@
+import BitBoard from '../BitBoard/BitBoard';
 import Board from '../Board/Board';
 import { pawnsMoves } from './pawnsMoves';
 
@@ -44,6 +45,40 @@ test('pawnsMove() | starting position - black to play', () => {
     { from: 'c7', killMoves: [], quietMoves: ['c5', 'c6'] },
     { from: 'd7', killMoves: [], quietMoves: ['d5', 'd6'] },
     { from: 'e7', killMoves: [], quietMoves: ['e5', 'e6'] },
+    { from: 'f7', killMoves: [], quietMoves: ['f5', 'f6'] },
+    { from: 'g7', killMoves: [], quietMoves: ['g5', 'g6'] },
+    { from: 'h7', killMoves: [], quietMoves: ['h5', 'h6'] },
+  ];
+
+  expect(received).toStrictEqual(expected);
+});
+
+test('pawnsMove() | black pawns in front of white pawns - white to play', () => {
+  const board = new Board('rnbqkbnr/8/8/8/8/pppppppp/PPPPPPPP/RNBQKBNR');
+  const received = pawnsMoves(board, 'w');
+  const expected = [
+    { from: 'a2', killMoves: ['b3'], quietMoves: [] },
+    { from: 'b2', killMoves: ['a3', 'c3'], quietMoves: [] },
+    { from: 'c2', killMoves: ['b3', 'd3'], quietMoves: [] },
+    { from: 'd2', killMoves: ['c3', 'e3'], quietMoves: [] },
+    { from: 'e2', killMoves: ['d3', 'f3'], quietMoves: [] },
+    { from: 'f2', killMoves: ['e3', 'g3'], quietMoves: [] },
+    { from: 'g2', killMoves: ['f3', 'h3'], quietMoves: [] },
+    { from: 'h2', killMoves: ['g3'], quietMoves: [] },
+  ];
+
+  expect(received).toStrictEqual(expected);
+});
+
+test('pawnsMove() | white queen will die... - black to play', () => {
+  const board = new Board('rnbqkbnr/pppppppp/3Q4/8/8/8/PPPPPPPP/RNB.KBNR');
+  const received = pawnsMoves(board, 'b');
+  const expected = [
+    { from: 'a7', killMoves: [], quietMoves: ['a5', 'a6'] },
+    { from: 'b7', killMoves: [], quietMoves: ['b5', 'b6'] },
+    { from: 'c7', killMoves: ['d6'], quietMoves: ['c5', 'c6'] },
+    { from: 'd7', killMoves: [], quietMoves: [] },
+    { from: 'e7', killMoves: ['d6'], quietMoves: ['e5', 'e6'] },
     { from: 'f7', killMoves: [], quietMoves: ['f5', 'f6'] },
     { from: 'g7', killMoves: [], quietMoves: ['g5', 'g6'] },
     { from: 'h7', killMoves: [], quietMoves: ['h5', 'h6'] },
