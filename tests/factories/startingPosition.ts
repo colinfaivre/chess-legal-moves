@@ -111,17 +111,17 @@ export const legalMovesKnight: IMovesFromPosition[] = [
   {
     from: 'd2',
     quietMoves: ['d3', 'd4'],
-    killMoves: [],
+    killMoves: ['e3'],
   },
   {
     from: 'e2',
-    quietMoves: ['e3', 'e4'],
+    quietMoves: [],
     killMoves: [],
   },
   {
     from: 'f2',
     quietMoves: ['f3', 'f4'],
-    killMoves: [],
+    killMoves: ['e3'],
   },
   {
     from: 'g2',
