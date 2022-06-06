@@ -30,7 +30,7 @@ export function createNewGameScan(gameState: IGameState): IScan {
   if (board.whiteKnights)
     scan.legalMoves.push(...generate.knightsMoves(board, gameState.hasToPlay));
   if (board.whitePawns)
-    scan.legalMoves.push(...generate.pawnsMoves(board.whitePawns));
+    scan.legalMoves.push(...generate.pawnsMoves(board, gameState.hasToPlay));
   if (board.whiteRooks)
     scan.legalMoves.push(...generate.rooksMoves(board, gameState.hasToPlay));
   if (board.whiteBishops)
