@@ -13,7 +13,7 @@ import { IGameState, IScan } from './types';
  */
 export default class Game {
   // @TODO test everything in Game class
-  private state: IGameState = {
+  public state: IGameState = {
     fenBoard: '',
     hasToPlay: 'w',
     availableCastlings: '',
