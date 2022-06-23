@@ -9,7 +9,7 @@ test('validate.fenStringSyntax() | invalid fen string', () => {
 test('validate.fenStringSyntax() | valid fen string', () => {
   expect(() => {
     validate.fenStringSyntax(
-      'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1'
+      'rnbqkbnr/pppppppp/8/8/8/8/PPPPP.PP/RNBQKBNR w KQkq e3 0 1'
     );
   }).not.toThrow();
 });
