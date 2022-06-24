@@ -40,7 +40,7 @@ export function parseMove(moveString: string): IParsedMove {
 }
 
 export function mapPositionToBoardIndex(position: string): number {
-  const filesLetter = ['a', 'b', 'c', 'd', 'e', ' f', 'g', 'h'];
+  const filesLetter = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
   const indexMap: { [key: string]: number } = {};
   let counter = 0;
 

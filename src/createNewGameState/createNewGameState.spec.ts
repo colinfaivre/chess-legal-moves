@@ -23,6 +23,28 @@ test('createNewGameState() | a2a4', () => {
   expect(received).toStrictEqual(expected);
 });
 
+test('createNewGameState() | g1f3', () => {
+  const gameState: IGameState = {
+    fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',
+    hasToPlay: 'w',
+    availableCastlings: 'KQkq',
+    enPassantTarget: '-',
+    halfMoveClock: 0,
+    fullMoveClock: 1,
+  };
+  const received = createNewGameState('g1f3', gameState);
+  const expected = {
+    fenBoard: 'rnbqkbnr/pppppppp/8/8/8/5N2/PPPPPPPP/RNBQKB.R',
+    hasToPlay: 'b',
+    availableCastlings: 'KQkq',
+    enPassantTarget: '-',
+    halfMoveClock: 1,
+    fullMoveClock: 1,
+  };
+
+  expect(received).toStrictEqual(expected);
+});
+
 test('createNewGameState() | h2h4', () => {
   const gameState: IGameState = {
     fenBoard: 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR',

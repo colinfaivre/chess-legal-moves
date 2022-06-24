@@ -55,3 +55,17 @@ test('mapPositionToBoardIndex() | h8', () => {
 
   expect(received).toBe(expected);
 });
+
+test('mapPositionToBoardIndex() | f3', () => {
+  const received = mapPositionToBoardIndex('f3');
+  const expected = 21;
+
+  expect(received).toBe(expected);
+});
+
+test('mapPositionToBoardIndex() | c3', () => {
+  const received = mapPositionToBoardIndex('c3');
+  const expected = 18;
+
+  expect(received).toBe(expected);
+});
